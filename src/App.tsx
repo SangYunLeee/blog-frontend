@@ -20,7 +20,7 @@ function App() {
         >
           Learn React
         </a>
-        <div onClick={testFunt}>테스트</div>
+        <div onClick={testFunt}>테스트 test</div>
       </header>
     </div>
   );
