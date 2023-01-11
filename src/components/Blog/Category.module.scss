@@ -1,0 +1,37 @@
+.categoryContainer {
+  margin-top: 10%;
+  .inputWrapper {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    .input {
+      background-color: lightgray;
+      padding: 8px;
+      border-radius: 5px;
+    }
+    .searchIcon {
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      top: 2px;
+      right: 110px;
+    }
+  }
+  .categoryWrapper {
+    margin: 20px auto;
+    .title {
+      margin: 5% 25%;
+      font-size: 30px;
+    }
+    ul {
+      margin-left: 25%;
+      line-height: 2;
+      li {
+        border-left: 2px solid lightgray;
+        margin-left: 10px;
+        padding-left: 20px;
+        font-size: 20px;
+      }
+    }
+  }
+}
