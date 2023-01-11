@@ -1,16 +1,27 @@
-import React, { HTMLInputTypeAttribute } from 'react';
+import React, { HTMLInputTypeAttribute, Dispatch, SetStateAction } from 'react';
 import css from './LoginInput.module.scss';
 
 interface Props {
   text: string;
   type: HTMLInputTypeAttribute;
+  setFunc: Dispatch<SetStateAction<string>>;
 }
 
-const LoginInput = ({ text, type }: Props) => {
+const LoginInput = ({ text, type, setFunc }: Props) => {
   return (
-    <div>
-      <span className={css.inputLabel}>{text}</span>
-      <input id="userId" className={css.loginInput} type={type} />
+    <div className={css.formWrap}>
+      <input
+        id="userId"
+        className={css.loginInput}
+        type={type}
+        onChange={(e) => setFunc(e.target.value)}
+        name="form"
+        autoComplete="off"
+        required
+      />
+      <label htmlFor="form" className={css.labelName}>
+        <span className={css.contentName}>{text}</span>
+      </label>
     </div>
   );
 };

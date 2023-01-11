@@ -1,6 +1,6 @@
 import React from 'react';
 
 function SignUp() {
-  return <div>router 를 연결해주세요.</div>;
+  return <div>회원가입</div>;
 }
 export default SignUp;
