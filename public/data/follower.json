@@ -1,0 +1,58 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "email": "mupani@gmail.com",
+      "nickname": "무파니",
+      "userImage": "https://i.pinimg.com/564x/f1/4e/22/f14e22889fa95d7f91b483d50b0b4260.jpg"
+    },
+    {
+      "id": 2,
+      "email": "congbam@gmail.com",
+      "nickname": "콩도리밤토리",
+      "userImage": "https://i.pinimg.com/564x/74/f5/6b/74f56b7b8968f329bd757dee80a06bf1.jpg"
+    },
+    {
+      "id": 3,
+      "email": "tacoya@gmail.com",
+      "nickname": "타코",
+      "userImage": "https://i.pinimg.com/564x/9e/53/e1/9e53e1d5b43c196f97e654585846de8b.jpg"
+    },
+    {
+      "id": 4,
+      "email": "bingti@gmail.com",
+      "nickname": "빙티",
+      "userImage": "https://i.pinimg.com/564x/02/8b/55/028b5513a9d44d0169c282a5af396ad3.jpg"
+    },
+    {
+      "id": 5,
+      "email": "jjuni@gmail.com",
+      "nickname": "쭈니",
+      "userImage": "https://i.pinimg.com/564x/29/e3/88/29e38842458191a049ed31efc14b88b2.jpg"
+    },
+    {
+      "id": 6,
+      "email": "bingti@gmail.com",
+      "nickname": "빙티",
+      "userImage": "https://i.pinimg.com/564x/02/8b/55/028b5513a9d44d0169c282a5af396ad3.jpg"
+    },
+    {
+      "id": 7,
+      "email": "jjuni@gmail.com",
+      "nickname": "쭈니",
+      "userImage": "https://i.pinimg.com/564x/29/e3/88/29e38842458191a049ed31efc14b88b2.jpg"
+    },
+    {
+      "id": 8,
+      "email": "bingti@gmail.com",
+      "nickname": "빙티",
+      "userImage": "https://i.pinimg.com/564x/02/8b/55/028b5513a9d44d0169c282a5af396ad3.jpg"
+    },
+    {
+      "id": 9,
+      "email": "jjuni@gmail.com",
+      "nickname": "쭈니",
+      "userImage": "https://i.pinimg.com/564x/29/e3/88/29e38842458191a049ed31efc14b88b2.jpg"
+    }
+  ]
+}
