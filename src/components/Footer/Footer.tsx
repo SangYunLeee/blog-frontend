@@ -9,12 +9,14 @@ const Footer = () => {
       behavior: 'smooth',
     });
   };
+
   return (
-    <div className={css.footer}>
+    <>
       <button className={css.moveTopButton} onClick={clickMoveTopButton}>
         최상단으로 가는 버튼
       </button>
-    </div>
+      <div className={css.footer}></div>
+    </>
   );
 };
 
