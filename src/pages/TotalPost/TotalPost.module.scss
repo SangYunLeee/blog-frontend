@@ -1,0 +1,25 @@
+.totalPost {
+  width: 850px;
+  height: 1000px;
+  margin: 0 auto;
+
+  .category {
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .tagList {
+    display: flex;
+
+    .tag {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100px;
+      height: 30px;
+      border: 1px solid black;
+      border-radius: 5px;
+      margin: 0 3px;
+    }
+  }
+}
