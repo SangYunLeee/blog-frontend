@@ -11,12 +11,11 @@ const LoginInput = ({ text, type, setFunc }: Props) => {
   return (
     <div className={css.formWrap}>
       <input
-        id="userId"
         className={css.loginInput}
         type={type}
         onChange={(e) => setFunc(e.target.value)}
         name="form"
-        autoComplete="off"
+        autoComplete="new-password"
         required
       />
       <label htmlFor="form" className={css.labelName}>

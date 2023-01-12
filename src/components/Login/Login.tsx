@@ -10,25 +10,25 @@ const Login = () => {
   const [pw, setPw] = useState<string>('');
 
   const handleLogin = () => {
-    fetch(`${process.env.REACT_APP_API_URL}/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: id,
-        password: pw
-      })
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        if (result.token !== undefined) {
-          localStorage.setItem('token', result.token);
-          setOpen(false);
-        } else {
-          alert('아이디와 비밀번호를 확인해 주세요');
-        }
-      });
+    // fetch(`${process.env.REACT_APP_API_URL}/login`, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify({
+    //     email: id,
+    //     password: pw
+    //   })
+    // })
+    //   .then((response) => response.json())
+    //   .then((result) => {
+    //     if (result.token !== undefined) {
+    //       localStorage.setItem('token', result.token);
+    //       setOpen(false);
+    //     } else {
+    //       alert('아이디와 비밀번호를 확인해 주세요');
+    //     }
+    //   });
   };
 
   return (
@@ -37,39 +37,49 @@ const Login = () => {
       {open && (
         <div className={css.container}>
           <div className={css.content}>
+            <div className={css.image}>
+              <img
+                className={css.mainImage}
+                src="image/blog.svg"
+                alt="main pic"
+              />
+              <h5 className={css.slogan}>기록과 함게 쌓여가는 즐거움</h5>
+            </div>
             {!singUpOpen ? (
-              <>
-                <div className={css.image}>
+              <div className={css.title}>
+                <div className={css.iconWrap}>
                   <img
-                    className={css.mainImage}
-                    src="image/blog.svg"
-                    alt="main pic"
+                    className={css.closeIcon}
+                    src="image/login-close.png"
+                    alt="close"
+                    onClick={() => setOpen(false)}
                   />
-                  <h5 className={css.slogan}>기록과 함게 쌓여가는 즐거움</h5>
                 </div>
-                <div className={css.title}>
-                  <h2 className={css.login}>로그인</h2>
+                <h2 className={css.login}>로그인</h2>
+                <div className={css.inputBox}>
                   <LoginInput text="이메일" type="text" setFunc={setId} />
-                  <LoginInput text="비밀번호" type="password" setFunc={setPw} />
-                  <button
-                    className={css.loginBtn}
-                    onClick={() => handleLogin()}
-                    disabled={!(id.length > 0 && pw.length > 0)}
-                  >
-                    로그인
-                  </button>
-                  <div className={css.horizonLine} />
-                  <p className={css.question}>아직 가입하지 않으셨다면? </p>
-                  <button
-                    className={css.signUpBtn}
-                    onClick={() => setSingUpOpen(!singUpOpen)}
-                  >
-                    &nbsp;&nbsp;회원가입
-                  </button>
                 </div>
-              </>
+                <div className={css.inputBox}>
+                  <LoginInput text="비밀번호" type="password" setFunc={setPw} />
+                </div>
+                <button
+                  className={css.loginBtn}
+                  onClick={() => handleLogin()}
+                  disabled={!(id.length > 0 && pw.length > 0)}
+                >
+                  로그인
+                </button>
+                <div className={css.horizonLine} />
+                <p className={css.question}>아직 가입하지 않으셨다면? </p>
+                <button
+                  className={css.signUpBtn}
+                  onClick={() => setSingUpOpen(!singUpOpen)}
+                >
+                  &nbsp;&nbsp;회원가입
+                </button>
+              </div>
             ) : (
-              <SignUp />
+              <SignUp setFunc={setSingUpOpen} />
             )}
           </div>
           <div

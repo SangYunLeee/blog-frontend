@@ -6,6 +6,36 @@
     transform: translateY(65%);
   }
 }
+
+@mixin btn {
+  cursor: pointer;
+  color: rgb(255, 255, 255);
+  background-color: #c7cfb7;
+  &:disabled {
+    cursor: default;
+    background-color: #f2f2ec;
+    &:hover {
+      background-color: #f2f2ec;
+    }
+  }
+  &:hover {
+    background-color: #9dad7f;
+  }
+}
+
+@mixin close {
+  margin-left: 0 !important;
+  position: relative;
+  width: 90%;
+  .closeIcon {
+    padding-top: 28px;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+  }
+}
 .container {
   align-items: center;
   width: 100%;
@@ -35,9 +65,11 @@
   background-color: white;
   border-radius: 20px;
   z-index: 10000;
-
+  .iconWrap {
+    @include close();
+  }
   .image {
-    width: 48%;
+    width: 44%;
     background-color: #f7f7e8;
     height: 100%;
     align-items: flex-start;
@@ -48,7 +80,7 @@
       animation: up-down 1.4s infinite ease-in-out alternate;
     }
     .slogan {
-      margin-top: 52%;
+      margin-top: 56%;
       font-size: 19px;
       font-weight: 300;
       color: #666666;
@@ -65,26 +97,16 @@
       margin: 30% 0% 13%;
       font-weight: 300;
     }
-
+    .inputBox {
+      margin-top: 20px;
+    }
     .loginBtn {
       width: 80%;
       text-align: center;
-      background-color: #c7cfb7;
       padding: 4% 2%;
       margin-top: 9%;
-      color: rgb(255, 255, 255);
       border-radius: 3px;
-      cursor: pointer;
-      &:disabled {
-        cursor: default;
-        background-color: #f2f2ec;
-        &:hover {
-          background-color: #f2f2ec;
-        }
-      }
-      &:hover {
-        background-color: #9dad7f;
-      }
+      @include btn();
     }
 
     .horizonLine {
