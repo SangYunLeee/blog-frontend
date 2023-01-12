@@ -4,10 +4,12 @@ import css from './LoginInput.module.scss';
 interface Props {
   text: string;
   type: HTMLInputTypeAttribute;
+  flag?: boolean;
+  value?: string;
   setFunc: Dispatch<SetStateAction<string>>;
 }
 
-const LoginInput = ({ text, type, setFunc }: Props) => {
+const LoginInput = ({ text, type, setFunc, flag, value }: Props) => {
   return (
     <div className={css.formWrap}>
       <input
@@ -16,6 +18,7 @@ const LoginInput = ({ text, type, setFunc }: Props) => {
         onChange={(e) => setFunc(e.target.value)}
         name="form"
         autoComplete="new-password"
+        value={value}
         required
       />
       <label htmlFor="form" className={css.labelName}>

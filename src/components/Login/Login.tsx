@@ -10,25 +10,26 @@ const Login = () => {
   const [pw, setPw] = useState<string>('');
 
   const handleLogin = () => {
-    // fetch(`${process.env.REACT_APP_API_URL}/login`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify({
-    //     email: id,
-    //     password: pw
-    //   })
-    // })
-    //   .then((response) => response.json())
-    //   .then((result) => {
-    //     if (result.token !== undefined) {
-    //       localStorage.setItem('token', result.token);
-    //       setOpen(false);
-    //     } else {
-    //       alert('아이디와 비밀번호를 확인해 주세요');
-    //     }
-    //   });
+    fetch(`${process.env.REACT_APP_API_URL}/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: id,
+        password: pw,
+      }),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.token !== undefined) {
+          localStorage.setItem('token', result.token);
+          alert('로그인에 성공하였습니다.');
+          setOpen(false);
+        } else {
+          alert('아이디와 비밀번호를 확인해 주세요');
+        }
+      });
   };
 
   return (
@@ -43,7 +44,7 @@ const Login = () => {
                 src="image/blog.svg"
                 alt="main pic"
               />
-              <h5 className={css.slogan}>기록과 함게 쌓여가는 즐거움</h5>
+              <h5 className={css.slogan}>기록과 함께 쌓여가는 즐거움</h5>
             </div>
             {!singUpOpen ? (
               <div className={css.title}>
@@ -64,7 +65,7 @@ const Login = () => {
                 </div>
                 <button
                   className={css.loginBtn}
-                  onClick={() => handleLogin()}
+                  onClick={handleLogin}
                   disabled={!(id.length > 0 && pw.length > 0)}
                 >
                   로그인
