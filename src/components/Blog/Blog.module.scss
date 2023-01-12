@@ -1,24 +1,6 @@
 .blogContainner {
-  margin-top: 10%;
-  margin-left: 2%;
-  margin-right: 2%;
+  margin: 10% 2% 0 3%;
   width: 100%;
-  .blogName {
-    margin-bottom: 3%;
-    font-size: 40px;
-  }
-  .contentWrapper {
-    display: flex;
-    justify-content: space-between;
-    .allContents {
-      width: 10%;
-      font-size: 30px;
-    }
-    .border {
-      width: 90%;
-      height: 0;
-    }
-  }
   .contents {
     display: flex;
     justify-content: space-between;
@@ -29,11 +11,13 @@
     .contentWrapper {
       flex-direction: column;
       .contentTitle {
+        margin: 15px 0;
         font-size: 25px;
       }
       .titleWrapper {
         display: flex;
         .reply {
+          margin: 15px 0;
           padding-top: 8px;
           margin-left: 5px;
           color: red;

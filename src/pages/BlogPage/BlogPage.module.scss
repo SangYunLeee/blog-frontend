@@ -10,4 +10,28 @@
     padding: 10px;
     margin-top: 5%;
   }
+  .blogcontent {
+    width: 130vh;
+    .blogHeader {
+      margin-top: 10%;
+      margin-left: 2%;
+      width: 100%;
+      .blogName {
+        margin-bottom: 3%;
+        font-size: 40px;
+      }
+      .titleWrapper {
+        display: flex;
+        justify-content: space-between;
+        .allContents {
+          width: 10%;
+          font-size: 30px;
+        }
+        .border {
+          width: 90%;
+          height: 0;
+        }
+      }
+    }
+  }
 }
