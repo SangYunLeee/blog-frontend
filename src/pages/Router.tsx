@@ -7,7 +7,6 @@ function Router() {
     <BrowserRouter>
       <Routes>
         <Route path="/testpage" element={<TestPage />} />
-        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );
