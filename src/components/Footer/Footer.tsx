@@ -12,9 +12,10 @@ const Footer = () => {
 
   return (
     <>
-      <button className={css.moveTopButton} onClick={clickMoveTopButton}>
-        최상단으로 가는 버튼
-      </button>
+      <div className={css.moveTopButtonDiv}>
+        <button className={css.moveTopButton} onClick={clickMoveTopButton} />
+      </div>
+
       <div className={css.footer}></div>
     </>
   );

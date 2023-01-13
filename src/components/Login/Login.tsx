@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, Dispatch, SetStateAction } from 'react';
 import LoginInput from '../LoginInput/LoginInput';
 import SignUp from '../SignUp/SignUp';
 import css from './Login.module.scss';
 
-const Login = () => {
-  const [open, setOpen] = useState<boolean>(false); //헤더 만들어지면 헤더에 가야하는 불리언 10번줄도
+interface headerProps {
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+const Login = ({ open, setOpen }: headerProps) => {
   const [singUpOpen, setSingUpOpen] = useState<boolean>(false);
   const [id, setId] = useState<string>('');
   const [pw, setPw] = useState<string>('');
@@ -34,7 +38,6 @@ const Login = () => {
 
   return (
     <div>
-      <button onClick={() => setOpen(!open)}>로그인</button>
       {open && (
         <div className={css.container}>
           <div className={css.content}>

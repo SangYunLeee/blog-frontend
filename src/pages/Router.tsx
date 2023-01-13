@@ -9,7 +9,6 @@ function Router() {
       <Routes>
         <Route path="/totalpost" element={<TotalPost />} />
         <Route path="/testpage" element={<TestPage />} />
-        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );
