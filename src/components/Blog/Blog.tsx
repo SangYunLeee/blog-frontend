@@ -6,6 +6,7 @@ const Blog = (
   props: Pick<BlogData, 'title' | 'content' | 'reply' | 'img' | 'date'>
 ) => {
   const { title, content, reply, img, date } = props;
+
   return (
     <div className={css.blogContainner}>
       <section className={css.contents}>

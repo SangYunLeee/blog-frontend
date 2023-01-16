@@ -4,8 +4,9 @@
     display: flex;
     justify-content: center;
     position: relative;
+    margin-bottom: 20%;
     .input {
-      background-color: lightgray;
+      background-color: #e6e8ea;
       padding: 8px;
       border-radius: 5px;
     }
@@ -13,8 +14,8 @@
       position: absolute;
       width: 25px;
       height: 25px;
-      top: 2px;
-      right: 110px;
+      top: 5px;
+      right: 100px;
     }
   }
   .categoryWrapper {
@@ -27,10 +28,10 @@
       margin-left: 25%;
       line-height: 2;
       li {
-        border-left: 2px solid lightgray;
+        border-left: 2px solid #e6e8ea;
         margin-left: 10px;
         padding-left: 20px;
-        font-size: 20px;
+        font-size: 15px;
       }
     }
   }

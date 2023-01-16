@@ -20,11 +20,8 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <div className={css.content}>너굴맨은 너굴너굴너굴해요</div>
-      <img
-        className={css.grass}
-        src="https://blog.kakaocdn.net/dn/bVq2wY/btquXtTTCzq/e4BkXRgKjWKmbilg4D0RvK/img.png"
-      />
+      <div className={css.content}>안녕 나는 너굴맨이라구!</div>
+      <div className={css.grass}>grass</div>
       <button className={css.writeBtn}>게시물 작성하기</button>
     </div>
   );

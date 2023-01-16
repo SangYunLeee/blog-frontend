@@ -1,5 +1,4 @@
 .blogContainner {
-  margin: 10% 2% 0 3%;
   width: 100%;
   .contents {
     display: flex;
@@ -7,7 +6,7 @@
     margin-left: 5%;
     margin-top: 3%;
     padding-bottom: 20px;
-    border-bottom: 1px solid lightgray;
+    border-bottom: 1px solid #e6e8ea;
     .contentWrapper {
       flex-direction: column;
       .contentTitle {

@@ -14,12 +14,18 @@ export interface BlogData {
 }
 const BlogPage = () => {
   const [blogData, setBlogData] = useState<BlogData[]>([]);
+  const [searchData, setSearchData] = useState<string>('');
 
   useEffect(() => {
     fetch('../data/blogdata.json')
       .then((res) => res.json())
       .then((data) => setBlogData(data.data));
   }, []);
+
+  const onChangeSearch = (e: any) => {
+    e.preventDefault();
+    setSearchData(e.target.value);
+  };
 
   return (
     <div className={css.blogContainner}>
