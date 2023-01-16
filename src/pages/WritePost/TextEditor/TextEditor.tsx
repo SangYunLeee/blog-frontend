@@ -13,7 +13,6 @@ const TextEditor = () => {
   };
   return (
     <div className={css.container}>
-      <button onClick={log}>버튼</button>
       <Editor
         tinymceScriptSrc={
           process.env.REACT_APP_PUBLIC_URL + '/tinymce/tinymce.min.js'
@@ -51,6 +50,7 @@ const TextEditor = () => {
             'body { font-family:Helvetica,Arial,sans-serif; font-size:14px; }',
         }}
       />
+      <button onClick={log}>버튼</button>
     </div>
   );
 };
