@@ -1,4 +1,9 @@
-import React, { useState, Dispatch, SetStateAction } from 'react';
+import React from 'react';
+import Carousel from '../../components/Carousel/Carousel';
+import AllPost from '../../components/BlogPost/AllPost';
+import NewPost from '../../components/BlogPost/NewPost';
+import css from './Home.module.scss';
+//import React, { useState, Dispatch, SetStateAction } from 'react';
 // import Follow from '../../components/Follow/Follow';
 
 // 팔로우 연결
@@ -10,9 +15,18 @@ import React, { useState, Dispatch, SetStateAction } from 'react';
 const Home = () => {
   // const [open, setOpen] = useState<boolean>(false);
   return (
-    <div>
-      {/* <button onClick={() => setOpen(true)}>팔로우</button> */}
-      {/* {open ? <Follow open={open} setOpen={setOpen} /> : null} */}
+    <div className={css.home}>
+      <div className={css.homeContainer}>
+        <section className={css.carouselContent}>
+          <Carousel />
+        </section>
+        <section className={css.allPost}>
+          <AllPost />
+        </section>
+        <section className={css.newPost}>
+          <NewPost />
+        </section>
+      </div>
     </div>
   );
 };
