@@ -1,0 +1,166 @@
+{
+  "data": [
+    {
+      "id": 6,
+      "title": "오늘의 일기",
+      "content": "행복한 하루였다~~!",
+      "thumnailImgUrl": "https://s3.ap-northeast-2.amazonaws.com/univ-careet/FileData/Article/98/1218ed65-6dff-4479-bab5-501eaf138313.jpg",
+      "secretType": 1,
+      "createdAt": "2023-01-09T01:06:42.000Z",
+      "category": {
+        "id": 1,
+        "categoryName": "맛집 기록"
+      },
+      "user": {
+        "id": 1,
+        "nickname": "테스트1"
+      },
+      "topic": {
+        "id": 1,
+        "topicName": "IT"
+      },
+      "tags": [
+        {
+          "id": 5,
+          "tagName": "고구려"
+        },
+        {
+          "id": 6,
+          "tagName": "짜파게티"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "title": "title iam 1",
+      "content": "월요일 좋아 최고로 좋아 난 일 할 때 제일 멋지지 오늘부터 열심히 할 거야 오, 좋아 월요일 좋아 같이불러 핑핑아! (냔냔냔냔 냔냔냔냐 냐냐냐냐냔냐냐) (냔냔냔냔 냔냔냔냐 냔냐냐) 월요일 월요일~ 월요일 좋아 ~ (징징이)제발좀 조용히해!!",
+      "thumnailImgUrl": "https://t1.daumcdn.net/thumb/R720x0.fjpg/?fname=http://t1.daumcdn.net/brunch/service/user/msS/image/wePy728thj_JO2MrZFln4IaJZDM.jpg",
+      "secretType": 1,
+      "createdAt": "2023-01-09T01:39:15.000Z",
+      "category": {
+        "id": 1,
+        "categoryName": "맛집 기록"
+      },
+      "user": {
+        "id": 1,
+        "nickname": "테스트1"
+      },
+      "topic": {
+        "id": 1,
+        "topicName": "IT"
+      },
+      "tags": [
+        {
+          "id": 5,
+          "tagName": "고구려"
+        },
+        {
+          "id": 6,
+          "tagName": "짜파게티"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "title": "title iam 1",
+      "content": "content iam1",
+      "thumnailImgUrl": null,
+      "secretType": 1,
+      "createdAt": "2023-01-09T01:39:38.000Z",
+      "category": {
+        "id": 1,
+        "categoryName": "맛집 기록"
+      },
+      "user": {
+        "id": 1,
+        "nickname": "테스트1"
+      },
+      "topic": {
+        "id": 1,
+        "topicName": "IT"
+      },
+      "tags": null
+    },
+    {
+      "id": 9,
+      "title": "오늘의 일기",
+      "content": "행복한 하루였다~~!",
+      "thumnailImgUrl": "https://s3.ap-northeast-2.amazonaws.com/univ-careet/FileData/Article/98/1218ed65-6dff-4479-bab5-501eaf138313.jpg",
+      "secretType": 1,
+      "createdAt": "2023-01-09T01:06:42.000Z",
+      "category": {
+        "id": 1,
+        "categoryName": "맛집 기록"
+      },
+      "user": {
+        "id": 1,
+        "nickname": "테스트1"
+      },
+      "topic": {
+        "id": 1,
+        "topicName": "IT"
+      },
+      "tags": [
+        {
+          "id": 5,
+          "tagName": "고구려"
+        },
+        {
+          "id": 6,
+          "tagName": "짜파게티"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "title": "title iam 1",
+      "content": "월요일 좋아 최고로 좋아 난 일 할 때 제일 멋지지 오늘부터 열심히 할 거야 오, 좋아 월요일 좋아 같이불러 핑핑아! (냔냔냔냔 냔냔냔냐 냐냐냐냐냔냐냐) (냔냔냔냔 냔냔냔냐 냔냐냐) 월요일 월요일~ 월요일 좋아 ~ (징징이)제발좀 조용히해!!",
+      "thumnailImgUrl": "https://t1.daumcdn.net/thumb/R720x0.fjpg/?fname=http://t1.daumcdn.net/brunch/service/user/msS/image/wePy728thj_JO2MrZFln4IaJZDM.jpg",
+      "secretType": 1,
+      "createdAt": "2023-01-09T01:39:15.000Z",
+      "category": {
+        "id": 1,
+        "categoryName": "맛집 기록"
+      },
+      "user": {
+        "id": 1,
+        "nickname": "테스트1"
+      },
+      "topic": {
+        "id": 1,
+        "topicName": "IT"
+      },
+      "tags": [
+        {
+          "id": 5,
+          "tagName": "고구려"
+        },
+        {
+          "id": 6,
+          "tagName": "짜파게티"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "title": "title iam 1",
+      "content": "content iam1",
+      "thumnailImgUrl": null,
+      "secretType": 1,
+      "createdAt": "2023-01-09T01:39:38.000Z",
+      "category": {
+        "id": 1,
+        "categoryName": "맛집 기록"
+      },
+      "user": {
+        "id": 1,
+        "nickname": "테스트1"
+      },
+      "topic": {
+        "id": 1,
+        "topicName": "IT"
+      },
+      "tags": null
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+@media (max-width: 3000px) {
+  .swiper {
+    width: 65vw;
+  }
+}
+
+@media (max-width: 1800px) {
+  .swiper {
+    width: 75vw;
+  }
+}
+
+@media (max-width: 1200px) {
+  .swiper {
+    width: 80vw;
+  }
+}
+
+@media (max-width: 750px) {
+  .swiper {
+    width: 90vw;
+  }
+}
+
+.swiper {
+  .swiper-pagination {
+    position: absolute;
+  }
+
+  .swiper-pagination-bullet {
+    width: 70px;
+    height: 3px;
+    border-radius: 3px;
+    border: 1px solid #88d0e8;
+    background: transparent;
+    opacity: 1;
+  }
+
+  .swiper-pagination-bullet-active {
+    width: 75px;
+    background: #88d0e8;
+    transition: width 0.5s;
+    border-radius: 3px;
+  }
+}
