@@ -1,0 +1,31 @@
+.blogContainner {
+  width: 100%;
+  .contents {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 5%;
+    margin-top: 3%;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e6e8ea;
+    .contentWrapper {
+      flex-direction: column;
+      .contentTitle {
+        margin: 15px 0;
+        font-size: 25px;
+      }
+      .titleWrapper {
+        display: flex;
+        .reply {
+          margin: 15px 0;
+          padding-top: 8px;
+          margin-left: 5px;
+          color: red;
+        }
+      }
+    }
+    .contentImg {
+      width: 200px;
+      height: 100px;
+    }
+  }
+}
