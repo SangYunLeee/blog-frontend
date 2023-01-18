@@ -1,25 +1,29 @@
-import React, { useRef } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
-import { Editor as TinyMCEEditor } from 'tinymce';
 import css from './TextEditor.module.scss';
-const TextEditor = () => {
-  const editorRef = useRef<TinyMCEEditor | null>(null);
 
-  const log = () => {
-    if (editorRef.current) {
-      //콘솔로 띄워줌
-      console.log(editorRef.current.getContent());
-    }
-  };
+interface Props {
+  setContent: Dispatch<SetStateAction<string>>;
+}
+
+const TextEditor = ({ setContent }: Props) => {
+  function OnChangeHandler(inst: any) {
+    setContent(inst.getBody().innerHTML);
+  }
+
   return (
     <div className={css.container}>
       <Editor
         tinymceScriptSrc={
           process.env.REACT_APP_PUBLIC_URL + '/tinymce/tinymce.min.js'
         }
-        onInit={(evt, editor) => (editorRef.current = editor)}
-        // initialValue="<p></p>"
+        id="flag"
         init={{
+          setup: function (ed: any) {
+            ed.on('keyup', function () {
+              OnChangeHandler(ed);
+            });
+          },
           height: 980,
           menubar: false,
           plugins: [
@@ -50,7 +54,6 @@ const TextEditor = () => {
             'body { font-family:Helvetica,Arial,sans-serif; font-size:14px; }',
         }}
       />
-      <button onClick={log}>버튼</button>
     </div>
   );
 };

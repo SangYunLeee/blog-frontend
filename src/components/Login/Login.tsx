@@ -29,6 +29,7 @@ const Login = ({ open, setOpen }: headerProps) => {
         if (result.token !== undefined) {
           localStorage.setItem('token', result.token);
           alert('로그인에 성공하였습니다.');
+          window.location.reload();
           setOpen(false);
         } else {
           alert('아이디와 비밀번호를 확인해 주세요');
