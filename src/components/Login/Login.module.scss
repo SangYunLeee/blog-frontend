@@ -10,16 +10,16 @@
 @mixin btn {
   cursor: pointer;
   color: rgb(255, 255, 255);
-  background-color: #c7cfb7;
+  background-color: #b6c4f5;
   &:disabled {
     cursor: default;
-    background-color: #f2f2ec;
+    background-color: #e8eff3;
     &:hover {
-      background-color: #f2f2ec;
+      background-color: #e8eff3;
     }
   }
   &:hover {
-    background-color: #9dad7f;
+    background-color: #8da3f0;
   }
 }
 
@@ -71,7 +71,7 @@
   }
   .image {
     width: 44%;
-    background-color: #f7f7e8;
+    background-color: #e8eff3;
     height: 100%;
     align-items: flex-start;
     border-top-left-radius: 20px;
