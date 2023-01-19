@@ -35,24 +35,40 @@ const Tag = ({ change }: Props) => {
   };
 
   return (
-    <div className={css.testPage}>
-      <div className={css.tagArr}>
-        {tagArr.map((tag, idx) => (
-          <div key={idx} className={css.tagArray}>
-            <span>{tag}</span>
-            <span onClick={() => handleDelete(tag)}>delete</span>
-          </div>
-        ))}
+    <div className={css.totalWrap}>
+      <div className={css.top}>
+        <p className={css.red} />
+        <p className={css.gray} />
+        <p className={css.green} />
       </div>
       <div className={css.eachTag}>
-        <label># </label>
+        <label className={css.hashtag}># </label>
         <input
           type="text"
-          placeholder="태그 입력 후 enter"
+          placeholder="태그를 입력 하세요"
           onChange={(e) => setTag(e.target.value)}
           onKeyUp={(e) => handleKeyUp(e)}
           value={tag}
         />
+      </div>
+      <div className={css.tagArr}>
+        <p className={css.inform}>
+          * 엔터나 스페이스 키를 누르면 태그가 생성돼요!
+        </p>
+        {tagArr.map((tag, idx) => (
+          <div key={idx} className={css.tagArray}>
+            <span className={css.makeTag}>{tag}</span>
+            <span className={css.deleteBtn} onClick={() => handleDelete(tag)}>
+              <img
+                className={css.deleteImg}
+                src="./image/tagDelete.png"
+                alt="deleteBtn"
+                width="9px"
+                height="9px"
+              />
+            </span>
+          </div>
+        ))}
       </div>
     </div>
   );

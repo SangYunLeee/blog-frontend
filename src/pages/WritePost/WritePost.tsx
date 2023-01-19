@@ -52,12 +52,10 @@ const WritePost = () => {
   return (
     <>
       <Header />
+
       <div className={css.totalWrap}>
-        <NavBar change={change} handleWritePost={handleWritePost} />
+        {/* <NavBar change={change} handleWritePost={handleWritePost} /> */}
         <div className={css.container}>
-          <div className={css.tag}>
-            <Tag change={change} />
-          </div>
           <div className={css.InputWrap}>
             {thumbImg && (
               <span
@@ -102,6 +100,9 @@ const WritePost = () => {
             />
           </div>
           <TextEditor setContent={setContent} />
+        </div>
+        <div className={css.tag}>
+          <Tag change={change} />
         </div>
       </div>
     </>
