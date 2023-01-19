@@ -3,6 +3,7 @@ import css from './NavBar.module.scss';
 
 interface Props {
   change: (key: string, value: string) => void;
+  handleWritePost: () => void;
 }
 
 interface Topics {
@@ -15,13 +16,14 @@ interface Categories {
   categoryName: string;
 }
 
-const NavBar = ({ change }: Props) => {
+const NavBar = ({ change, handleWritePost }: Props) => {
   const [topics, setTopics] = useState<Topics[]>();
   const [categories, setCategories] = useState<Categories[]>();
 
   const handleSetVal = (key: string, value: string) => {
     change(key, value);
   };
+
   useEffect(() => {
     const fetchData = async () => {
       const token = localStorage.getItem('token');
@@ -85,6 +87,7 @@ const NavBar = ({ change }: Props) => {
         <option value="1">맞팔공개</option>
         <option value="2">비공개</option>
       </select>
+      <button onClick={handleWritePost}> 제출</button>
     </div>
   ) : null;
 };
