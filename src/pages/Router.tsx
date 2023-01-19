@@ -4,8 +4,10 @@ import Home from './Home/Home';
 import TestPage from './TestPage/TestPage';
 import TotalPost from './TotalPost/TotalPost';
 import WritePost from './WritePost/WritePost';
+import BlogPage from './BlogPage/BlogPage';
+import SettingPage from './SettingPage/SettingPage';
 
-function Router() {
+const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
@@ -13,8 +15,11 @@ function Router() {
         <Route path="/totalpost" element={<TotalPost />} />
         <Route path="/testpage" element={<TestPage />} />
         <Route path="/write" element={<WritePost />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/setting" element={<SettingPage />} />
       </Routes>
     </BrowserRouter>
   );
-}
+};
+
 export default Router;
