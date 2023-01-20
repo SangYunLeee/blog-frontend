@@ -53,55 +53,84 @@ const WritePost = () => {
     <>
       <Header />
       <div className={css.totalWrap}>
-        <NavBar change={change} handleWritePost={handleWritePost} />
         <div className={css.container}>
-          <div className={css.tag}>
-            <Tag change={change} />
+          <div className={css.nav}>
+            <NavBar change={change} />
           </div>
-          <div className={css.InputWrap}>
-            {thumbImg && (
-              <span
-                className={css.imgDeleteBtn}
-                onClick={() => {
-                  setThumbImg('');
-                  change('thumbnail', '');
+          <div className={css.containerWrap}>
+            <div className={css.InputWrap}>
+              <input
+                accept="image/png,image/jpg,image/jpeg,.heic"
+                type="file"
+                id="input-file"
+                onChange={(e) => {
+                  if (e.target.files) {
+                    change('thumbnail', e.target.files[0]);
+                    setThumbImg(URL.createObjectURL(e.target.files[0]));
+                    e.target.value = '';
+                  }
                 }}
-              >
-                delete
-              </span>
-            )}
-            <label className={css.fileInput} htmlFor="input-file">
-              사진 업로드
-            </label>
-
-            {thumbImg && (
-              <img
-                src={thumbImg}
-                alt="thumbnail"
-                width="100px"
-                height="100px"
               />
-            )}
 
-            <input
-              accept="image/png,image/jpg,image/jpeg,.heic"
-              type="file"
-              id="input-file"
-              onChange={(e) => {
-                if (e.target.files) {
-                  change('thumbnail', e.target.files[0]);
-                  setThumbImg(URL.createObjectURL(e.target.files[0]));
-                }
-              }}
-            />
-            <input
-              onChange={(e) => change('title', e.target.value)}
-              className={css.titleInput}
-              type="text"
-              placeholder="제목"
-            />
+              {thumbImg ? (
+                <>
+                  <label htmlFor="input-file">
+                    <img
+                      className={css.fileInput}
+                      src="./image/whitePic.png"
+                      alt="addPic"
+                    />
+                  </label>
+                  <img
+                    className={css.imgDeleteBtn}
+                    onClick={(e) => {
+                      URL.revokeObjectURL(thumbImg);
+                      setThumbImg('');
+                      change('thumbnail', '');
+                    }}
+                    src="./image/tagDelete.png"
+                    alt="close"
+                  />
+                </>
+              ) : (
+                <label htmlFor="input-file">
+                  <img
+                    className={css.fileInput}
+                    src="./image/blackPic.png"
+                    alt="addPic"
+                  />
+                </label>
+              )}
+              <div className={`${thumbImg ? css.after : css.before}`}>
+                <input
+                  onChange={(e) => change('title', e.target.value)}
+                  className={`${
+                    css.titleInput + (thumbImg ? ' ' + css.after : ' ')
+                  }`}
+                  type="text"
+                  placeholder="제목"
+                />
+                {thumbImg && (
+                  <>
+                    <p className={css.grayBack} />
+                    <img
+                      className={css.thumbImg}
+                      src={thumbImg}
+                      alt="thumbnail"
+                      width="100px"
+                      height="100px"
+                    />
+                  </>
+                )}
+              </div>
+            </div>
+            <div className={css.ediotr}>
+              <TextEditor setContent={setContent} />
+            </div>
           </div>
-          <TextEditor setContent={setContent} />
+        </div>
+        <div className={css.tag}>
+          <Tag change={change} handleWritePost={handleWritePost} />
         </div>
       </div>
     </>
