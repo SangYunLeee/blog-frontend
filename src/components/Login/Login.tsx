@@ -31,6 +31,7 @@ const Login = ({ open, setOpen }: headerProps) => {
           alert('로그인에 성공하였습니다.');
           window.location.reload();
           setOpen(false);
+          window.location.reload();
         } else {
           alert('아이디와 비밀번호를 확인해 주세요');
         }

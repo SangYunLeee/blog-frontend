@@ -1,45 +1,58 @@
-.categoryMenu {
+.topicMenu {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   gap: 15px;
-  width: 120px;
-  height: 30px;
-  border: 1px solid #88d0e8;
+  width: 100px;
+  height: 27px;
+  padding: 3px 0 3px 0;
+  border-radius: 10px;
+  border: 1.5px solid #b6c4f5;
   color: #414141;
-  font-size: 13px;
+  font-size: 14px;
   cursor: pointer;
 
   .angle {
-    color: #77c8e3;
+    color: #8da3f0;
+    font-size: 15px;
   }
 }
 
-.categoryWrap {
+.topicWrap {
   position: absolute;
   height: auto;
+  border-radius: 10px;
+  border: 1px solid #e6e8ea;
+  margin-top: 10px;
 
-  .categoryList {
+  .topicList {
     display: flex;
     flex-direction: column;
     list-style: none;
     height: 100%;
     overflow-y: scroll;
+    border-radius: 10px;
 
-    .categoryItem {
+    .topicItem {
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 120px;
+      width: 100px;
       height: 30px;
+      padding: 3px 0 3px 0;
+      border-bottom: 1px solid #e6e6e6;
       background-color: white;
       list-style: none;
-      font-size: 13px;
+      font-size: 14px;
       z-index: 1;
       cursor: pointer;
-      border-left: 1px solid #88d0e8;
-      border-right: 1px solid #88d0e8;
-      border-bottom: 1px solid #88d0e8;
+    }
+    :hover {
+      background-color: #b6c4f5;
+      color: white;
+    }
+    :last-child {
+      border-bottom: 0;
     }
   }
 }
