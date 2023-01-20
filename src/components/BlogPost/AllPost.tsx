@@ -1,32 +1,88 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Dispatch, SetStateAction } from 'react';
 import DropDown from '../DropDown/DropDown';
 import { FaChevronLeft } from 'react-icons/fa';
 import { FaChevronRight } from 'react-icons/fa';
 
 import css from './AllPost.module.scss';
 
-interface newPostInterface {
+interface allPostInterface {
   id: string;
   title: string;
   content: string;
-  thumnailImgUrl: string;
+  thumbnailImgUrl: string;
   createdAt: string;
+  user: {
+    id: number;
+    nickname: string;
+    profileImgUrl: string;
+  };
+}
+
+export interface topicDataInterface {
+  setTopicIdData: Dispatch<SetStateAction<number>>;
+  setPagination: Dispatch<SetStateAction<number>>;
 }
 
 const AllPost = () => {
-  const [newPostData, setNewPostData] = useState<newPostInterface[]>([]);
+  //주제 아이디
+  const [topicIdData, setTopicIdData] = useState(0);
+  //페이지네이션
+  const [pagination, setPagination] = useState(1);
+
+  const token = localStorage.getItem('token');
+
+  const requestHeaders: HeadersInit = new Headers();
+  requestHeaders.set('Content-Type', 'application/json');
+  if (token) {
+    requestHeaders.set('Authorization', token);
+  }
+
+  //전체글 데이터
+  const [allPostData, setAllPostData] = useState<allPostInterface[]>([]);
+  const [maxCountPage, setMaxCountPage] = useState<number>(1);
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await fetch(`./data/post.json`);
-        const json = await response.json();
-        setNewPostData(json.data);
-      } catch (error) {
-        console.error('error');
+      if (topicIdData !== 0) {
+        try {
+          const response = await fetch(
+            `${process.env.REACT_APP_API_URL}/posts?topicId=${topicIdData}&countPerPage=8&pageNumber=${pagination}`,
+            {
+              headers: requestHeaders,
+            }
+          );
+          const json = await response.json();
+          setMaxCountPage(json.maxPage);
+          setAllPostData(json.data);
+        } catch (error) {
+          console.error('error');
+        }
+      } else {
+        try {
+          const response = await fetch(
+            `${process.env.REACT_APP_API_URL}/posts?countPerPage=8&pageNumber=${pagination}`,
+            {
+              headers: requestHeaders,
+            }
+          );
+          const json = await response.json();
+          setMaxCountPage(json.maxPage);
+          setAllPostData(json.data);
+        } catch (error) {
+          console.error('error');
+        }
       }
     };
     fetchData();
-  }, []);
+  }, [pagination, topicIdData]);
+
+  const prevPage = () => {
+    setPagination(pagination - 1);
+  };
+
+  const nextPage = () => {
+    setPagination(pagination + 1);
+  };
+
   return (
     <ul className={css.allPostContainer}>
       <li className={css.allPostTitle}>
@@ -34,40 +90,63 @@ const AllPost = () => {
           전체 글<button className={css.moreButton}>더보기</button>
         </span>
         <div>
-          <DropDown />
+          <DropDown
+            setTopicIdData={setTopicIdData}
+            setPagination={setPagination}
+          />
         </div>
       </li>
       <div className={css.allPostWrap}>
-        <FaChevronLeft className={css.chevron} />
+        <div className="pageButton">
+          {pagination === 1 ? null : (
+            <FaChevronLeft className={css.chevron} onClick={prevPage} />
+          )}
+        </div>
         <div className={css.allPostContent}>
-          {newPostData.map((postData) => {
-            const { id, title, thumnailImgUrl, createdAt } = postData;
+          {allPostData.map((postData) => {
+            const { id, title, content, thumbnailImgUrl, createdAt, user } =
+              postData;
             const date = new Date(createdAt);
-            const postingDate = `${date.getFullYear()}.${
+            const postingDate = `${date.getFullYear()}년 ${
               date.getMonth() + 1
-            }.${date.getDate()}`;
+            }월 ${date.getDate()}일`;
             return (
               <div key={id} className={css.postBox}>
                 <div className={css.postUser}>
-                  <img
-                    className={css.userImage}
-                    src={thumnailImgUrl}
-                    alt="유저이미지"
-                  />
-                  <span className={css.userName}>유저이름</span>
+                  <div className={css.userInfo}>
+                    <img
+                      className={css.userImage}
+                      src={user.profileImgUrl}
+                      alt="유저이미지"
+                    />
+                    <span className={css.userName}>{user.nickname}</span>
+                  </div>
+                  <span className={css.postingDate}>{postingDate}</span>
                 </div>
                 <div className={css.postImg}>
-                  <img className={css.thumnail} src={thumnailImgUrl} alt="" />
+                  <img
+                    className={css.thumbnail}
+                    src={thumbnailImgUrl}
+                    alt="썸네일"
+                  />
                 </div>
                 <div className={css.postTitle}>
-                  <span className={css.postingDate}>{postingDate}</span>|
-                  <span className={css.titleText}>{title}</span>
+                  <p>
+                    <span className={css.titleText}>{title}</span>
+                  </p>
+                  <p>
+                    <span className={css.postingContent}>{content}</span>
+                  </p>
                 </div>
               </div>
             );
           })}
         </div>
-        <FaChevronRight className={css.chevron} />
+        <div className="pageButton">
+          {pagination === maxCountPage ? null : (
+            <FaChevronRight className={css.chevron} onClick={nextPage} />
+          )}
+        </div>
       </div>
     </ul>
   );
