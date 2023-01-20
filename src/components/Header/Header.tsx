@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Login from '../Login/Login';
 import css from './Header.module.scss';
-
+import { useNavigate } from 'react-router-dom';
 type userInfoProfile = { blogTitle: string; profileIntro: string };
 
 interface userInfo {
@@ -24,6 +24,7 @@ const Header = () => {
   const loginBtn = useRef<HTMLButtonElement>(null);
 
   const requestHeaders: HeadersInit = new Headers();
+  const navigate = useNavigate();
   requestHeaders.set('Content-Type', 'application/json');
   if (token) {
     requestHeaders.set('Authorization', token);
@@ -72,7 +73,14 @@ const Header = () => {
             </div>
           </div>
           <div className={css.writePostBtnDiv}>
-            {token && <div className={css.writePostBtn}>새 글 작성</div>}
+            {token && (
+              <div
+                className={css.writePostBtn}
+                onClick={() => navigate('/write')}
+              >
+                새 글 작성
+              </div>
+            )}
           </div>
           <div className={css.userNameDiv}>
             {token ? (

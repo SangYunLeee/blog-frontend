@@ -29,7 +29,6 @@ const Login = ({ open, setOpen }: headerProps) => {
         if (result.token !== undefined) {
           localStorage.setItem('token', result.token);
           alert('로그인에 성공하였습니다.');
-          window.location.reload();
           setOpen(false);
           window.location.reload();
         } else {

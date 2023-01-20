@@ -21,8 +21,7 @@
       align-items: center;
       position: relative;
       margin-right: 10px;
-
-      .inputFocus {
+      ㄹ .inputFocus {
         width: 200px;
         height: 30px;
         border-radius: 5px;
@@ -90,6 +89,7 @@
       margin-right: 10px;
 
       .writePostBtn {
+        cursor: pointer;
         display: flex;
         justify-content: center;
         align-items: center;
