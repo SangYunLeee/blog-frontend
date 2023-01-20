@@ -8,11 +8,10 @@
 .totalWrap {
   display: flex;
   flex-direction: column;
-  width: 350px;
-
+  width: 85%;
   .top {
     height: 40px;
-    background-color: #fafafa;
+    background-color: #f6f6f6;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
     position: relative;
@@ -34,7 +33,7 @@
   }
   .tagArr {
     background-color: #fafafa;
-    height: 200px;
+    min-height: 200px;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     padding: 5px 20px 20px 20px;
@@ -90,6 +89,19 @@
       }
 
       right: 1px;
+    }
+  }
+  .submit {
+    cursor: pointer;
+    margin-top: 15px;
+    height: 40px;
+    font-size: 16px;
+    background-color: #b6c4f5;
+    color: #ffffff;
+    border-radius: 10px;
+    text-align: center;
+    &:hover {
+      background-color: #8da3f0;
     }
   }
 }

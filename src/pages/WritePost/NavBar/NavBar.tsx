@@ -3,7 +3,6 @@ import css from './NavBar.module.scss';
 
 interface Props {
   change: (key: string, value: string) => void;
-  handleWritePost: () => void;
 }
 
 interface Topics {
@@ -16,7 +15,7 @@ interface Categories {
   categoryName: string;
 }
 
-const NavBar = ({ change, handleWritePost }: Props) => {
+const NavBar = ({ change }: Props) => {
   const [topics, setTopics] = useState<Topics[]>();
   const [categories, setCategories] = useState<Categories[]>();
 
@@ -57,7 +56,10 @@ const NavBar = ({ change, handleWritePost }: Props) => {
 
   return topics ? (
     <div className={css.navWrap}>
-      <select onChange={(e) => handleSetVal('topicId', e.target.value)}>
+      <select
+        className={css.topic}
+        onChange={(e) => handleSetVal('topicId', e.target.value)}
+      >
         <option value="default" disabled={true}>
           주제
         </option>
@@ -67,7 +69,10 @@ const NavBar = ({ change, handleWritePost }: Props) => {
           </option>
         ))}
       </select>
-      <select onChange={(e) => handleSetVal('categoryId', e.target.value)}>
+      <select
+        className={css.category}
+        onChange={(e) => handleSetVal('categoryId', e.target.value)}
+      >
         <option value="default" disabled={false}>
           전체
         </option>
@@ -79,7 +84,10 @@ const NavBar = ({ change, handleWritePost }: Props) => {
             ))
           : null}
       </select>
-      <select onChange={(e) => handleSetVal('secretType', e.target.value)}>
+      <select
+        className={css.secretType}
+        onChange={(e) => handleSetVal('secretType', e.target.value)}
+      >
         <option value="default" disabled={true}>
           공개범위
         </option>
@@ -87,7 +95,6 @@ const NavBar = ({ change, handleWritePost }: Props) => {
         <option value="1">맞팔공개</option>
         <option value="2">비공개</option>
       </select>
-      <button onClick={handleWritePost}> 제출</button>
     </div>
   ) : null;
 };

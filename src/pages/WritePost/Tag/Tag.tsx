@@ -3,9 +3,10 @@ import css from './Tag.module.scss';
 
 interface Props {
   change: (key: string, value: string) => void;
+  handleWritePost: () => void;
 }
 
-const Tag = ({ change }: Props) => {
+const Tag = ({ change, handleWritePost }: Props) => {
   const [tag, setTag] = useState<string>('');
   const [tagArr, setTagArr] = useState<string[]>([]);
 
@@ -70,6 +71,9 @@ const Tag = ({ change }: Props) => {
           </div>
         ))}
       </div>
+      <button className={css.submit} onClick={handleWritePost}>
+        기록하기
+      </button>
     </div>
   );
 };
