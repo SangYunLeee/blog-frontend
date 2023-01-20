@@ -73,7 +73,10 @@ const NavBar = ({ change }: Props) => {
         className={css.category}
         onChange={(e) => handleSetVal('categoryId', e.target.value)}
       >
-        <option value="default" disabled={false}>
+        <option value="category" id="" disabled={true}>
+          카테고리
+        </option>
+        <option value="default" id="" disabled={false}>
           전체
         </option>
         {categories
