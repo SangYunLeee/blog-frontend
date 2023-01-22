@@ -1,51 +1,66 @@
 import React, { useState, useEffect } from 'react';
-import css from './BlogPage.module.scss';
 import Blog from '../../components/Blog/Blog';
 import Profile from '../../components/Blog/Profile';
 import Category from '../../components/Blog/Category';
+import Header from '../../components/Header/Header';
+import css from './BlogPage.module.scss';
+import axios from 'axios';
 
 export interface BlogData {
   id: number;
   title: string;
   content: string;
   reply: number;
-  img: string;
-  date: string;
+  thumbnailImgUrl: string;
+  createdAt: number;
 }
 const BlogPage = () => {
   const [blogData, setBlogData] = useState<BlogData[]>([]);
-  const [searchData, setSearchData] = useState<string>('');
+  const [inputData, setInputData] = useState<string>('');
 
   useEffect(() => {
-    fetch('../data/blogdata.json')
+    fetch(`${process.env.REACT_APP_API_URL}/posts?userId=2`)
       .then((res) => res.json())
       .then((data) => setBlogData(data.data));
   }, []);
 
-  const onChangeSearch = (e: any) => {
-    e.preventDefault();
-    setSearchData(e.target.value);
-  };
+  const onSearch = blogData.filter((data) => {
+    if (inputData == null) return data;
+    else if (
+      data.title.toLowerCase().includes(inputData.toLowerCase()) ||
+      data.content.toLowerCase().includes(inputData.toLowerCase())
+    ) {
+      return data;
+    }
+  });
 
+  console.log(blogData);
   return (
-    <div className={css.blogContainner}>
-      <div className={css.blogWrapper}>
-        <Profile />
-        <Category />
-      </div>
-      <div className={css.blogcontent}>
-        <div className={css.blogHeader}>
-          <h1 className={css.blogName}>갚아봐요 대출의 숲</h1>
-          <div className={css.titleWrapper}>
-            <h2 className={css.allContents}>전체 글</h2>
-            <hr className={css.border} />
-          </div>
+    <>
+      <Header />
+      <div className={css.blogContainner}>
+        <div className={css.blogWrapper}>
+          <Profile />
+          <Category
+            inputData={inputData}
+            setInputData={setInputData}
+            onSearch={onSearch}
+          />
         </div>
-        {blogData.map((data) => {
-          return <Blog key={data.id} {...data} />;
-        })}
+        <div className={css.blogcontent}>
+          <div className={css.blogHeader}>
+            <h1 className={css.blogName}>갚아봐요 대출의 숲</h1>
+            <div className={css.titleWrapper}>
+              <h2 className={css.allContents}>전체 글</h2>
+              <hr className={css.border} />
+            </div>
+          </div>
+          {onSearch.map((data) => {
+            return <Blog key={data.id} {...data} />;
+          })}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

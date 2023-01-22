@@ -2,20 +2,19 @@
   margin-top: 10%;
   .inputWrapper {
     display: flex;
-    justify-content: center;
-    position: relative;
-    margin-bottom: 20%;
+    margin: 20% auto;
+    background-color: #e6e8ea;
+    padding: 8px;
+    border-radius: 5px;
+    width: 55%;
     .input {
-      background-color: #e6e8ea;
-      padding: 8px;
-      border-radius: 5px;
     }
     .searchIcon {
-      position: absolute;
       width: 25px;
       height: 25px;
-      top: 5px;
-      right: 100px;
+    }
+    .searchButton {
+      cursor: pointer;
     }
   }
   .categoryWrapper {
@@ -32,6 +31,7 @@
         margin-left: 10px;
         padding-left: 20px;
         font-size: 15px;
+        cursor: pointer;
       }
     }
   }

@@ -1,16 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import css from './Category.module.scss';
-
-const Category = () => {
+interface Props {
+  inputData: string;
+  setInputData: any;
+  onSearch: any;
+}
+const Category: React.FC<Props> = (props) => {
   return (
     <div className={css.categoryContainer}>
       <div className={css.inputWrapper}>
-        <input className={css.input} type="text" placeholder="블로그 내 검색" />
-        <img
-          className={css.searchIcon}
-          src="https://cdn-icons-png.flaticon.com/512/8915/8915520.png"
-          alt="SearchIcon"
+        <input
+          className={css.input}
+          type="text"
+          placeholder="블로그 내 검색"
+          onChange={(e) => props.setInputData(e.target.value)}
+          value={props.inputData}
         />
+        <button className={css.searchButton}>
+          <img
+            className={css.searchIcon}
+            src="/image/header-search.png"
+            alt="SearchIcon"
+          />
+        </button>
       </div>
       <div className={css.categoryWrapper}>
         <div className={css.title}>카테고리</div>
