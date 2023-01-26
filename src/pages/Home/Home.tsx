@@ -22,16 +22,18 @@ const Home = () => {
     <>
       <Header />
       <div className={css.home}>
+        <section className={css.carouselContent}>
+          <Carousel />
+        </section>
         <div className={css.homeContainer}>
-          <section className={css.carouselContent}>
-            <Carousel />
-          </section>
-          <section className={css.allPost}>
-            <AllPost />
-          </section>
-          <section className={css.newPost}>
-            {token === null ? null : <NewPost />}
-          </section>
+          <div className={css.postContent}>
+            <section className={css.allPost}>
+              <AllPost />
+            </section>
+            <section className={css.newPost}>
+              {token === null ? null : <NewPost />}
+            </section>
+          </div>
         </div>
       </div>
       <Footer />

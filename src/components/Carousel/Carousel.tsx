@@ -23,9 +23,9 @@ const Carousel = () => {
       modules={[Navigation, EffectFade, Pagination, Autoplay]}
       loop={true}
     >
-      <SwiperSlide>
+      {/* <SwiperSlide>
         <Grass />
-      </SwiperSlide>
+      </SwiperSlide> */}
       <SwiperSlide>
         <Weather />
       </SwiperSlide>

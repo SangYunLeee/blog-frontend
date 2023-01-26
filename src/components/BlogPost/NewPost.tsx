@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import DropDown from '../DropDown/DropDown';
 import css from './NewPost.module.scss';
-interface newPostInterface {
+interface NewPostInterface {
   id: string;
   title: string;
   content: string;
@@ -29,7 +29,7 @@ const NewPost = () => {
     requestHeaders.set('Authorization', token);
   }
 
-  const [newPostData, setNewPostData] = useState<newPostInterface[]>([]);
+  const [newPostData, setNewPostData] = useState<NewPostInterface[]>([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -132,7 +132,10 @@ const NewPost = () => {
                   <p className={css.postingTime}>{postingDate}</p>
                   <p className={css.postingTitle}>{title}</p>
                   <p className={css.postingContent}>
-                    <span className={css.text}>{content}</span>
+                    <span
+                      className={css.text}
+                      dangerouslySetInnerHTML={{ __html: content }}
+                    />
                   </p>
                 </div>
                 <div className={css.thumbnailContent}>

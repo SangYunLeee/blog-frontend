@@ -5,7 +5,7 @@ import { FaChevronRight } from 'react-icons/fa';
 
 import css from './AllPost.module.scss';
 
-interface allPostInterface {
+interface AllPostInterface {
   id: string;
   title: string;
   content: string;
@@ -18,7 +18,7 @@ interface allPostInterface {
   };
 }
 
-export interface topicDataInterface {
+export interface TopicDataInterface {
   setTopicIdData: Dispatch<SetStateAction<number>>;
   setPagination: Dispatch<SetStateAction<number>>;
 }
@@ -38,7 +38,7 @@ const AllPost = () => {
   }
 
   //전체글 데이터
-  const [allPostData, setAllPostData] = useState<allPostInterface[]>([]);
+  const [allPostData, setAllPostData] = useState<AllPostInterface[]>([]);
   const [maxCountPage, setMaxCountPage] = useState<number>(1);
   useEffect(() => {
     const fetchData = async () => {
@@ -135,7 +135,10 @@ const AllPost = () => {
                     <span className={css.titleText}>{title}</span>
                   </p>
                   <p>
-                    <span className={css.postingContent}>{content}</span>
+                    <span
+                      className={css.postingContent}
+                      dangerouslySetInnerHTML={{ __html: content }}
+                    />
                   </p>
                 </div>
               </div>
