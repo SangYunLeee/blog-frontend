@@ -10,47 +10,47 @@ const WeatherIcon = ({
 }: WeatherDataInterface) => {
   const [icon, setIcon] = useState<string>();
 
+  const weatherMap: Map<string, string[]> = new Map([
+    ['Clear', ['./image/night/clear.png', './image/day/clear.png']],
+    ['Clouds', ['./image/night/clouds.png', './image/day/clouds.png']],
+    ['Drizzle', ['./image/night/drizzle.png', './image/day/drizzle.png']],
+    ['Rain', ['./image/night/rain.png', './image/day/rain.png']],
+    [
+      'Thunderstorm',
+      ['./image/night/thunderstorm.png', './image/day/thunderstorm.png'],
+    ],
+    ['Snow', ['./image/night/snow.png', './image/day/snow.png']],
+  ]);
+
   useEffect(() => {
+    const data = weatherMap.get(weatherData);
+
     if (time === 'night') {
-      if (weatherData === 'Clear') {
-        setIcon('./image/night/clear sky.png');
-      } else if (weatherData === 'Clouds') {
-        setIcon('./image/night/few clouds.png');
-      } else if (weatherData === 'Drizzle') {
-        setIcon('./image/night/shower rain.png');
-        setRain(true);
-      } else if (weatherData === 'Rain') {
+      if (data) {
+        setIcon(data[0]);
+      } else if (data === 'Rain') {
         setIcon('./image/night/rain.png');
         setRain(true);
-      } else if (weatherData === 'Thunderstorm') {
-        setIcon('./image/night/thunderstorm.png');
-      } else if (weatherData === 'Snow') {
+      } else if (data === 'Snow') {
         setIcon('./image/night/snow.png');
         setSnow(true);
       } else {
         setIcon('./image/night/mist.png');
       }
     } else {
-      if (weatherData === 'Clear') {
-        setIcon('./image/day/clear sky.png');
-      } else if (weatherData === 'Clouds') {
-        setIcon('./image/day/few clouds.png');
-      } else if (weatherData === 'Drizzle') {
-        setIcon('./image/day/shower rain.png');
-        setRain(true);
-      } else if (weatherData === 'Rain') {
+      if (data) {
+        setIcon(data[1]);
+      } else if (data === 'Rain') {
         setIcon('./image/day/rain.png');
         setRain(true);
-      } else if (weatherData === 'Thunderstorm') {
-        setIcon('./image/day/thunderstorm.png');
-      } else if (weatherData === 'Snow') {
+      } else if (data === 'Snow') {
         setIcon('./image/day/snow.png');
         setSnow(true);
       } else {
         setIcon('./image/day/mist.png');
       }
     }
-  }, [setRain, setSnow, time, weatherData]);
+  }, [time, weatherData]);
   return <img className={css.weatherIcon} src={icon} alt="" />;
 };
 
