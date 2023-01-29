@@ -31,7 +31,7 @@ const TodayWeather = () => {
         <div className={css.todayWeatherContainer}>
           {weatherList.map((list: any) => {
             const { dt, dt_txt, main, weather } = list;
-            const temp = Math.round(main.temp) + '°C';
+            const temp = Math.floor(main.temp) + '°C';
             const weatherData: string = weather[0].main;
             const dateTime = dt_txt.split(' ');
             const date = dateTime[0].split('-');

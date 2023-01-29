@@ -56,7 +56,7 @@ const Weather = () => {
             //현재 위치 날씨
             setWeatherId(weather.weather[0].id);
             //현재 온도
-            const temp = Math.round(weather.main.temp) + '°C';
+            const temp = Math.floor(weather.main.temp) + '°C';
             setTemperature(temp);
             //위치정보 동의
             setAgree(true);
