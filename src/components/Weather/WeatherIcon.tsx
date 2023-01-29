@@ -14,12 +14,10 @@ const WeatherIcon = ({
     ['Clear', ['./image/night/clear.png', './image/day/clear.png']],
     ['Clouds', ['./image/night/clouds.png', './image/day/clouds.png']],
     ['Drizzle', ['./image/night/drizzle.png', './image/day/drizzle.png']],
-    ['Rain', ['./image/night/rain.png', './image/day/rain.png']],
     [
       'Thunderstorm',
       ['./image/night/thunderstorm.png', './image/day/thunderstorm.png'],
     ],
-    ['Snow', ['./image/night/snow.png', './image/day/snow.png']],
   ]);
 
   useEffect(() => {
@@ -28,10 +26,10 @@ const WeatherIcon = ({
     if (time === 'night') {
       if (data) {
         setIcon(data[0]);
-      } else if (data === 'Rain') {
+      } else if (weatherData === 'Rain') {
         setIcon('./image/night/rain.png');
         setRain(true);
-      } else if (data === 'Snow') {
+      } else if (weatherData === 'Snow') {
         setIcon('./image/night/snow.png');
         setSnow(true);
       } else {
@@ -40,10 +38,10 @@ const WeatherIcon = ({
     } else {
       if (data) {
         setIcon(data[1]);
-      } else if (data === 'Rain') {
+      } else if (weatherData === 'Rain') {
         setIcon('./image/day/rain.png');
         setRain(true);
-      } else if (data === 'Snow') {
+      } else if (weatherData === 'Snow') {
         setIcon('./image/day/snow.png');
         setSnow(true);
       } else {
