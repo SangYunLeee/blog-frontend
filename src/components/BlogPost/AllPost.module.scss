@@ -6,26 +6,26 @@
 
 @media (max-width: 2050px) {
   .postBox {
-    width: 22rem !important;
+    width: 19rem !important;
   }
 }
 
 @media (max-width: 1700px) {
   .postBox {
-    width: 20rem !important;
+    width: 18rem !important;
   }
 }
 
 @media (max-width: 900px) {
   .postBox {
-    width: 28rem !important;
+    width: 25rem !important;
   }
 }
 
 .allPostContainer {
   display: grid;
   grid-template-rows: 50px auto;
-  gap: 60px;
+  gap: 30px;
   width: 100%;
   margin-bottom: 40px;
 
@@ -71,7 +71,7 @@
 
 .allPostContent {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(20rem, max-content));
+  grid-template-columns: repeat(auto-fill, minmax(18rem, max-content));
   justify-content: center;
   place-items: center;
   gap: 20px;
@@ -80,7 +80,7 @@
   .postBox {
     display: flex;
     flex-direction: column;
-    height: 22rem;
+    height: 20rem;
     margin: 10px;
     border-radius: 10px;
     box-shadow: 0px 3px 10px 5px #eef0f2;
@@ -119,12 +119,12 @@
       }
     }
     .postImg {
-      height: 200px;
       display: flex;
       justify-content: center;
+      height: 170px;
       .thumbnail {
-        height: 100%;
         width: 100%;
+        height: 100%;
         object-fit: cover;
       }
     }

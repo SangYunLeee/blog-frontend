@@ -3,6 +3,7 @@ import { FiMapPin } from 'react-icons/fi';
 import Snowy from './WeatherEffect/Snowy';
 import Rainy from './WeatherEffect/Rainy';
 import WeatherIcon from './WeatherIcon';
+import TodayWeather from './TodayWeather';
 import css from './Weather.module.scss';
 
 export interface WeatherDataInterface {
@@ -13,20 +14,32 @@ export interface WeatherDataInterface {
   setWeatherData: Dispatch<SetStateAction<string>>;
 }
 
+export interface TranslateDataInterface {
+  translateData: any;
+  setTranslateData: Dispatch<SetStateAction<any>>;
+}
+
 const Weather = () => {
-  const [weather, setWeather] = useState([]);
-  const [agree, setAgree] = useState<boolean>(false);
-  const [weatherId, setWeatherId] = useState('');
+  //날씨 한글번역
+  const [translateData, setTranslateData] = useState([]);
+  //날씨 api 데이터
   const [weatherData, setWeatherData] = useState('');
+  //날씨 api 현재날씨 번호
+  const [weatherId, setWeatherId] = useState('');
+  //위치정보 동의여부
+  const [agree, setAgree] = useState<boolean>(false);
+  //현재 위치
   const [location, setLocation] = useState();
+  //현재 온도
   const [temperature, setTemperature] = useState('');
+  const [currentHour, setCurrentHour] = useState<number>();
   const [time, setTime] = useState<string>('');
 
   //weatherEffect
   const [snow, setSnow] = useState(false);
   const [rain, setRain] = useState(false);
 
-  useEffect(() => {
+  const getWeather = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         const lat = position.coords.latitude;
@@ -35,14 +48,9 @@ const Weather = () => {
 
         const fetchData = async () => {
           try {
-            //날씨 한글 번역
-            const weatherTranslateResponse = await fetch('./data/weather.json');
-            const weatherTranslate = await weatherTranslateResponse.json();
-            setWeather(weatherTranslate.data);
-
             const weatherResponse = await fetch(url);
             const weather = await weatherResponse.json();
-            setWeatherData(weather.weather[0].description);
+            setWeatherData(weather.weather[0].main);
             //현재 지역
             setLocation(weather.name);
             //현재 위치 날씨
@@ -50,7 +58,6 @@ const Weather = () => {
             //현재 온도
             const temp = Math.round(weather.main.temp) + '°C';
             setTemperature(temp);
-
             //위치정보 동의
             setAgree(true);
           } catch (error) {
@@ -62,12 +69,26 @@ const Weather = () => {
     } else {
       setAgree(false);
     }
+  };
+
+  useEffect(() => {
+    const translateData = async () => {
+      try {
+        //날씨 한글 번역
+        const weatherTranslateResponse = await fetch('./data/weather.json');
+        const weatherTranslate = await weatherTranslateResponse.json();
+        setTranslateData(weatherTranslate.data);
+      } catch (error) {
+        console.error('error');
+      }
+    };
+    translateData();
   }, []);
 
-  //현재 시간
   useEffect(() => {
     const date = new Date();
     const hour = date.getHours();
+    setCurrentHour(hour);
 
     if (hour >= 4 && hour <= 6) {
       setTime('dawn');
@@ -80,9 +101,8 @@ const Weather = () => {
     } else {
       setTime('night');
     }
-  }, [time]);
-
-  //아이콘 설정
+    getWeather();
+  }, [currentHour]);
 
   return (
     <div className={`${css[`${time}`]}`}>
@@ -101,7 +121,7 @@ const Weather = () => {
                 setRain={setRain}
                 setWeatherData={setWeatherData}
               />
-              {weather.map((data) => {
+              {translateData.map((data) => {
                 const { id, content } = data;
                 if (id === weatherId) {
                   return (
@@ -117,6 +137,9 @@ const Weather = () => {
               <FiMapPin className={css.locationIcon} />
               <span className={css.locationName}>{location}</span>
             </div>
+            <div className={css.rightContainer}>
+              <TodayWeather />
+            </div>
           </>
         ) : (
           <div className={css.disagree}>
@@ -124,7 +147,6 @@ const Weather = () => {
             <span>현재 날씨 정보를 확인해보세요 !</span>
           </div>
         )}
-        <div className={css.rightContainer}></div>
       </div>
     </div>
   );

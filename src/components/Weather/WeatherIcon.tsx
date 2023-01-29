@@ -7,59 +7,50 @@ const WeatherIcon = ({
   setRain,
   time,
   weatherData,
-  setWeatherData,
 }: WeatherDataInterface) => {
   const [icon, setIcon] = useState<string>();
 
   useEffect(() => {
-    if (time === 'dusk' || 'night') {
-      if (weatherData === 'clear sky') {
+    if (time === 'night') {
+      if (weatherData === 'Clear') {
         setIcon('./image/night/clear sky.png');
-      } else if (weatherData === 'few clouds') {
+      } else if (weatherData === 'Clouds') {
         setIcon('./image/night/few clouds.png');
-      } else if (weatherData === 'scattered clouds') {
-        setIcon('./image/night/scattered clouds.png');
-      } else if (weatherData === 'broken clouds') {
-        setIcon('./image/night/broken clouds.png');
-      } else if (weatherData === '	shower rain') {
+      } else if (weatherData === 'Drizzle') {
         setIcon('./image/night/shower rain.png');
         setRain(true);
-      } else if (weatherData === '	rain') {
+      } else if (weatherData === 'Rain') {
         setIcon('./image/night/rain.png');
         setRain(true);
-      } else if (weatherData === '	thunderstorm') {
+      } else if (weatherData === 'Thunderstorm') {
         setIcon('./image/night/thunderstorm.png');
-      } else if (weatherData === '	snow') {
+      } else if (weatherData === 'Snow') {
         setIcon('./image/night/snow.png');
         setSnow(true);
       } else {
         setIcon('./image/night/mist.png');
       }
-    } else if (time === 'dawn' || 'morning' || 'afternoon') {
-      if (weatherData === 'clear sky') {
+    } else {
+      if (weatherData === 'Clear') {
         setIcon('./image/day/clear sky.png');
-      } else if (weatherData === 'few clouds') {
+      } else if (weatherData === 'Clouds') {
         setIcon('./image/day/few clouds.png');
-      } else if (weatherData === 'scattered clouds') {
-        setIcon('./image/day/scattered clouds.png');
-      } else if (weatherData === 'broken clouds') {
-        setIcon('./image/day/broken clouds.png');
-      } else if (weatherData === '	shower rain') {
+      } else if (weatherData === 'Drizzle') {
         setIcon('./image/day/shower rain.png');
         setRain(true);
-      } else if (weatherData === '	rain') {
+      } else if (weatherData === 'Rain') {
         setIcon('./image/day/rain.png');
         setRain(true);
-      } else if (weatherData === '	thunderstorm') {
+      } else if (weatherData === 'Thunderstorm') {
         setIcon('./image/day/thunderstorm.png');
-      } else if (weatherData === '	snow') {
+      } else if (weatherData === 'Snow') {
         setIcon('./image/day/snow.png');
         setSnow(true);
       } else {
         setIcon('./image/day/mist.png');
       }
     }
-  }, [setRain, setSnow, setWeatherData, time, weatherData]);
+  }, [setRain, setSnow, time, weatherData]);
   return <img className={css.weatherIcon} src={icon} alt="" />;
 };
 
