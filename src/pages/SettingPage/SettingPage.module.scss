@@ -24,9 +24,11 @@
         background-color: black;
         color: white;
         text-align: center;
+        cursor: pointer;
       }
     }
     .blogInfo {
+      width: 100%;
       margin-left: 5%;
       .infoWrap {
         margin: 20px;
@@ -35,6 +37,7 @@
         }
         .infoContent {
           margin-top: 10px;
+          width: 100%;
           font-weight: 300;
         }
       }
@@ -58,6 +61,7 @@
       border-radius: 10px;
       background-color: white;
       text-align: center;
+      cursor: pointer;
     }
   }
 }

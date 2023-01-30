@@ -1,4 +1,5 @@
 import React from 'react';
+import Grass from '../../components/Blog/Grass/Grass';
 import css from './Profile.module.scss';
 
 const Profile = () => {
@@ -21,7 +22,9 @@ const Profile = () => {
         </div>
       </div>
       <div className={css.content}>안녕 나는 너굴맨이라구!</div>
-      <div className={css.grass}>grass</div>
+      <div className={css.grass}>
+        <Grass />
+      </div>
       <button className={css.writeBtn}>게시물 작성하기</button>
     </div>
   );

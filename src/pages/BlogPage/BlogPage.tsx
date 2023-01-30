@@ -19,7 +19,7 @@ const BlogPage = () => {
   const [inputData, setInputData] = useState<string>('');
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/posts?userId=2`)
+    fetch(`${process.env.REACT_APP_API_URL}/posts?userId=3`)
       .then((res) => res.json())
       .then((data) => setBlogData(data.data));
   }, []);
@@ -34,7 +34,6 @@ const BlogPage = () => {
     }
   });
 
-  console.log(blogData);
   return (
     <>
       <Header />
@@ -45,6 +44,7 @@ const BlogPage = () => {
             inputData={inputData}
             setInputData={setInputData}
             onSearch={onSearch}
+            blogData={blogData}
           />
         </div>
         <div className={css.blogcontent}>
