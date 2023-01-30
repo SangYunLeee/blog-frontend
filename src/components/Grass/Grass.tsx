@@ -1,8 +1,7 @@
 import React from 'react';
-import css from './Grass.module.scss';
 
 const Grass = () => {
-  return <div className={css.grass}>Grass</div>;
+  return <div>Grass</div>;
 };
 
 export default Grass;
