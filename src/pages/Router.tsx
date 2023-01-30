@@ -6,6 +6,8 @@ import TotalPost from './TotalPost/TotalPost';
 import WritePost from './WritePost/WritePost';
 import BlogPage from './BlogPage/BlogPage';
 import SettingPage from './SettingPage/SettingPage';
+import NeighborPost from './NeighborPost/NeighborPost';
+import SearchPost from './searchPost/SearchPost';
 
 const Router = () => {
   return (
@@ -17,6 +19,8 @@ const Router = () => {
         <Route path="/write" element={<WritePost />} />
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/setting" element={<SettingPage />} />
+        <Route path="/neighborpost" element={<NeighborPost />} />
+        <Route path="/searchpost" element={<SearchPost />} />
       </Routes>
     </BrowserRouter>
   );
