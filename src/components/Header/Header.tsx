@@ -57,6 +57,7 @@ const Header = () => {
         .then((data) => setUserInfo(data.userInfo));
   }, [token]);
 
+  console.log(userInfo);
   return (
     <>
       <Login open={open} setOpen={setOpen} />

@@ -5,6 +5,8 @@ import css from './WritePost.module.scss';
 import axios from 'axios';
 import Header from '../../components/Header/Header';
 import Tag from './Tag/Tag';
+import { useNavigate } from 'react-router-dom';
+
 const axios_ = axios.create({
   baseURL: `${process.env.REACT_APP_API_URL}/`,
 });
@@ -24,7 +26,7 @@ const WritePost = () => {
   const change = (name: string, value: string | File) => {
     setForm({ ...form, [name]: value });
   };
-
+  const navigate = useNavigate();
   const handleWritePost = async () => {
     let blogData = new FormData();
     const objKeys = Object.keys(form);
@@ -46,7 +48,7 @@ const WritePost = () => {
         authorization: localStorage.getItem('token'),
       },
       data: blogData,
-    });
+    }).then((res) => navigate(`/post/${res.data.postId}`));
   };
 
   return (
