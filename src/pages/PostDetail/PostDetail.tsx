@@ -11,7 +11,7 @@ type userInfoProfile = {
   profileImgUrl: string;
 };
 
-interface userInfo {
+interface UserInfo {
   id: number;
   nickname: string;
   email: string;
@@ -19,11 +19,20 @@ interface userInfo {
   startDate: string;
 }
 
+interface Comment {
+  id: number;
+  content: string;
+  createDate: string;
+  createdDate: string;
+  user: UserInfo;
+}
+
 //모두가 볼수 있는 게시물 이여야함
 const PostDetail = () => {
   const [post, setPost] = useState<postDataType>();
-  const [user, setUser] = useState<userInfo>();
+  const [user, setUser] = useState<UserInfo>();
   const [comment, setComment] = useState<string>('');
+  const [commentList, setCommentList] = useState<Comment[]>([]);
   const url = window.location.href;
   const params = useParams();
 
@@ -49,6 +58,12 @@ const PostDetail = () => {
     })
       .then((res) => res.json())
       .then((res) => setUser(res.data));
+
+    fetch(`${process.env.REACT_APP_API_URL}/comments/${params.id}`, {
+      method: 'GET',
+    })
+      .then((res) => res.json())
+      .then((res) => setCommentList(res.data));
   }, []);
 
   const handleDelete = () => {
@@ -56,6 +71,39 @@ const PostDetail = () => {
       method: 'DELETE',
       headers,
     }).then(() => alert('삭제 완료 되었습니다'));
+  };
+
+  const deleteComment = async (id: number) => {
+    await fetch(`${process.env.REACT_APP_API_URL}/comments/${id}`, {
+      method: 'DELETE',
+      headers,
+    }).then(() => alert('삭제 완료 되었습니다'));
+
+    fetch(`${process.env.REACT_APP_API_URL}/comments/${params.id}`, {
+      method: 'GET',
+    })
+      .then((res) => res.json())
+      .then((res) => setCommentList(res.data));
+  };
+
+  const handleComment = async () => {
+    await fetch(`${process.env.REACT_APP_API_URL}/comments`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({
+        postId: params.id,
+        content: comment,
+      }),
+    }).then(() => {
+      alert('댓글이 생성 되었습니다');
+      setComment('');
+    });
+
+    fetch(`${process.env.REACT_APP_API_URL}/comments/${params.id}`, {
+      method: 'GET',
+    })
+      .then((res) => res.json())
+      .then((res) => setCommentList(res.data));
   };
 
   return post ? (
@@ -120,28 +168,62 @@ const PostDetail = () => {
             </div>
           )}
         </div>
-        {/* 댓글부분
-        1. 댓글 추가 
-        댓글 불러오기 
-        그사람 유저 검색?
-        */}
+
         <div className={css.comments}>
-          <div className={css.commentInput}>
-            <img
-              className={css.commentImg}
-              src={user?.profile.profileImgUrl}
-              alt="profile"
-            />
-            <input
-              className={css.InputText}
-              type="text"
-              placeholder="댓글을 입력하여 주세요."
-              onChange={(e) => setComment(e.target.value)}
-            />
-            <button className={css.commentBtn} disabled={comment.length < 1}>
-              작성
-            </button>
-          </div>
+          {user && (
+            <div className={css.commentInput}>
+              <img
+                className={css.commentImg}
+                src={user?.profile.profileImgUrl}
+                alt="profile"
+              />
+              <input
+                className={css.InputText}
+                type="text"
+                placeholder="댓글을 입력하여 주세요."
+                onChange={(e) => setComment(e.target.value)}
+                value={comment}
+              />
+              <button
+                className={css.commentBtn}
+                disabled={comment.length < 1}
+                onClick={handleComment}
+              >
+                작성
+              </button>
+            </div>
+          )}
+          {commentList.length !== 0 ? (
+            <div className={css.commentListWrap}>
+              {commentList.map((e, idx) => (
+                <div key={idx} className={css.eachComment}>
+                  <div className={css.commentName}>
+                    <p className={css.userName}>{e.user.nickname}</p>
+                    <p className={css.createTime}>{e.createdDate}</p>
+                  </div>
+                  <div className={css.c_content}>
+                    <p className={css.c_comment}>{e.content}</p>
+                    {post.user.id === user?.id ? (
+                      <div className={css.c_btnWrap}>
+                        <button
+                          className={css.c_deleteBtn}
+                          onClick={() => deleteComment(e.id)}
+                        >
+                          삭제&nbsp;
+                        </button>
+                        <span className={css.line}>|</span>
+                        <button className={css.c_editBtn}>&nbsp;수정</button>
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className={css.commentList}>
+              댓글이 아직 존재하지 않습니다.
+            </div>
+          )}
         </div>
       </div>
     </div>
