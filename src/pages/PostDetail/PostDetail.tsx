@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import css from './PostDetail.module.scss';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { postDataType } from '../TotalPost/TotalPost';
 import Header from '../../components/Header/Header';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
@@ -35,7 +35,8 @@ const PostDetail = () => {
   const [commentList, setCommentList] = useState<Comment[]>([]);
   const url = window.location.href;
   const params = useParams();
-
+  const navigate = useNavigate();
+  const [postDate, setPostDate] = useState<string>();
   const token = localStorage.getItem('token');
   let headers: Record<string, string> = {
     'Content-Type': 'application/json',
@@ -66,11 +67,23 @@ const PostDetail = () => {
       .then((res) => setCommentList(res.data));
   }, []);
 
+  useEffect(() => {
+    if (post) {
+      const date = new Date(post.createdAt);
+      setPostDate(
+        `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`
+      );
+    }
+  }, [post]);
+
   const handleDelete = () => {
     fetch(`${process.env.REACT_APP_API_URL}/posts/${params.id}`, {
       method: 'DELETE',
       headers,
-    }).then(() => alert('삭제 완료 되었습니다'));
+    }).then(() => {
+      alert('삭제 완료 되었습니다');
+      navigate('/blog');
+    });
   };
 
   const deleteComment = async (id: number) => {
@@ -144,7 +157,7 @@ const PostDetail = () => {
             </div>
             <div className={css.titleWrap}>
               <h1 className={css.title}>{post.title}</h1>
-              <p className={css.time}>{post.createdAt}</p>
+              <p className={css.time}>{postDate}</p>
             </div>
           </div>
           <div className={css.content}>
@@ -182,6 +195,15 @@ const PostDetail = () => {
                 type="text"
                 placeholder="댓글을 입력하여 주세요."
                 onChange={(e) => setComment(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.nativeEvent.isComposing) {
+                    return;
+                  } else {
+                    if (e.key === 'Enter') {
+                      handleComment();
+                    }
+                  }
+                }}
                 value={comment}
               />
               <button
@@ -193,31 +215,38 @@ const PostDetail = () => {
               </button>
             </div>
           )}
+
           {commentList.length !== 0 ? (
             <div className={css.commentListWrap}>
-              {commentList.map((e, idx) => (
-                <div key={idx} className={css.eachComment}>
-                  <div className={css.commentName}>
-                    <p className={css.userName}>{e.user.nickname}</p>
-                    <p className={css.createTime}>{e.createdDate}</p>
+              {commentList.map((e, idx) => {
+                const date = new Date(e.createdDate);
+                const createDate = `${date.getFullYear()}년 ${
+                  date.getMonth() + 1
+                }월 ${date.getDate()}일`;
+                return (
+                  <div key={idx} className={css.eachComment}>
+                    <div className={css.commentName}>
+                      <p className={css.userName}>{e.user.nickname}</p>
+                      <p className={css.createTime}>{createDate}</p>
+                    </div>
+                    <div className={css.c_content}>
+                      <p className={css.c_comment}>{e.content}</p>
+                      {post.user.id === user?.id ? (
+                        <div className={css.c_btnWrap}>
+                          <button
+                            className={css.c_deleteBtn}
+                            onClick={() => deleteComment(e.id)}
+                          >
+                            삭제&nbsp;
+                          </button>
+                          <span className={css.line}>|</span>
+                          <button className={css.c_editBtn}>&nbsp;수정</button>
+                        </div>
+                      ) : null}
+                    </div>
                   </div>
-                  <div className={css.c_content}>
-                    <p className={css.c_comment}>{e.content}</p>
-                    {post.user.id === user?.id ? (
-                      <div className={css.c_btnWrap}>
-                        <button
-                          className={css.c_deleteBtn}
-                          onClick={() => deleteComment(e.id)}
-                        >
-                          삭제&nbsp;
-                        </button>
-                        <span className={css.line}>|</span>
-                        <button className={css.c_editBtn}>&nbsp;수정</button>
-                      </div>
-                    ) : null}
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           ) : (
             <div className={css.commentList}>
