@@ -16,7 +16,6 @@ const TodayWeather = () => {
           const weatherResponse = await fetch(url);
           const weather = await weatherResponse.json();
           setWeatherList(weather.list);
-          // setWeatherData(weather.weather[0].description);
         } catch (error) {
           console.error('error');
         }

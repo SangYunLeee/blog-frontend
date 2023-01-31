@@ -1,5 +1,6 @@
 import React, { useEffect, useState, Dispatch, SetStateAction } from 'react';
 import DropDown from '../DropDown/DropDown';
+import { useNavigate } from 'react-router-dom';
 import { FaChevronLeft } from 'react-icons/fa';
 import { FaChevronRight } from 'react-icons/fa';
 
@@ -36,6 +37,8 @@ const AllPost = () => {
   if (token) {
     requestHeaders.set('Authorization', token);
   }
+
+  const navigate = useNavigate();
 
   //전체글 데이터
   const [allPostData, setAllPostData] = useState<AllPostInterface[]>([]);
@@ -87,7 +90,13 @@ const AllPost = () => {
     <ul className={css.allPostContainer}>
       <li className={css.allPostTitle}>
         <span>
-          전체 글<button className={css.moreButton}>더보기</button>
+          전체 글
+          <button
+            className={css.moreButton}
+            onClick={() => navigate('/totalpost')}
+          >
+            더보기
+          </button>
         </span>
         <div>
           <DropDown
