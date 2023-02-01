@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css/navigation';
 import 'swiper/css/effect-fade';
@@ -11,6 +11,16 @@ import Grass from '../Grass/Grass';
 import Weather from '../Weather/Weather';
 
 const Carousel = () => {
+  const token = localStorage.getItem('token');
+  const [loopCheck, setLoopCheck] = useState(false);
+  useEffect(() => {
+    if (token === null) {
+      setLoopCheck(false);
+    } else if (token !== null) {
+      setLoopCheck(true);
+    }
+  }, [token]);
+
   return (
     <Swiper
       autoplay={{
@@ -21,14 +31,22 @@ const Carousel = () => {
         clickable: true,
       }}
       modules={[Navigation, EffectFade, Pagination, Autoplay]}
-      loop={true}
+      loop={loopCheck}
     >
-      <SwiperSlide>
-        <Grass />
-      </SwiperSlide>
-      <SwiperSlide>
-        <Weather />
-      </SwiperSlide>
+      {token === null ? (
+        <SwiperSlide>
+          <Weather />
+        </SwiperSlide>
+      ) : (
+        <>
+          <SwiperSlide>
+            <Grass />
+          </SwiperSlide>
+          <SwiperSlide>
+            <Weather />
+          </SwiperSlide>
+        </>
+      )}
     </Swiper>
   );
 };

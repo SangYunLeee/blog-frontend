@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { topicDataInterface } from '../BlogPost/AllPost';
+import { TopicDataInterface } from '../BlogPost/AllPost';
 import { FaAngleDown } from 'react-icons/fa';
 import { FaAngleUp } from 'react-icons/fa';
 import css from './DropDown.module.scss';
 
-export interface topicInterface {
+export interface TopicInterface {
   id: number;
   content: string;
 }
 
-const DropDown = ({ setTopicIdData, setPagination }: topicDataInterface) => {
+const DropDown = ({ setTopicIdData, setPagination }: TopicDataInterface) => {
   const token = localStorage.getItem('token');
 
   const requestHeaders: HeadersInit = new Headers();
@@ -28,7 +28,7 @@ const DropDown = ({ setTopicIdData, setPagination }: topicDataInterface) => {
     setTopicIdData(index);
     setPagination(1);
   };
-  const [topicData, setTopicData] = useState<topicInterface[]>([]);
+  const [topicData, setTopicData] = useState<TopicInterface[]>([]);
   useEffect(() => {
     const fetchData = async () => {
       try {

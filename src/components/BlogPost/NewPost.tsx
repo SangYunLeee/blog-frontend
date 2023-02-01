@@ -1,7 +1,8 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import React, { useEffect, useState } from 'react';
 import DropDown from '../DropDown/DropDown';
 import css from './NewPost.module.scss';
-interface newPostInterface {
+interface NewPostInterface {
   id: string;
   title: string;
   content: string;
@@ -15,7 +16,9 @@ interface newPostInterface {
 }
 
 const NewPost = () => {
-  //이웃 있는지 없는지 여부확인
+  //이웃이 있는지 없는지 여부확인
+  const [buddyData, setBuddyData] = useState<boolean>(false);
+  //이웃 새글 여부확인
   const [buddyPostData, setBuddyPostData] = useState<boolean>(false);
   const [pagination, setPagination] = useState(1);
   //주제 아이디
@@ -29,22 +32,20 @@ const NewPost = () => {
     requestHeaders.set('Authorization', token);
   }
 
-  const [newPostData, setNewPostData] = useState<newPostInterface[]>([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${process.env.REACT_APP_API_URL}/posts?myFollowing=true`,
+          `${process.env.REACT_APP_API_URL}/following?myFollowing=true`,
           {
             headers: requestHeaders,
           }
         );
         const json = await response.json();
         if (json.data.length === 0) {
-          setBuddyPostData(false);
+          setBuddyData(false);
         } else {
-          setNewPostData(json.data);
-          setBuddyPostData(true);
+          setBuddyData(true);
         }
       } catch (error) {
         console.error('error');
@@ -53,6 +54,7 @@ const NewPost = () => {
     fetchData();
   }, []);
 
+  const [newPostData, setNewPostData] = useState<NewPostInterface[]>([]);
   useEffect(() => {
     const fetchData = async () => {
       if (topicIdData !== 0) {
@@ -109,50 +111,61 @@ const NewPost = () => {
           />
         </div>
       </li>
-      {buddyPostData ? (
+      {buddyData ? (
         <>
-          {newPostData.map((postData) => {
-            const { id, title, content, thumbnailImgUrl, createdAt, user } =
-              postData;
-            const date = new Date(createdAt);
-            const postingDate = `${date.getFullYear()}년 ${
-              date.getMonth() + 1
-            }월 ${date.getDate()}일`;
-            return (
-              <li key={id} className={css.newPostContent}>
-                <div className={css.userInfo}>
-                  <img
-                    className={css.userImg}
-                    src={user.profileImgUrl}
-                    alt="유저이미지"
-                  />
-                  <span className={css.userName}>{user.nickname}</span>
-                </div>
-                <div className={css.postContent}>
-                  <p className={css.postingTime}>{postingDate}</p>
-                  <p className={css.postingTitle}>{title}</p>
-                  <p className={css.postingContent}>
-                    <span className={css.text}>{content}</span>
-                  </p>
-                </div>
-                <div className={css.thumbnailContent}>
-                  {thumbnailImgUrl === null ? null : (
-                    <div className={css.thumbnailImg}>
+          {buddyPostData ? (
+            <>
+              {newPostData.map((postData) => {
+                const { id, title, content, thumbnailImgUrl, createdAt, user } =
+                  postData;
+                const date = new Date(createdAt);
+                const postingDate = `${date.getFullYear()}년 ${
+                  date.getMonth() + 1
+                }월 ${date.getDate()}일`;
+                return (
+                  <li key={id} className={css.newPostContent}>
+                    <div className={css.userInfo}>
                       <img
-                        src={thumbnailImgUrl}
-                        alt="썸네일"
-                        className={css.postThumbnail}
+                        className={css.userImg}
+                        src={user.profileImgUrl}
+                        alt="유저이미지"
                       />
+                      <span className={css.userName}>{user.nickname}</span>
                     </div>
-                  )}
-                </div>
-              </li>
-            );
-          })}
+                    <div className={css.postContent}>
+                      <p className={css.postingTime}>{postingDate}</p>
+                      <p className={css.postingTitle}>{title}</p>
+                      <p className={css.postingContent}>
+                        <span
+                          className={css.text}
+                          dangerouslySetInnerHTML={{ __html: content }}
+                        />
+                      </p>
+                    </div>
+                    <div className={css.thumbnailContent}>
+                      {thumbnailImgUrl === null ? null : (
+                        <div className={css.thumbnailImg}>
+                          <img
+                            src={thumbnailImgUrl}
+                            alt="썸네일"
+                            className={css.postThumbnail}
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </li>
+                );
+              })}
+            </>
+          ) : (
+            <div className={css.makeBuddyContainer}>
+              <p>아직 새로운 글이 없어요!</p>
+            </div>
+          )}
         </>
       ) : (
         <div className={css.makeBuddyContainer}>
-          <p>이웃을 추가하고 새로운 글들을 만나보세요!</p>
+          <p>이웃을 추가하고 새로운 글을 확인해보세요!</p>
         </div>
       )}
     </ul>

@@ -1,11 +1,12 @@
 import React, { useEffect, useState, Dispatch, SetStateAction } from 'react';
 import DropDown from '../DropDown/DropDown';
+import { useNavigate } from 'react-router-dom';
 import { FaChevronLeft } from 'react-icons/fa';
 import { FaChevronRight } from 'react-icons/fa';
 
 import css from './AllPost.module.scss';
 
-interface allPostInterface {
+interface AllPostInterface {
   id: string;
   title: string;
   content: string;
@@ -18,7 +19,7 @@ interface allPostInterface {
   };
 }
 
-export interface topicDataInterface {
+export interface TopicDataInterface {
   setTopicIdData: Dispatch<SetStateAction<number>>;
   setPagination: Dispatch<SetStateAction<number>>;
 }
@@ -37,8 +38,10 @@ const AllPost = () => {
     requestHeaders.set('Authorization', token);
   }
 
+  const navigate = useNavigate();
+
   //전체글 데이터
-  const [allPostData, setAllPostData] = useState<allPostInterface[]>([]);
+  const [allPostData, setAllPostData] = useState<AllPostInterface[]>([]);
   const [maxCountPage, setMaxCountPage] = useState<number>(1);
   useEffect(() => {
     const fetchData = async () => {
@@ -87,7 +90,13 @@ const AllPost = () => {
     <ul className={css.allPostContainer}>
       <li className={css.allPostTitle}>
         <span>
-          전체 글<button className={css.moreButton}>더보기</button>
+          전체 글
+          <button
+            className={css.moreButton}
+            onClick={() => navigate('/totalpost')}
+          >
+            더보기
+          </button>
         </span>
         <div>
           <DropDown
@@ -135,7 +144,10 @@ const AllPost = () => {
                     <span className={css.titleText}>{title}</span>
                   </p>
                   <p>
-                    <span className={css.postingContent}>{content}</span>
+                    <span
+                      className={css.postingContent}
+                      dangerouslySetInnerHTML={{ __html: content }}
+                    />
                   </p>
                 </div>
               </div>

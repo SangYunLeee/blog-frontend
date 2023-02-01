@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import css from './Follower.module.scss';
 
-interface followerInterface {
+interface FollowerInterface {
   id: string;
   email: string;
   nickname: string;
@@ -9,7 +9,7 @@ interface followerInterface {
 }
 
 const Follower = () => {
-  const [followerData, setFollowerData] = useState<followerInterface[]>([]);
+  const [followerData, setFollowerData] = useState<FollowerInterface[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
