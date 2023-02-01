@@ -1,6 +1,7 @@
 import React from 'react';
 import css from './Poster.module.scss';
 import { postDataType } from '../../pages/TotalPost/TotalPost';
+import { url } from 'inspector';
 
 interface postProps {
   post: postDataType;
@@ -12,18 +13,19 @@ const Poster = ({ post }: postProps) => {
     date.getMonth() + 1
   }.${date.getDate()}`;
 
-  console.log(post);
-
   return (
     <div className={css.poster}>
       <div className={css.userDataDiv}>
-        <div className={css.userImage}></div>
+        <div
+          className={css.userImage}
+          style={{ backgroundImage: `url(${post.user.profileImgUrl})` }}
+        ></div>
         <div className={css.userNickname}>{post.user.nickname}</div>
       </div>
       <div className={css.postMainDiv}>
         <div className={css.currDate}>{currDate}</div>
         <div className={css.postTitle}>{post.title}</div>
-        <div className={css.content}>{post.content}</div>
+        <div className={css.content}>{post.content.slice(0, 100)}</div>
       </div>
       <div
         className={css.thumbnailDiv}
