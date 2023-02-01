@@ -1,0 +1,40 @@
+.infoWrapper {
+  display: flex;
+  align-items: center;
+  margin-left: 15%;
+  .imgWrapper {
+    position: relative;
+    .profileImg {
+      width: 300px;
+      height: 300px;
+      border-radius: 70%;
+    }
+    .editButton {
+      position: absolute;
+      bottom: 0;
+      right: 10%;
+      width: 50px;
+      height: 30px;
+      border-radius: 20%;
+      background-color: black;
+      color: white;
+      text-align: center;
+      cursor: pointer;
+    }
+  }
+  .blogInfo {
+    width: 100%;
+    margin-left: 5%;
+    .infoWrap {
+      margin: 20px;
+      font-size: 25px;
+      .infoTitle {
+      }
+      .infoContent {
+        margin-top: 10px;
+        width: 100%;
+        font-weight: 300;
+      }
+    }
+  }
+}
