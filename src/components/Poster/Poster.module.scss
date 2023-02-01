@@ -5,6 +5,19 @@
   width: 100%;
   min-height: 130px;
   border-top: 1px rgb(222, 222, 222) solid;
+  cursor: pointer;
+  &:hover {
+    animation: postHover 0.2s ease forwards;
+
+    @keyframes postHover {
+      0% {
+        transform: scale(1);
+      }
+      100% {
+        transform: scale(1.02);
+      }
+    }
+  }
 
   .userDataDiv {
     display: flex;
