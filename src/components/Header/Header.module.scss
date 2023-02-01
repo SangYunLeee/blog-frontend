@@ -6,8 +6,9 @@
   width: 100%;
   height: 50px;
   border-bottom: 1px solid rgba(128, 128, 128, 0.128);
-
+  background-color: white;
   .logo {
+    cursor: pointer;
   }
 
   .headerRightArea {
@@ -21,7 +22,6 @@
       align-items: center;
       position: relative;
       margin-right: 10px;
-
       .inputFocus {
         width: 200px;
         height: 30px;
@@ -90,6 +90,7 @@
       margin-right: 10px;
 
       .writePostBtn {
+        cursor: pointer;
         display: flex;
         justify-content: center;
         align-items: center;

@@ -1,5 +1,19 @@
-.grass {
-  background-color: #b0e8cb;
-  width: 100%;
+.grassWrap {
+  display: grid;
+  grid-template-columns: 8fr 1fr;
   height: 100%;
+  gap: 20px;
+  background-color: #fff;
+
+  .leftContainer {
+    display: flex;
+    padding-left: 60px;
+    justify-content: center;
+    align-items: center;
+  }
+  .rightContainer {
+    display: flex;
+    justify-content: center;
+    padding-right: 50px;
+  }
 }

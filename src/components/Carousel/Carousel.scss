@@ -1,6 +1,6 @@
 @media (max-width: 3000px) {
   .swiper {
-    width: 65vw;
+    width: 70vw;
   }
 }
 
@@ -31,14 +31,14 @@
     width: 70px;
     height: 3px;
     border-radius: 3px;
-    border: 1px solid #88d0e8;
+    border: 1px solid #b6c4f5;
     background: transparent;
     opacity: 1;
   }
 
   .swiper-pagination-bullet-active {
     width: 75px;
-    background: #88d0e8;
+    background: #b6c4f5;
     transition: width 0.5s;
     border-radius: 3px;
   }

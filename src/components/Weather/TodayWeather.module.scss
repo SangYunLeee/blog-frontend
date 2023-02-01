@@ -1,0 +1,33 @@
+.wrap {
+  display: flex;
+  width: 100%;
+  padding: 60px 60px 40px 60px;
+
+  .todayWeatherContainer {
+    display: grid;
+    width: 100%;
+    gap: 20px;
+    align-items: center;
+    overflow: auto;
+    grid-auto-flow: column;
+
+    .weatherContent {
+      display: grid;
+      gap: 10px;
+      place-items: center;
+      justify-content: center;
+
+      .day {
+        font-size: 12px;
+        font-weight: 600;
+        color: #b6c4f5;
+        position: absolute;
+        top: 29%;
+      }
+      .temp {
+        font-size: 15px;
+        letter-spacing: 1px;
+      }
+    }
+  }
+}

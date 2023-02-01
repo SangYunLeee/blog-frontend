@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, ChangeEvent } from 'react';
 import Login from '../Login/Login';
 import css from './Header.module.scss';
-
+import { useNavigate } from 'react-router-dom';
 type userInfoProfile = { blogTitle: string; profileIntro: string };
 
 interface userInfo {
@@ -24,10 +24,8 @@ const Header = () => {
   const loginBtn = useRef<HTMLButtonElement>(null);
 
   const requestHeaders: HeadersInit = new Headers();
+  const navigate = useNavigate();
   requestHeaders.set('Content-Type', 'application/json');
-  if (token) {
-    requestHeaders.set('Authorization', token);
-  }
 
   const openLogin = () => {
     setOpen(!open);
@@ -42,8 +40,18 @@ const Header = () => {
     localStorage.clear();
     window.location.reload();
   };
+  const searchingInputKeyword = (event: any) => {
+    if (event.keyCode === 13) {
+      window.location.href = `http://localhost:3000/searchpost?searchKeyword=${event.target.value}`;
+    }
+
+    // window.location.href = `${process.env.REACT_APP_API_URL}/posts?search=${event.target.value}`;
+  };
 
   useEffect(() => {
+    if (token) {
+      requestHeaders.set('Authorization', token);
+    }
     setToken(localStorage.getItem('token'));
   }, [localStorage.getItem('token')]);
 
@@ -53,33 +61,47 @@ const Header = () => {
         headers: requestHeaders,
       })
         .then((res) => res.json())
-        .then((data) => setUserInfo(data.data));
+        .then((data) => {
+          setUserInfo(data.data.nickname);
+        });
   }, [token]);
 
+  console.log(userInfo);
   return (
     <>
       <Login open={open} setOpen={setOpen} />
       <div className={css.header}>
-        <div className={css.logo}>로고</div>
+        <div
+          className={css.logo}
+          onClick={() => (window.location.href = 'http://localhost:3000')}
+        >
+          로고
+        </div>
         <div className={css.headerRightArea}>
           <div className={css.searchbar}>
             <input
               className={currInputFocus ? css.inputFocus : css.inputBlur}
               ref={searchInput}
+              onKeyDown={searchingInputKeyword}
             />
             <div className={css.searchIconDiv}>
               <div className={css.searchIcon} onClick={openSearchbar} />
             </div>
           </div>
           <div className={css.writePostBtnDiv}>
-            {token && <div className={css.writePostBtn}>새 글 작성</div>}
+            {token && (
+              <div
+                className={css.writePostBtn}
+                onClick={() => navigate('/write')}
+              >
+                새 글 작성
+              </div>
+            )}
           </div>
           <div className={css.userNameDiv}>
             {token ? (
               <div className={css.userName} onClick={clickUserMenu}>
-                <div
-                  className={css.userNameText}
-                >{`${userInfo?.nickname}님`}</div>
+                <div className={css.userNameText}>{`${userInfo}님`}</div>
               </div>
             ) : (
               <div className={css.loginBtn} onClick={openLogin}>

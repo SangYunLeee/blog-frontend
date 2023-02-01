@@ -30,6 +30,7 @@ const Login = ({ open, setOpen }: headerProps) => {
           localStorage.setItem('token', result.token);
           alert('로그인에 성공하였습니다.');
           setOpen(false);
+          window.location.reload();
         } else {
           alert('아이디와 비밀번호를 확인해 주세요');
         }
@@ -44,7 +45,7 @@ const Login = ({ open, setOpen }: headerProps) => {
             <div className={css.image}>
               <img
                 className={css.mainImage}
-                src="image/blog.svg"
+                src={process.env.REACT_APP_PUBLIC_URL + '/image/blog.svg'}
                 alt="main pic"
               />
               <h5 className={css.slogan}>기록과 함께 쌓여가는 즐거움</h5>
@@ -54,7 +55,10 @@ const Login = ({ open, setOpen }: headerProps) => {
                 <div className={css.iconWrap}>
                   <img
                     className={css.closeIcon}
-                    src="image/login-close.png"
+                    src={
+                      process.env.REACT_APP_PUBLIC_URL +
+                      '/image/login-close.png'
+                    }
                     alt="close"
                     onClick={() => setOpen(false)}
                   />
