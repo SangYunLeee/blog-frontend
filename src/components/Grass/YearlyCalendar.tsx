@@ -35,7 +35,7 @@ const YearlyCalendar = () => {
   const firstDate = {
     date: '2023-01-01',
     count: 0,
-    level: 0,
+    level: 1,
   };
 
   const lastDate = {
@@ -118,10 +118,10 @@ const YearlyCalendar = () => {
       blockMargin={5}
       theme={{
         level0: '#F0F0F0',
-        level1: '#dff2ff',
-        level2: '#8dcbf7',
-        level3: '#2088d3',
-        level4: '#002987',
+        level1: '#e4f3f6',
+        level2: '#8bd9ea',
+        level3: '#0490c3',
+        level4: '#073777',
       }}
     />
   );
