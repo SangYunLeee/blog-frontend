@@ -1,18 +1,14 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Grass from '../../components/Blog/Grass/Grass';
 import css from './Profile.module.scss';
 
-const Profile = () => {
+const Profile = ({ userNickname, userImg, userIntro }: any) => {
   return (
     <div className={css.profileContainer}>
       <div className={css.headerWrapper}>
-        <img
-          className={css.profileImg}
-          alt="ProfileImg"
-          src="https://mblogthumb-phinf.pstatic.net/MjAyMDA0MDRfMTA5/MDAxNTg1OTgyNzM0NDc4.T5kYmq6tRhKYUyg2VReNW9Lt3XmAVFXj1nm3mgnJkWUg.k-JIS4uUip4cqMMuaqnpgdPPt2qvtkU1Lre99Y9omq8g.JPEG.rara4000/1bd7453343646f106926d6d05f85cd77cb28b0be4679593ca208a4cd0fbd88075e5592f731f6.jpg?type=w800"
-        />
+        <img className={css.profileImg} alt="ProfileImg" src={userImg} />
         <div className={css.nicknameWrapper}>
-          <h2>너굴맨</h2>
+          <h2>{userNickname} 님</h2>
           <div className={css.follow}>
             <p>팔로워</p>
             <p>20</p>
@@ -21,7 +17,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <div className={css.content}>안녕 나는 너굴맨이라구!</div>
+      <div className={css.content}>{userIntro}</div>
       <div className={css.grass}>
         <Grass />
       </div>

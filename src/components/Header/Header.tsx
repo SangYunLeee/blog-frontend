@@ -53,7 +53,7 @@ const Header = () => {
         headers: requestHeaders,
       })
         .then((res) => res.json())
-        .then((data) => setUserInfo(data.userInfo));
+        .then((data) => setUserInfo(data.data));
   }, [token]);
 
   return (

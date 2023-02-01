@@ -26,7 +26,6 @@ function Grass() {
                 .week(week)
                 .startOf('week')
                 .add(index, 'day');
-
               if (moment().format('YYYYMMDD') === days.format('YYYYMMDD')) {
                 return (
                   <td
@@ -60,7 +59,6 @@ function Grass() {
     }
     return result;
   };
-
   return (
     <div className={css.grassContainer}>
       <div className={css.grassHeader}>

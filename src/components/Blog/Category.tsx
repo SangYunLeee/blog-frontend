@@ -8,10 +8,10 @@ export interface Props {
   blogData: any;
 }
 const Category: React.FC<Props> = (props) => {
-  const datas = props.blogData.map((data: any) => {
-    return data.topic;
-  });
-  console.log(datas);
+  // const datas = props.blogData.map((data: any) => {
+  //   return data.topic;
+  // });
+  // console.log(datas);
   return (
     <div className={css.categoryContainer}>
       <div className={css.inputWrapper}>
@@ -32,12 +32,11 @@ const Category: React.FC<Props> = (props) => {
       </div>
       <div className={css.categoryWrapper}>
         <div className={css.title}>카테고리</div>
-        {datas.map((data: any) => {
-          return;
-          // <ul>
-          //   <li key={data.id}>{data.topicName}</li>
-          // </ul>;
-        })}
+        <ul>
+          {/* {datas.map((data: any) => {
+            <li key={data.id}>{data.topicName}</li>;
+          })} */}
+        </ul>
       </div>
     </div>
   );
