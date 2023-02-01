@@ -1,40 +1,127 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import axios from 'axios';
+import Header from '../../components/Header/Header';
+import EditProfile from '../../components/EditProfile/EditProfile';
 import css from './SettingPage.module.scss';
 
+export interface UserInfo {
+  id: number;
+  nickname: string;
+  email: string;
+  profile: { blogTitle: string; profileIntro: string; profileImgUrl: string };
+}
 const SettingPage = () => {
+  const [userInfo, setUserInfo] = useState<UserInfo[]>([]);
+  const [nicknameData, setNicknameData] = useState<string>('');
+  const [blogTitleData, setBlogTitleData] = useState<string>('');
+  const [profileIntroData, setProfileIntroData] = useState<string>('');
+  const [fileUrl, setFileUrl] = useState<string | any>('');
+  const [file, setFile] = useState<FileList | null>();
+  const imgUploadInput = useRef<HTMLInputElement | null>(null);
+  const requestHeaders: HeadersInit = new Headers();
+  const token = localStorage.getItem('token');
+  requestHeaders.set('Content-Type', 'application/json');
+  if (token) {
+    requestHeaders.set('Authorization', token);
+  }
+
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URL}/user`, {
+      headers: requestHeaders,
+    })
+      .then((res) => res.json())
+      .then((data) => setUserInfo(data.data));
+  }, []);
+
+  const onImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      setFile(event.target.files);
+
+      const newFileUrl = URL.createObjectURL(event.target.files[0]);
+      setFileUrl(newFileUrl);
+    }
+  };
+
+  // const submitHandler = async (event: React.MouseEvent<HTMLButtonElement>) => {
+  //   event.preventDefault();
+  //   const formData = new FormData();
+  //   if (file) {
+  //     formData.append('file', file[0]);
+  //     try {
+  //       const response = await axios.patch(
+  //         `${process.env.REACT_APP_API_URL}/profile`,
+  //         formData,
+  //         {
+  //           headers: { 'content-type': 'multipart/form-data' },
+  //         }
+  //       );
+  //     } catch (error: any) {
+  //       alert('에러!');
+  //       throw new Error(error);
+  //     }
+  //   } else {
+  //     alert('이미지 필요!');
+  //   }
+  // };
+
+  const onEdit = (id: any) => {
+    fetch(`${process.env.REACT_APP_API_URL}/profile`, {
+      method: 'PATCH',
+      headers: requestHeaders,
+      body: JSON.stringify({
+        nickname: nicknameData,
+        blogTitle: blogTitleData,
+        profileIntro: profileIntroData,
+      }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.message === 'PROFILE_UPDATED') {
+          setUserInfo(
+            userInfo.map((data) =>
+              data.id === id
+                ? {
+                    ...data,
+                    nickname: nicknameData,
+                    blogTitle: blogTitleData,
+                    profileIntro: profileIntroData,
+                  }
+                : data
+            )
+          );
+          alert('수정완료');
+        } else {
+          alert('수정 실패');
+        }
+      });
+  };
+
   return (
-    <div className={css.settingContainer}>
-      <div className={css.infoWrapper}>
-        <div className={css.imgWrapper}>
-          <img
-            className={css.profileImg}
-            alt="ProfileImg"
-            src="https://mblogthumb-phinf.pstatic.net/MjAyMDA0MDRfMTA5/MDAxNTg1OTgyNzM0NDc4.T5kYmq6tRhKYUyg2VReNW9Lt3XmAVFXj1nm3mgnJkWUg.k-JIS4uUip4cqMMuaqnpgdPPt2qvtkU1Lre99Y9omq8g.JPEG.rara4000/1bd7453343646f106926d6d05f85cd77cb28b0be4679593ca208a4cd0fbd88075e5592f731f6.jpg?type=w800"
-          />
-          <button className={css.editButton}>EDIT</button>
-        </div>
-        <div className={css.blogInfo}>
-          <div className={css.infoWrap}>
-            <p className={css.infoTitle}>별명</p>
-            <p className={css.infoContent}>나는 너굴맨이야</p>
-          </div>
-          <div className={css.infoWrap}>
-            <p className={css.infoTitle}>한줄 소개</p>
-            <p className={css.infoContent}>오늘은 어떤가요??</p>
-          </div>
-          <div className={css.infoWrap}>
-            <p className={css.infoTitle}>블로그 이름</p>
-            <p className={css.infoContent}>갚아봐요 대출의 숲</p>
-          </div>
+    <>
+      <Header />
+      <div className={css.settingContainer}>
+        <EditProfile
+          userInfo={userInfo}
+          nicknameData={nicknameData}
+          setNicknameData={setNicknameData}
+          blogTitleData={blogTitleData}
+          setBlogTitleData={setBlogTitleData}
+          profileIntroData={profileIntroData}
+          setProfileIntroData={setProfileIntroData}
+          fileUrl={fileUrl}
+          imgUploadInput={imgUploadInput}
+          onImageChang={onImageChange}
+        />
+        <div className={css.saveWrapper}>
+          <p className={css.saveComment}>
+            조심하세요 변경사항이 저장되지 않았어요!
+          </p>
+          <button className={css.saveButton} onClick={onEdit}>
+            변경사항 저장하기
+          </button>
         </div>
       </div>
-      <div className={css.saveWrapper}>
-        <p className={css.saveComment}>
-          조심하세요 변경사항이 저장되지 않았어요!
-        </p>
-        <button className={css.saveButton}>변경사항 저장하기</button>
-      </div>
-    </div>
+    </>
   );
 };
 
