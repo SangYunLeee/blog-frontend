@@ -1,6 +1,5 @@
 import React from 'react';
 import css from './Grass.module.scss';
-import 'react-calendar-heatmap/dist/styles.css';
 import YearlyCalendar from './YearlyCalendar';
 import UserBox from './UserBox';
 
