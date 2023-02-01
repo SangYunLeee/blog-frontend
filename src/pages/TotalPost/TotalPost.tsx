@@ -8,7 +8,7 @@ export interface postDataType {
   id: string;
   title: string;
   content: string;
-  thumnailImgUrl: string;
+  thumbnailImgUrl: string;
   secretType: number;
   createdAt: string;
   category: {
@@ -18,6 +18,7 @@ export interface postDataType {
   user: {
     id: number;
     nickname: string;
+    profileImgUrl: string;
   };
   topic: {
     id: number;

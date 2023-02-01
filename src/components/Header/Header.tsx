@@ -54,9 +54,10 @@ const Header = () => {
         headers: requestHeaders,
       })
         .then((res) => res.json())
-        .then((data) => setUserInfo(data.userInfo));
+        .then((data) => setUserInfo(data.data));
   }, [token]);
 
+  console.log(userInfo);
   return (
     <>
       <Login open={open} setOpen={setOpen} />
