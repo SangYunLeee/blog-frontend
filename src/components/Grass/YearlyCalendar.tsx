@@ -118,8 +118,8 @@ const YearlyCalendar = () => {
       blockMargin={5}
       theme={{
         level0: '#F0F0F0',
-        level1: '#e4f3f6',
-        level2: '#8bd9ea',
+        level1: '#cbebf2',
+        level2: '#65cfe7',
         level3: '#0490c3',
         level4: '#073777',
       }}
