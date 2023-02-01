@@ -35,7 +35,7 @@ const YearlyCalendar = () => {
   const firstDate = {
     date: '2023-01-01',
     count: 0,
-    level: 1,
+    level: 0,
   };
 
   const lastDate = {
