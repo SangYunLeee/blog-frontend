@@ -30,7 +30,7 @@ const Poster = ({ post }: postProps) => {
       <div
         className={css.thumbnailDiv}
         style={{
-          backgroundImage: `url(${post.thumnailImgUrl})`,
+          backgroundImage: `url(${post.thumbnailImgUrl})`,
           backgroundSize: 'cover',
         }}
       ></div>

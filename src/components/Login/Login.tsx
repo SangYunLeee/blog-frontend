@@ -45,7 +45,7 @@ const Login = ({ open, setOpen }: headerProps) => {
             <div className={css.image}>
               <img
                 className={css.mainImage}
-                src="image/blog.svg"
+                src={process.env.REACT_APP_PUBLIC_URL + '/image/blog.svg'}
                 alt="main pic"
               />
               <h5 className={css.slogan}>기록과 함께 쌓여가는 즐거움</h5>
@@ -55,7 +55,10 @@ const Login = ({ open, setOpen }: headerProps) => {
                 <div className={css.iconWrap}>
                   <img
                     className={css.closeIcon}
-                    src="image/login-close.png"
+                    src={
+                      process.env.REACT_APP_PUBLIC_URL +
+                      '/image/login-close.png'
+                    }
                     alt="close"
                     onClick={() => setOpen(false)}
                   />

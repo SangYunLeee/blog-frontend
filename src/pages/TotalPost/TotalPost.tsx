@@ -8,7 +8,7 @@ export interface postDataType {
   id: string;
   title: string;
   content: string;
-  thumnailImgUrl: string;
+  thumbnailImgUrl: string;
   secretType: number;
   createdAt: string;
   category: {

@@ -8,6 +8,7 @@ import BlogPage from './BlogPage/BlogPage';
 import SettingPage from './SettingPage/SettingPage';
 import NeighborPost from './NeighborPost/NeighborPost';
 import SearchPost from './searchPost/SearchPost';
+import PostDetail from './PostDetail/PostDetail';
 
 const Router = () => {
   return (
@@ -21,6 +22,7 @@ const Router = () => {
         <Route path="/setting" element={<SettingPage />} />
         <Route path="/neighborpost" element={<NeighborPost />} />
         <Route path="/searchpost" element={<SearchPost />} />
+        <Route path="/post/:id" element={<PostDetail />} />
       </Routes>
     </BrowserRouter>
   );
