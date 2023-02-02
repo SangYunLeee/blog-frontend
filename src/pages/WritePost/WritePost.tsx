@@ -48,7 +48,7 @@ const WritePost = () => {
         authorization: localStorage.getItem('token'),
       },
       data: blogData,
-    }).then((res) => navigate(`/post/${res.data.postId}`));
+    }).then((res) => navigate(`/post/${res.data.data.postId}`));
   };
 
   return (

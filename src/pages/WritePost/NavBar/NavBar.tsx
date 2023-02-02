@@ -32,7 +32,7 @@ const NavBar = ({ change }: Props) => {
         headers,
       })
         .then((response) => response.json())
-        .then((response) => response.userInfo.id);
+        .then((response) => response.data.id);
 
       const _category = await fetch(
         `${process.env.REACT_APP_API_URL}/categories/users/${_userId}`,

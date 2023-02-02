@@ -161,11 +161,13 @@ const PostDetail = () => {
             </div>
           </div>
           <div className={css.content}>
-            <img
-              className={css.thumbnail}
-              src={post.thumbnailImgUrl}
-              alt="thumbnail"
-            />
+            {post.thumbnailImgUrl && (
+              <img
+                className={css.thumbnail}
+                src={post.thumbnailImgUrl}
+                alt="thumbnail"
+              />
+            )}
             <div
               className={css.postContent}
               dangerouslySetInnerHTML={{ __html: post.content }}
