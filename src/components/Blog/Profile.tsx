@@ -1,8 +1,65 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import Grass from '../../components/Blog/Grass/Grass';
+import Grass2 from './Grass/Grass2';
 import css from './Profile.module.scss';
 
+export interface GrassData {
+  count: number;
+  date: string;
+  level: number;
+}
+
 const Profile = ({ userNickname, userImg, userIntro }: any) => {
+  const [follower, setFollower] = useState<string[]>([]);
+  const [following, setFollowing] = useState<string[]>([]);
+  const [grassData, setGrassData] = useState<GrassData[]>([]);
+  const params = useParams();
+  const requestHeaders: HeadersInit = new Headers();
+  const token = localStorage.getItem('token');
+  requestHeaders.set('Content-Type', 'application/json');
+  if (token) {
+    requestHeaders.set('Authorization', token);
+  }
+
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URL}/follower/user/${params.id}`, {
+      headers: requestHeaders,
+    })
+      .then((res) => res.json())
+      .then((data) => setFollower(data.data));
+  }, []);
+
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URL}/following/user/${params.id}`, {
+      headers: requestHeaders,
+    })
+      .then((res) => res.json())
+      .then((data) => setFollowing(data.data));
+  }, []);
+
+  useEffect(() => {
+    fetch(
+      `${process.env.REACT_APP_API_URL}/grasses?userId=3&timezone=+9:00&withinDay=60`,
+      {
+        headers: requestHeaders,
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => setGrassData(data.data));
+  }, []);
+
+  const grassCounts = grassData.map((data) => {
+    return data.count;
+  });
+
+  const grassDate = grassData.map((data) => {
+    return data.date;
+  });
+  const grassLevel = grassData.map((data) => {
+    return data.level;
+  });
+
   return (
     <div className={css.profileContainer}>
       <div className={css.headerWrapper}>
@@ -11,15 +68,23 @@ const Profile = ({ userNickname, userImg, userIntro }: any) => {
           <h2>{userNickname} 님</h2>
           <div className={css.follow}>
             <p>팔로워</p>
-            <p>20</p>
+            <p>{follower.length}</p>
             <p>팔로잉</p>
-            <p>22</p>
+            <p>{following.length}</p>
           </div>
         </div>
       </div>
       <div className={css.content}>{userIntro}</div>
       <div className={css.grass}>
-        <Grass />
+        {/* {grassData.map((data) => {
+          return <Grass {...data} />;
+        })} */}
+        <Grass
+          grassCounts={grassCounts}
+          grassDate={grassDate}
+          grassLevel={grassLevel}
+        />
+        {/* <Grass2 /> */}
       </div>
       <button className={css.writeBtn}>게시물 작성하기</button>
     </div>

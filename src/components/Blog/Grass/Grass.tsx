@@ -1,15 +1,22 @@
 import React, { useState } from 'react';
 import moment from 'moment';
 import css from './Grass.module.scss';
+import type { GrassData } from '../Profile';
 
-function Grass() {
+function Grass({ grassCounts, grassDate, grassLevel }: any) {
+  // props: Pick<GrassData, 'count' | 'date' | 'level'>
+  // const { count, date, level } = props;
   const [getMoment, setMoment] = useState(moment());
+  // const dates = date.replace(/-/g, '');
   const today = getMoment;
   const firstWeek = today.clone().startOf('month').week();
   const lastWeek =
     today.clone().endOf('month').week() === 1
       ? 53
       : today.clone().endOf('month').week();
+  // const grassDates = grassData.grassData.map((data: any) => {
+  //   return data.date;
+  // });
 
   const calendarArr = () => {
     let result: any = [];
@@ -26,29 +33,15 @@ function Grass() {
                 .week(week)
                 .startOf('week')
                 .add(index, 'day');
-              if (moment().format('YYYYMMDD') === days.format('YYYYMMDD')) {
+              if (moment().format('YYYY-MM-DD') == days.format('YYYY-MM-DD')) {
                 return (
-                  <td
-                    key={index}
-                    className={css.date}
-                    style={{ backgroundColor: 'red' }}
-                  >
-                    <span>{days.format('D')}</span>
-                  </td>
-                );
-              } else if (days.format('MM') !== today.format('MM')) {
-                return (
-                  <td
-                    key={index}
-                    className={css.date}
-                    style={{ backgroundColor: 'gray' }}
-                  >
+                  <td key={index} style={{ backgroundColor: 'red' }}>
                     <span>{days.format('D')}</span>
                   </td>
                 );
               } else {
                 return (
-                  <td key={index} className={css.date}>
+                  <td key={index}>
                     <span>{days.format('D')}</span>
                   </td>
                 );
@@ -59,6 +52,10 @@ function Grass() {
     }
     return result;
   };
+
+  // console.log(grassCounts);
+  // console.log(grassDate[0]);
+  // console.log(grassLevel);
   return (
     <div className={css.grassContainer}>
       <div className={css.grassHeader}>
