@@ -9,12 +9,21 @@ interface postProps {
 
 const Poster = ({ post }: postProps) => {
   const date = new Date(post.createdAt);
-  const currDate = `${date.getFullYear()}.${
+  const currDate = `${date.getFullYear()}년 ${
     date.getMonth() + 1
-  }.${date.getDate()}`;
+  }월 ${date.getDate()}일`;
+
+  const clickPost = (event: any) => {
+    if (
+      event.target.className ===
+      document.querySelector(`.${css.userImage}`)?.className
+    )
+      window.location.href = `http://localhost:3000/blog/${post.user.id}`;
+    else window.location.href = `http://localhost:3000/post/${post.id}`;
+  };
 
   return (
-    <div className={css.poster}>
+    <div className={css.poster} onClick={clickPost}>
       <div className={css.userDataDiv}>
         <div
           className={css.userImage}
@@ -25,7 +34,10 @@ const Poster = ({ post }: postProps) => {
       <div className={css.postMainDiv}>
         <div className={css.currDate}>{currDate}</div>
         <div className={css.postTitle}>{post.title}</div>
-        <div className={css.content}>{post.content.slice(0, 100)}</div>
+        <div
+          className={css.content}
+          dangerouslySetInnerHTML={{ __html: post.content.slice(0, 100) }}
+        ></div>
       </div>
       <div
         className={css.thumbnailDiv}

@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './Home/Home';
-import TestPage from './TestPage/TestPage';
 import TotalPost from './TotalPost/TotalPost';
 import WritePost from './WritePost/WritePost';
 import BlogPage from './BlogPage/BlogPage';
@@ -16,7 +15,6 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/totalpost" element={<TotalPost />} />
-        <Route path="/testpage" element={<TestPage />} />
         <Route path="/write" element={<WritePost />} />
         <Route path="/blog/:id" element={<BlogPage />} />
         <Route path="/setting" element={<SettingPage />} />

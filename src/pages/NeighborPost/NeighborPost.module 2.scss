@@ -1,0 +1,60 @@
+.totalPost {
+  width: 850px;
+  margin: 20px auto;
+
+  .category {
+    margin: 20px 0;
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .tagList {
+    display: flex;
+
+    .tagDiv {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 30px;
+      border-radius: 10px;
+      background-color: rgb(234, 234, 234);
+      margin: 0 3px;
+      cursor: pointer;
+
+      .tagContent {
+        font-size: 14px;
+        margin: 0 15px;
+        font-weight: 500;
+        color: rgb(76, 76, 76);
+      }
+    }
+  }
+
+  .postList {
+    margin: 15px 0;
+    width: 100%;
+
+    .post {
+      margin-bottom: 15px;
+      width: 90%;
+      height: 100px;
+      border: 1px solid black;
+    }
+  }
+
+  .pageDiv {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    .page {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 50px;
+      margin: 5px;
+      cursor: pointer;
+    }
+  }
+}

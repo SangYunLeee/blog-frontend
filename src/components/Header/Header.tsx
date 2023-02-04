@@ -66,7 +66,6 @@ const Header = () => {
         });
   }, [token]);
 
-  // console.log(userInfo);
   return (
     <>
       <Login open={open} setOpen={setOpen} />
