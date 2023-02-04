@@ -250,7 +250,7 @@ const PostDetail = () => {
           </div>
         </div>
       )}
-      {postEdit && <WritePost status="수정" />}
+      {postEdit && <WritePost status="수정" postId={params.id} />}
     </>
   ) : null;
 };
