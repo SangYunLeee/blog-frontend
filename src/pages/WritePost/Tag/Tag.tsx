@@ -4,9 +4,10 @@ import css from './Tag.module.scss';
 interface Props {
   change: (key: string, value: string) => void;
   handleWritePost: () => void;
+  status?: string;
 }
 
-const Tag = ({ change, handleWritePost }: Props) => {
+const Tag = ({ change, handleWritePost, status }: Props) => {
   const [tag, setTag] = useState<string>('');
   const [tagArr, setTagArr] = useState<string[]>([]);
 
@@ -72,7 +73,7 @@ const Tag = ({ change, handleWritePost }: Props) => {
         ))}
       </div>
       <button className={css.submit} onClick={handleWritePost}>
-        기록하기
+        {status ? '수정하기' : '기록하기'}
       </button>
     </div>
   );

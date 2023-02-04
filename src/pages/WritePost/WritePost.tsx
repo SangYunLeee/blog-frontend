@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TextEditor from './TextEditor/TextEditor';
 import NavBar from './NavBar/NavBar';
 import css from './WritePost.module.scss';
@@ -6,12 +6,18 @@ import axios from 'axios';
 import Header from '../../components/Header/Header';
 import Tag from './Tag/Tag';
 import { useNavigate } from 'react-router-dom';
+import { postDataType } from '../TotalPost/TotalPost';
 
 const axios_ = axios.create({
   baseURL: `${process.env.REACT_APP_API_URL}/`,
 });
 
-const WritePost = () => {
+interface Props {
+  status?: string;
+  postId?: string;
+}
+
+const WritePost = ({ status, postId }: Props) => {
   const [form, setForm] = useState<Record<string, string | File>>({
     title: '',
     categoryId: '',
@@ -23,10 +29,27 @@ const WritePost = () => {
 
   const [content, setContent] = useState('');
   const [thumbImg, setThumbImg] = useState('');
+  const [post, setPost] = useState<postDataType>();
+
   const change = (name: string, value: string | File) => {
     setForm({ ...form, [name]: value });
   };
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (status) {
+      fetch(`${process.env.REACT_APP_API_URL}/posts/${postId}`, {
+        method: 'GET',
+      })
+        .then((res) => res.json())
+        .then((res) => setPost(res.data));
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log(post);
+  }, [post]);
+
   const handleWritePost = async () => {
     let blogData = new FormData();
     const objKeys = Object.keys(form);
@@ -40,15 +63,27 @@ const WritePost = () => {
       }
     }
 
-    await axios_({
-      method: 'POST',
-      url: `/posts`,
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        authorization: localStorage.getItem('token'),
-      },
-      data: blogData,
-    }).then((res) => navigate(`/post/${res.data.data.postId}`));
+    if (status) {
+      await axios_({
+        method: 'PATCH',
+        url: `/posts`,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          authorization: localStorage.getItem('token'),
+        },
+        data: blogData,
+      }).then((res) => navigate(`/post/${res.data.data.postId}`));
+    } else {
+      await axios_({
+        method: 'POST',
+        url: `/posts`,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          authorization: localStorage.getItem('token'),
+        },
+        data: blogData,
+      }).then((res) => navigate(`/post/${res.data.data.postId}`));
+    }
   };
 
   return (
@@ -79,7 +114,9 @@ const WritePost = () => {
                   <label htmlFor="input-file">
                     <img
                       className={css.fileInput}
-                      src="./image/whitePic.png"
+                      src={
+                        process.env.REACT_APP_PUBLIC_URL + `/image/whitePic.png`
+                      }
                       alt="addPic"
                     />
                   </label>
@@ -98,7 +135,9 @@ const WritePost = () => {
                 <label htmlFor="input-file">
                   <img
                     className={css.fileInput}
-                    src="./image/blackPic.png"
+                    src={
+                      process.env.REACT_APP_PUBLIC_URL + `/image/blackPic.png`
+                    }
                     alt="addPic"
                   />
                 </label>
@@ -111,6 +150,7 @@ const WritePost = () => {
                   }`}
                   type="text"
                   placeholder="제목"
+                  defaultValue={post?.title}
                 />
                 {thumbImg && (
                   <>
@@ -126,13 +166,21 @@ const WritePost = () => {
                 )}
               </div>
             </div>
-            <div className={css.ediotr}>
-              <TextEditor setContent={setContent} />
+            <div className={css.editor}>
+              {post ? (
+                <TextEditor setContent={setContent} content={post.content} />
+              ) : (
+                <TextEditor setContent={setContent} />
+              )}
             </div>
           </div>
         </div>
         <div className={css.tag}>
-          <Tag change={change} handleWritePost={handleWritePost} />
+          <Tag
+            change={change}
+            handleWritePost={handleWritePost}
+            status={status}
+          />
         </div>
       </div>
     </>

@@ -27,7 +27,7 @@ const NavBar = ({ change }: Props) => {
     const fetchData = async () => {
       const token = localStorage.getItem('token');
       let headers = token ? { authorization: token } : undefined;
-      const _userId = await fetch(`${process.env.REACT_APP_API_URL}/user`, {
+      const _userId = await fetch(`${process.env.REACT_APP_API_URL}/users`, {
         method: 'GET',
         headers,
       })

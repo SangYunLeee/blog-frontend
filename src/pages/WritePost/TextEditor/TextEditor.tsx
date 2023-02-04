@@ -4,9 +4,10 @@ import css from './TextEditor.module.scss';
 
 interface Props {
   setContent: Dispatch<SetStateAction<string>>;
+  content?: string;
 }
 
-const TextEditor = ({ setContent }: Props) => {
+const TextEditor = ({ setContent, content }: Props) => {
   function OnChangeHandler(inst: any) {
     setContent(inst.getBody().innerHTML);
   }
@@ -14,6 +15,7 @@ const TextEditor = ({ setContent }: Props) => {
   return (
     <div className={css.container}>
       <Editor
+        initialValue={content}
         tinymceScriptSrc={
           process.env.REACT_APP_PUBLIC_URL + '/tinymce/tinymce.min.js'
         }
