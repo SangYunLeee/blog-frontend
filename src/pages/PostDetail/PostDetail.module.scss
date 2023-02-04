@@ -1,6 +1,6 @@
 .container {
   background-color: #e8eff3;
-  height: 100vh;
+  height: 100%;
   .contentWrap {
     width: 67%;
     margin-left: auto;
@@ -46,9 +46,11 @@
         .profile {
           padding-bottom: 5%;
           width: 15%;
+          cursor: pointer;
           .profileImg {
             width: 75%;
             border-radius: 50%;
+            cursor: pointer;
           }
           .name {
             color: #909090;
@@ -82,14 +84,15 @@
       }
       .content {
         text-align: center;
-        padding: 5%;
+        padding: 0% 5% 5% 5%;
 
         .thumbnail {
-          width: 90%;
+          height: 50%;
         }
         .postContent {
           text-align: left !important;
           margin-top: 5%;
+          line-height: 30px;
         }
       }
     }
@@ -111,18 +114,18 @@
           font-weight: 300;
         }
         .InputText {
-          width: 88%;
+          width: 91%;
         }
         .commentImg {
           margin-left: 1%;
           margin-right: 1%;
-          width: 40px;
-          height: 40px;
+          width: 30px;
+          height: 30px;
           border-radius: 50%;
         }
         .commentBtn {
           color: #8da3f0;
-          font-size: 18px;
+          font-size: 16px;
           cursor: pointer;
           &:disabled {
             cursor: default;

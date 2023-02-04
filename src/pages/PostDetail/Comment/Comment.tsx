@@ -1,7 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import css from './Comment.module.scss';
 import { CommentProp } from '../PostDetail';
-import { UserInfo } from '../../SettingPage/SettingPage';
+import { UserInfo } from '../PostDetail';
+import { useNavigate } from 'react-router-dom';
 interface Props {
   comment: CommentProp;
   user: UserInfo | undefined;
@@ -19,6 +20,7 @@ const Comment = ({
   const [editFlag, setEditFlag] = useState<Boolean>(true);
   const commentRef = useRef<HTMLInputElement>(null);
   const token = localStorage.getItem('token');
+  const navigate = useNavigate();
   let headers: Record<string, string> = {
     'Content-Type': 'application/json',
   };
@@ -36,7 +38,6 @@ const Comment = ({
         content: commentRef?.current?.value,
       }),
     }).then(() => {
-      alert('댓글이 수정 되었습니다');
       reload();
     });
   };
@@ -44,14 +45,20 @@ const Comment = ({
   return (
     <div className={css.eachComment}>
       <div className={css.commentName}>
-        <p className={css.userName}>{comment.user.nickname}</p>
+        <p
+          className={css.userName}
+          onClick={() => navigate(`/blog/${comment.user.id}`)}
+        >
+          {comment.user.nickname}
+        </p>
         <p className={css.createTime}>{createDate}</p>
       </div>
       <div className={css.c_content}>
         <img
           className={css.profileImg}
-          src={user?.profile.profileImgUrl}
+          src={comment.user?.profileImgUrl}
           alt="profile"
+          onClick={() => navigate(`/blog/${comment.user.id}`)}
         />
         {editFlag ? (
           <div className={css.set}>
