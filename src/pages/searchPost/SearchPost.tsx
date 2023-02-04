@@ -173,7 +173,9 @@ const TotalPost = () => {
       }
     )
       .then((res) => res.json())
-      .then((data) => setUserData(data.data));
+      .then((data) => {
+        setUserData(data.data);
+      });
   }, [searchTotal]);
 
   return (

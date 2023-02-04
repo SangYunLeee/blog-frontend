@@ -13,12 +13,13 @@ const Poster = ({ post }: postProps) => {
     date.getMonth() + 1
   }월 ${date.getDate()}일`;
 
-  const clickPost = () => {
-    window.location.href = `http://localhost:3000/post/${post.id}`;
-  };
-
-  const clickUserImage = () => {
-    console.log('test');
+  const clickPost = (event: any) => {
+    if (
+      event.target.className ===
+      document.querySelector(`.${css.userImage}`)?.className
+    )
+      console.log('블로그로 이동');
+    else window.location.href = `http://localhost:3000/post/${post.id}`;
   };
 
   return (
@@ -26,7 +27,6 @@ const Poster = ({ post }: postProps) => {
       <div className={css.userDataDiv}>
         <div
           className={css.userImage}
-          onClick={clickUserImage}
           style={{ backgroundImage: `url(${post.user.profileImgUrl})` }}
         ></div>
         <div className={css.userNickname}>{post.user.nickname}</div>
