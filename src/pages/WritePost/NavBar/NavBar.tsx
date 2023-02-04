@@ -3,6 +3,9 @@ import css from './NavBar.module.scss';
 
 interface Props {
   change: (key: string, value: string) => void;
+  p_topicId?: string;
+  p_secretType?: string;
+  p_categoryId?: string;
 }
 
 interface Topics {
@@ -15,7 +18,7 @@ interface Categories {
   categoryName: string;
 }
 
-const NavBar = ({ change }: Props) => {
+const NavBar = ({ change, p_topicId, p_secretType, p_categoryId }: Props) => {
   const [topics, setTopics] = useState<Topics[]>();
   const [categories, setCategories] = useState<Categories[]>();
 
@@ -59,6 +62,7 @@ const NavBar = ({ change }: Props) => {
       <select
         className={css.topic}
         onChange={(e) => handleSetVal('topicId', e.target.value)}
+        defaultValue={p_topicId}
       >
         <option value="default" disabled={true}>
           주제
@@ -72,6 +76,7 @@ const NavBar = ({ change }: Props) => {
       <select
         className={css.category}
         onChange={(e) => handleSetVal('categoryId', e.target.value)}
+        defaultValue={p_categoryId}
       >
         <option value="category" id="" disabled={true}>
           카테고리
@@ -90,6 +95,7 @@ const NavBar = ({ change }: Props) => {
       <select
         className={css.secretType}
         onChange={(e) => handleSetVal('secretType', e.target.value)}
+        defaultValue={p_secretType}
       >
         <option value="default" disabled={true}>
           공개범위

@@ -1,13 +1,14 @@
 import React, { useState, KeyboardEvent, useEffect } from 'react';
 import css from './Tag.module.scss';
-
+import { postDataType } from '../../TotalPost/TotalPost';
 interface Props {
   change: (key: string, value: string) => void;
   handleWritePost: () => void;
   status?: string;
+  post?: postDataType;
 }
 
-const Tag = ({ change, handleWritePost, status }: Props) => {
+const Tag = ({ change, handleWritePost, status, post }: Props) => {
   const [tag, setTag] = useState<string>('');
   const [tagArr, setTagArr] = useState<string[]>([]);
 
@@ -15,6 +16,16 @@ const Tag = ({ change, handleWritePost, status }: Props) => {
     const arr: string[] = tagArr;
     change('tagNames', arr.join(','));
   }, [tagArr]);
+
+  useEffect(() => {
+    if (post) {
+      post?.tags.map((e) =>
+        tagArr.includes(e.tagName)
+          ? null
+          : setTagArr((tagArr) => [...tagArr, e.tagName])
+      );
+    }
+  }, [post]);
 
   const handleKeyUp = (e: KeyboardEvent<HTMLElement>) => {
     e.preventDefault();
@@ -63,7 +74,7 @@ const Tag = ({ change, handleWritePost, status }: Props) => {
             <span className={css.deleteBtn} onClick={() => handleDelete(tag)}>
               <img
                 className={css.deleteImg}
-                src="./image/tagDelete.png"
+                src={process.env.REACT_APP_PUBLIC_URL + `/image/tagDelete.png`}
                 alt="deleteBtn"
                 width="9px"
                 height="9px"

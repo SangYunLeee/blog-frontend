@@ -47,7 +47,18 @@ const WritePost = ({ status, postId }: Props) => {
   }, []);
 
   useEffect(() => {
-    console.log(post);
+    if (post) {
+      if (post.category.id) {
+        change('categoryId', String(post.category.id));
+      }
+      if (post.secretType) {
+        change('secretType', String(post.secretType));
+      }
+      if (post.topic.topicName) {
+        change('TopicId', String(post.topic.id));
+      }
+      setContent(post?.content);
+    }
   }, [post]);
 
   const handleWritePost = async () => {
@@ -66,13 +77,16 @@ const WritePost = ({ status, postId }: Props) => {
     if (status) {
       await axios_({
         method: 'PATCH',
-        url: `/posts`,
+        url: `/posts/${postId}`,
         headers: {
           'Content-Type': 'multipart/form-data',
           authorization: localStorage.getItem('token'),
         },
         data: blogData,
-      }).then((res) => navigate(`/post/${res.data.data.postId}`));
+      }).then((res) => {
+        navigate(`/post/${postId}`);
+        window.location.reload();
+      });
     } else {
       await axios_({
         method: 'POST',
@@ -87,12 +101,17 @@ const WritePost = ({ status, postId }: Props) => {
   };
 
   return (
-    <>
+    <div className={css.FinalWrap}>
       <Header />
       <div className={css.totalWrap}>
         <div className={css.container}>
           <div className={css.nav}>
-            <NavBar change={change} />
+            <NavBar
+              change={change}
+              p_topicId={String(post?.topic.id)}
+              p_secretType={String(post?.secretType)}
+              p_categoryId={String(post?.category.id)}
+            />
           </div>
           <div className={css.containerWrap}>
             <div className={css.InputWrap}>
@@ -167,11 +186,7 @@ const WritePost = ({ status, postId }: Props) => {
               </div>
             </div>
             <div className={css.editor}>
-              {post ? (
-                <TextEditor setContent={setContent} content={post.content} />
-              ) : (
-                <TextEditor setContent={setContent} />
-              )}
+              <TextEditor setContent={setContent} content={post?.content} />
             </div>
           </div>
         </div>
@@ -180,10 +195,11 @@ const WritePost = ({ status, postId }: Props) => {
             change={change}
             handleWritePost={handleWritePost}
             status={status}
+            post={post}
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 export default WritePost;
