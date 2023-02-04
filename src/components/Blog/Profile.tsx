@@ -76,10 +76,6 @@ const Profile = ({ userNickname, userImg, userIntro, userId }: any) => {
       .then((data) => setGrassData(data.data));
   }, []);
 
-  useEffect(() => {
-    console.log(userId, 'userId');
-  }, []);
-
   // const grassCounts = grassData.map((data) => {
   //   return data.count;
   // });
@@ -101,15 +97,56 @@ const Profile = ({ userNickname, userImg, userIntro, userId }: any) => {
 
   useEffect(() => {
     //내가 팔로잉
-    fetch(`${process.env.REACT_APP_API_URL}/following/user/${currUserId}`, {
+    fetch(`${process.env.REACT_APP_API_URL}/following?myFollowing=true`, {
       headers: requestHeaders,
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res.data);
         setFollowingData(res.data);
       });
   }, []);
+
+  const clickFollowBtn = (event: any) => {
+    if (event.target.innerText === '언팔로우') {
+      fetch(`${process.env.REACT_APP_API_URL}/follow/${params.id}`, {
+        headers: requestHeaders,
+        method: 'DELETE',
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          if (result.message === 'UNFOLLOW_SUCCESSFULLY') {
+            fetch(
+              `${process.env.REACT_APP_API_URL}/following?myFollowing=true`,
+              {
+                headers: requestHeaders,
+              }
+            )
+              .then((res) => res.json())
+              .then((res) => setFollowingData(res.data));
+          }
+        });
+    } else
+      fetch(`${process.env.REACT_APP_API_URL}/follow`, {
+        headers: requestHeaders,
+        method: 'POST',
+        body: JSON.stringify({
+          targetUsersId: params.id,
+        }),
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          if (result.message === 'FOLLOW_SUCCESSFULLY') {
+            fetch(
+              `${process.env.REACT_APP_API_URL}/following?myFollowing=true`,
+              {
+                headers: requestHeaders,
+              }
+            )
+              .then((res) => res.json())
+              .then((res) => setFollowingData(res.data));
+          }
+        });
+  };
 
   return (
     <div className={css.profileContainer}>
@@ -151,12 +188,13 @@ const Profile = ({ userNickname, userImg, userIntro, userId }: any) => {
           grassLevel={grassLevel}
         /> */}
         <Grass2 />
-        {currUserId === Number(params.id) && (
-          <button className={css.writeBtn}>팔로우</button>
+        {currUserId !== Number(params.id) && (
+          <button className={css.writeBtn} onClick={clickFollowBtn}>
+            {followingData.some((elem: any) => elem.id === Number(params.id))
+              ? '언팔로우'
+              : '팔로우'}
+          </button>
         )}
-        {followingData.some((elem: any) => elem.id === params.id)
-          ? 'true'
-          : 'false'}
       </div>
     </div>
   );

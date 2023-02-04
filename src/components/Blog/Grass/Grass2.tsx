@@ -39,17 +39,17 @@ const Grass2 = () => {
         formatDay={(locale, date) => moment(date).format('DD')}
         next2Label={null}
         prev2Label={null}
-        tileContent={({ date, view }) => {
-          const html = [];
-          if (grassDatas.find((x) => x === moment(date).format('YYYY-MM-DD'))) {
-            html.push(<div className="dot"></div>);
-          }
-          return (
-            <>
-              <div>{html}</div>
-            </>
-          );
-        }}
+        // tileContent={({ date, view }) => {
+        //   const html = [];
+        //   if (grassDatas.find((x) => x === moment(date).format('YYYY-MM-DD'))) {
+        //     html.push(<div className="dot"></div>);
+        //   }
+        //   return (
+        //     <>
+        //       <div>{html}</div>
+        //     </>
+        //   );
+        // }}
       />
     </div>
   );
