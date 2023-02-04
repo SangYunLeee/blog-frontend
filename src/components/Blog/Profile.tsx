@@ -55,7 +55,7 @@ const Profile = ({ userNickname, userImg, userIntro, userId }: any) => {
     })
       .then((res) => res.json())
       .then((data) => setFollower(data.data));
-  }, []);
+  }, [followingData]);
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/following/user/${params.id}`, {
