@@ -19,6 +19,7 @@ export interface UserInfo {
   email: string;
   profile: userInfoProfile;
   startDate: string;
+  profileImgUrl: string;
 }
 
 export interface CommentProp {
@@ -41,6 +42,7 @@ const PostDetail = () => {
   const navigate = useNavigate();
   const [postDate, setPostDate] = useState<string>();
   const token = localStorage.getItem('token');
+
   let headers: Record<string, string> = {
     'Content-Type': 'application/json',
   };
@@ -51,6 +53,7 @@ const PostDetail = () => {
   const reload = () => {
     fetch(`${process.env.REACT_APP_API_URL}/comments/${params.id}`, {
       method: 'GET',
+      headers,
     })
       .then((res) => res.json())
       .then((res) => setCommentList(res.data));
@@ -58,6 +61,7 @@ const PostDetail = () => {
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/posts/${params.id}`, {
       method: 'GET',
+      headers,
     })
       .then((res) => res.json())
       .then((res) => setPost(res.data));
@@ -86,7 +90,6 @@ const PostDetail = () => {
       method: 'DELETE',
       headers,
     }).then(() => {
-      alert('삭제 완료 되었습니다');
       navigate('/blog');
     });
   };
@@ -96,7 +99,6 @@ const PostDetail = () => {
       method: 'DELETE',
       headers,
     }).then(() => {
-      alert('삭제 완료 되었습니다');
       reload();
     });
   };
@@ -110,7 +112,6 @@ const PostDetail = () => {
         content: comment,
       }),
     }).then(() => {
-      alert('댓글이 생성 되었습니다');
       setComment('');
       reload();
     });
@@ -151,7 +152,10 @@ const PostDetail = () => {
                 </CopyToClipboard>
               </div>
               <div className={css.headerWrap}>
-                <div className={css.profile}>
+                <div
+                  className={css.profile}
+                  onClick={() => navigate(`/blog/${post.user.id}`)}
+                >
                   <img
                     className={css.profileImg}
                     src={post.user.profileImgUrl}
