@@ -66,7 +66,7 @@ const Header = () => {
         });
   }, [token]);
 
-  console.log(userInfo);
+  // console.log(userInfo);
   return (
     <>
       <Login open={open} setOpen={setOpen} />
@@ -110,8 +110,15 @@ const Header = () => {
             )}
             {currMenuState && (
               <div className={css.userMenuDiv}>
-                <div className={css.userMenu}>개인 정보</div>
-                <div className={css.userMenu}>내 블로그</div>
+                <div
+                  className={css.userMenu}
+                  onClick={() => navigate('/setting')}
+                >
+                  개인 정보
+                </div>
+                <div className={css.userMenu} onClick={() => navigate('/blog')}>
+                  내 블로그
+                </div>
                 <div className={css.userMenu} onClick={logout}>
                   로그아웃
                 </div>
