@@ -20,17 +20,18 @@ export interface FollowBtnType {
   setSelectFollowerBtn: Dispatch<SetStateAction<boolean>>;
 }
 
-const Profile = ({ userNickname, userImg, userIntro }: any) => {
+const Profile = ({ userNickname, userImg, userIntro, userId }: any) => {
   const [open, setOpen] = useState<boolean>(false);
   const [selectFollowingBtn, setSelectFollowingBtn] = useState<boolean>(false);
   const [selectFollowerBtn, setSelectFollowerBtn] = useState<boolean>(false);
-
+  const [currUserId, setCurrUserId] = useState<number | null>(null);
   const [follower, setFollower] = useState<string[]>([]);
   const [following, setFollowing] = useState<string[]>([]);
   const [grassData, setGrassData] = useState<GrassData[]>([]);
   const params = useParams();
   const requestHeaders: HeadersInit = new Headers();
   const token = localStorage.getItem('token');
+  const [followingData, setFollowingData] = useState<any>([]);
   requestHeaders.set('Content-Type', 'application/json');
   if (token) {
     requestHeaders.set('Authorization', token);
@@ -75,16 +76,40 @@ const Profile = ({ userNickname, userImg, userIntro }: any) => {
       .then((data) => setGrassData(data.data));
   }, []);
 
-  const grassCounts = grassData.map((data) => {
-    return data.count;
-  });
+  useEffect(() => {
+    console.log(userId, 'userId');
+  }, []);
 
-  const grassDate = grassData.map((data) => {
-    return data.date;
-  });
-  const grassLevel = grassData.map((data) => {
-    return data.level;
-  });
+  // const grassCounts = grassData.map((data) => {
+  //   return data.count;
+  // });
+
+  // const grassDate = grassData.map((data) => {
+  //   return data.date;
+  // });
+  // const grassLevel = grassData.map((data) => {
+  //   return data.level;
+  // });
+
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URL}/users`, {
+      headers: requestHeaders,
+    })
+      .then((res) => res.json())
+      .then((data) => setCurrUserId(data.data.id));
+  }, []);
+
+  useEffect(() => {
+    //내가 팔로잉
+    fetch(`${process.env.REACT_APP_API_URL}/following/user/${currUserId}`, {
+      headers: requestHeaders,
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res.data);
+        setFollowingData(res.data);
+      });
+  }, []);
 
   return (
     <div className={css.profileContainer}>
@@ -126,8 +151,13 @@ const Profile = ({ userNickname, userImg, userIntro }: any) => {
           grassLevel={grassLevel}
         /> */}
         <Grass2 />
+        {currUserId === Number(params.id) && (
+          <button className={css.writeBtn}>팔로우</button>
+        )}
+        {followingData.some((elem: any) => elem.id === params.id)
+          ? 'true'
+          : 'false'}
       </div>
-      <button className={css.writeBtn}>게시물 작성하기</button>
     </div>
   );
 };

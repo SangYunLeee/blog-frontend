@@ -29,7 +29,7 @@ const Grass2 = () => {
   const grassDatas = grassData.map((data) => {
     return data.date;
   });
-  console.log(grassDatas);
+  // console.log(grassDatas);
 
   return (
     <div>

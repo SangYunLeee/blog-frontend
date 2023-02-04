@@ -20,6 +20,7 @@ const Header = () => {
     localStorage.getItem('token')
   );
   const [userInfo, setUserInfo] = useState<userInfo | null>(null);
+  const [userId, setUserId] = useState<userInfo | null>(null);
   const searchInput = useRef<HTMLInputElement>(null);
   const loginBtn = useRef<HTMLButtonElement>(null);
 
@@ -63,6 +64,7 @@ const Header = () => {
         .then((res) => res.json())
         .then((data) => {
           setUserInfo(data.data.nickname);
+          setUserId(data.data.id);
         });
   }, [token]);
 
@@ -115,7 +117,10 @@ const Header = () => {
                 >
                   개인 정보
                 </div>
-                <div className={css.userMenu} onClick={() => navigate('/blog')}>
+                <div
+                  className={css.userMenu}
+                  onClick={() => navigate(`/blog/${userId}`)}
+                >
                   내 블로그
                 </div>
                 <div className={css.userMenu} onClick={logout}>

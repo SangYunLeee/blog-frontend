@@ -22,6 +22,7 @@ const BlogPage = () => {
   const userNickname = `${userInfo?.nickname}`;
   const userImg = `${userInfo?.profile.profileImgUrl}`;
   const userIntro = `${userInfo?.profile.profileIntro}`;
+  const userId = `${userInfo?.id}`;
   const params = useParams();
   const requestHeaders: HeadersInit = new Headers();
   const token = localStorage.getItem('token');
@@ -60,6 +61,7 @@ const BlogPage = () => {
       <div className={css.blogContainner}>
         <div className={css.blogWrapper}>
           <Profile
+            userId={userId}
             userNickname={userNickname}
             userImg={userImg}
             userIntro={userIntro}
@@ -87,8 +89,8 @@ const BlogPage = () => {
               <hr className={css.border} />
             </div>
           </div>
-          {onSearch.map((data) => {
-            return <Blog key={data.id} {...data} />;
+          {onSearch.map((data, idx) => {
+            return <Blog key={idx} {...data} />;
           })}
         </div>
       </div>

@@ -3,6 +3,7 @@
   width: 100%;
   height: 100%;
   background-color: #e8eff3;
+
   .blogWrapper {
     display: flex;
     flex-direction: column;
@@ -12,7 +13,6 @@
   }
   .blogcontent {
     width: 120vh;
-    height: 100vh;
     background-color: white;
     .blogHeader {
       margin-top: 5%;
