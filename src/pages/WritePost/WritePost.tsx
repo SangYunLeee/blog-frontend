@@ -57,6 +57,7 @@ const WritePost = ({ status, postId }: Props) => {
       if (post.topic.topicName) {
         change('TopicId', String(post.topic.id));
       }
+      setContent(post?.content);
     }
   }, [post]);
 
@@ -83,6 +84,7 @@ const WritePost = ({ status, postId }: Props) => {
         },
         data: blogData,
       }).then((res) => {
+        console.log(res);
         navigate(`/post/${postId}`);
         window.location.reload();
       });
