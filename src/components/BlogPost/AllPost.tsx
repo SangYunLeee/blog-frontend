@@ -68,7 +68,6 @@ const AllPost = () => {
             }
           );
           const json = await response.json();
-          console.log(json);
           setMaxCountPage(json.maxPage);
           setAllPostData(json.data);
         } catch (error) {

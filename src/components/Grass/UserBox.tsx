@@ -13,6 +13,7 @@ interface userInfo {
 
 const UserBox = () => {
   const [userData, setUserData] = useState<userInfo | null>(null);
+  const id = userData?.id;
   const token = localStorage.getItem('token');
   const requestHeaders: HeadersInit = new Headers();
   requestHeaders.set('Content-Type', 'application/json');
@@ -66,8 +67,8 @@ const UserBox = () => {
           </p>
         </div>
         <div className={css.blogBtn}>
-          <button onClick={() => navigate('/blog')}>내 블로그</button>
-          <button onClick={() => navigate('/write')}>게시글 작성</button>
+          <button onClick={() => navigate(`/blog/${id}`)}>내 블로그</button>
+          <button onClick={() => navigate(`/write`)}>게시글 작성</button>
         </div>
       </div>
     </div>

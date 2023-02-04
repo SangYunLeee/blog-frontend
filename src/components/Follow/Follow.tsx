@@ -5,19 +5,9 @@ import Follower from './Follower';
 import Following from './Following';
 import css from './Follow.module.scss';
 
-type FollowType = {
-  id: number;
-  email: string;
-  nickname: string;
-  profileImgUrl: string;
-  registed: boolean;
-};
 export type userId = {
   userId: number;
 };
-export interface FollowerInterface {
-  userId: number;
-}
 
 const Follow = ({
   open,
