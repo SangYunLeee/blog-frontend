@@ -11,7 +11,11 @@ const axios_ = axios.create({
   baseURL: `${process.env.REACT_APP_API_URL}/`,
 });
 
-const WritePost = () => {
+interface Props {
+  status?: string;
+}
+
+const WritePost = ({ status }: Props) => {
   const [form, setForm] = useState<Record<string, string | File>>({
     title: '',
     categoryId: '',
@@ -79,7 +83,9 @@ const WritePost = () => {
                   <label htmlFor="input-file">
                     <img
                       className={css.fileInput}
-                      src="./image/whitePic.png"
+                      src={
+                        process.env.REACT_APP_PUBLIC_URL + `/image/whitePic.png`
+                      }
                       alt="addPic"
                     />
                   </label>
@@ -98,7 +104,9 @@ const WritePost = () => {
                 <label htmlFor="input-file">
                   <img
                     className={css.fileInput}
-                    src="./image/blackPic.png"
+                    src={
+                      process.env.REACT_APP_PUBLIC_URL + `/image/blackPic.png`
+                    }
                     alt="addPic"
                   />
                 </label>
@@ -132,7 +140,11 @@ const WritePost = () => {
           </div>
         </div>
         <div className={css.tag}>
-          <Tag change={change} handleWritePost={handleWritePost} />
+          <Tag
+            change={change}
+            handleWritePost={handleWritePost}
+            status={status}
+          />
         </div>
       </div>
     </>
