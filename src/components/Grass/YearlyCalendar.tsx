@@ -56,7 +56,7 @@ const YearlyCalendar = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/user`, {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/users`, {
           headers: requestHeaders,
         });
         const json = await response.json();
