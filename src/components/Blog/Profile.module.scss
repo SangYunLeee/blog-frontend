@@ -21,7 +21,11 @@
       .follow {
         display: flex;
         margin-left: 20px;
-        p {
+        cursor: pointer;
+
+        .following,
+        .follower {
+          display: flex;
           margin-left: 5px;
         }
       }

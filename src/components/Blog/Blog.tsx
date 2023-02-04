@@ -10,6 +10,7 @@ const Blog = (
 ) => {
   const { title, content, reply, thumbnailImgUrl, createdAt } = props;
   const date = new Date(createdAt);
+  console.log(title);
   const postingDate = `${date.getFullYear()}년 ${
     date.getMonth() + 1
   }월 ${date.getDate()}일`;
@@ -20,6 +21,7 @@ const Blog = (
           <p className={css.writeDate}>{postingDate}</p>
           <div className={css.titleWrapper}>
             <h3 className={css.contentTitle}>{title}</h3>
+
             <p className={css.reply}>({reply})</p>
           </div>
           <p

@@ -114,7 +114,8 @@ const Profile = ({ userNickname, userImg, userIntro }: any) => {
           </div>
         </div>
       </div>
-      <div className={css.content}>{userIntro}</div>
+      {userIntro === null && <div className={css.content}>{userIntro}</div>}
+
       <div className={css.grass}>
         {/* {grassData.map((data) => {
           return <Grass {...data} />;

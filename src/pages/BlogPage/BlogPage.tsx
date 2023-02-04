@@ -73,7 +73,11 @@ const BlogPage = () => {
         </div>
         <div className={css.blogcontent}>
           <div className={css.blogHeader}>
-            <h1 className={css.blogName}>{`${userInfo?.profile.blogTitle}`}</h1>
+            {userInfo?.profile.blogTitle && (
+              <h1
+                className={css.blogName}
+              >{`${userInfo?.profile.blogTitle}`}</h1>
+            )}
             <div className={css.titleWrapper}>
               {inputData ? (
                 <h2 className={css.allContents}>{inputData}</h2>
