@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { postDataType } from '../TotalPost/TotalPost';
 import Header from '../../components/Header/Header';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import Comment from './Comment/Comment';
 
 type userInfoProfile = {
   blogTitle: string;
@@ -11,7 +12,7 @@ type userInfoProfile = {
   profileImgUrl: string;
 };
 
-interface UserInfo {
+export interface UserInfo {
   id: number;
   nickname: string;
   email: string;
@@ -19,7 +20,7 @@ interface UserInfo {
   startDate: string;
 }
 
-interface Comment {
+export interface CommentProp {
   id: number;
   content: string;
   createDate: string;
@@ -32,7 +33,7 @@ const PostDetail = () => {
   const [post, setPost] = useState<postDataType>();
   const [user, setUser] = useState<UserInfo>();
   const [comment, setComment] = useState<string>('');
-  const [commentList, setCommentList] = useState<Comment[]>([]);
+  const [commentList, setCommentList] = useState<CommentProp[]>([]);
   const url = window.location.href;
   const params = useParams();
   const navigate = useNavigate();
@@ -45,7 +46,13 @@ const PostDetail = () => {
   if (token) {
     headers = { ...headers, authorization: token };
   }
-
+  const reload = () => {
+    fetch(`${process.env.REACT_APP_API_URL}/comments/${params.id}`, {
+      method: 'GET',
+    })
+      .then((res) => res.json())
+      .then((res) => setCommentList(res.data));
+  };
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/posts/${params.id}`, {
       method: 'GET',
@@ -53,18 +60,14 @@ const PostDetail = () => {
       .then((res) => res.json())
       .then((res) => setPost(res.data));
 
-    fetch(`${process.env.REACT_APP_API_URL}/user`, {
+    fetch(`${process.env.REACT_APP_API_URL}/users`, {
       method: 'GET',
       headers,
     })
       .then((res) => res.json())
       .then((res) => setUser(res.data));
 
-    fetch(`${process.env.REACT_APP_API_URL}/comments/${params.id}`, {
-      method: 'GET',
-    })
-      .then((res) => res.json())
-      .then((res) => setCommentList(res.data));
+    reload();
   }, []);
 
   useEffect(() => {
@@ -92,11 +95,7 @@ const PostDetail = () => {
       headers,
     }).then(() => alert('삭제 완료 되었습니다'));
 
-    fetch(`${process.env.REACT_APP_API_URL}/comments/${params.id}`, {
-      method: 'GET',
-    })
-      .then((res) => res.json())
-      .then((res) => setCommentList(res.data));
+    reload();
   };
 
   const handleComment = async () => {
@@ -112,11 +111,7 @@ const PostDetail = () => {
       setComment('');
     });
 
-    fetch(`${process.env.REACT_APP_API_URL}/comments/${params.id}`, {
-      method: 'GET',
-    })
-      .then((res) => res.json())
-      .then((res) => setCommentList(res.data));
+    reload();
   };
 
   return post ? (
@@ -226,27 +221,14 @@ const PostDetail = () => {
                   date.getMonth() + 1
                 }월 ${date.getDate()}일`;
                 return (
-                  <div key={idx} className={css.eachComment}>
-                    <div className={css.commentName}>
-                      <p className={css.userName}>{e.user.nickname}</p>
-                      <p className={css.createTime}>{createDate}</p>
-                    </div>
-                    <div className={css.c_content}>
-                      <p className={css.c_comment}>{e.content}</p>
-                      {post.user.id === user?.id ? (
-                        <div className={css.c_btnWrap}>
-                          <button
-                            className={css.c_deleteBtn}
-                            onClick={() => deleteComment(e.id)}
-                          >
-                            삭제&nbsp;
-                          </button>
-                          <span className={css.line}>|</span>
-                          <button className={css.c_editBtn}>&nbsp;수정</button>
-                        </div>
-                      ) : null}
-                    </div>
-                  </div>
+                  <Comment
+                    key={idx}
+                    comment={e}
+                    user={user}
+                    deleteComment={deleteComment}
+                    createDate={createDate}
+                    reload={reload}
+                  />
                 );
               })}
             </div>

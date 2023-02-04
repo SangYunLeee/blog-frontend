@@ -29,7 +29,7 @@ const BlogPage = () => {
   }
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/user`, {
+    fetch(`${process.env.REACT_APP_API_URL}/users`, {
       headers: requestHeaders,
     })
       .then((res) => res.json())

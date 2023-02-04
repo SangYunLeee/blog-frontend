@@ -48,6 +48,7 @@
           width: 15%;
           .profileImg {
             width: 75%;
+            border-radius: 50%;
           }
           .name {
             color: #909090;
@@ -103,21 +104,21 @@
         display: flex;
         height: 50px;
         border-bottom: 1px solid #e5e5e5;
+        align-items: center;
         ::placeholder {
           color: #9a9a9a;
           font-size: 16px;
           font-weight: 300;
         }
-
         .InputText {
           width: 88%;
         }
-
         .commentImg {
           margin-left: 1%;
           margin-right: 1%;
-          width: 50px;
-          height: 50px;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
         }
         .commentBtn {
           color: #8da3f0;
@@ -136,52 +137,6 @@
       }
       .commentListWrap {
         padding: 5% 8%;
-        .eachComment {
-          margin-bottom: 2%;
-          border-bottom: 1px solid #e5e5e5;
-          display: flex;
-          flex-direction: column;
-          .commentName {
-            .userName {
-              margin-right: 2%;
-              color: #6a6a6a;
-              display: inline-block;
-              font-size: 13px;
-            }
-            .createTime {
-              font-size: 10px;
-              color: #b6b6b6;
-              vertical-align: bottom;
-              display: inline-block;
-            }
-          }
-          .c_content {
-            display: flex;
-            justify-content: space-between;
-            .c_comment {
-              color: #585858;
-              margin: 1% 0%;
-              display: inline-block;
-            }
-            .c_btnWrap {
-              width: 6%;
-              color: #9b9b9b;
-              display: inline-block;
-              .c_deleteBtn {
-                cursor: pointer;
-                font-size: 11px;
-              }
-              .line {
-                font-size: 11px;
-              }
-              .c_editBtn {
-                cursor: pointer;
-                margin-right: 1%;
-                font-size: 11px;
-              }
-            }
-          }
-        }
       }
     }
   }

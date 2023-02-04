@@ -1,0 +1,90 @@
+.eachComment {
+  margin-bottom: 2%;
+  border-bottom: 1px solid #e5e5e5;
+  display: flex;
+  flex-direction: column;
+  .commentName {
+    .userName {
+      margin-right: 2%;
+      color: #6a6a6a;
+      display: inline-block;
+      font-size: 13px;
+    }
+    .createTime {
+      font-size: 10px;
+      color: #b6b6b6;
+      vertical-align: bottom;
+      display: inline-block;
+    }
+  }
+  .c_content {
+    display: flex;
+    .profileImg {
+      width: 4%;
+      border-radius: 20%;
+      margin: 2% 0%;
+    }
+    .set {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      .c_comment {
+        padding-top: 1.5%;
+        color: #585858;
+        margin: 1% 0%;
+        display: inline-block;
+        margin-left: 1%;
+      }
+      .c_btnWrap {
+        width: 6%;
+        color: #9b9b9b;
+        display: inline-block;
+        .c_deleteBtn {
+          cursor: pointer;
+          font-size: 11px;
+        }
+        .line {
+          font-size: 11px;
+        }
+        .c_editBtn {
+          cursor: pointer;
+          margin-right: 1%;
+          font-size: 11px;
+        }
+      }
+    }
+  }
+  .editInput {
+    padding-top: 1%;
+    color: #585858;
+    margin: 1% 0%;
+    display: inline-block;
+    margin-left: 1%;
+    display: flex;
+    width: 94%;
+    justify-content: space-between;
+    .InputTag {
+      background-color: #e8eff3;
+      width: 90%;
+      border-radius: 5px;
+      padding-left: 2%;
+    }
+    .e_editBtn {
+      cursor: pointer;
+      background-color: #b1c5d1;
+      font-size: 11px;
+      padding: 5px !important;
+      border-radius: 10px;
+      margin-left: 1%;
+      color: white;
+      &:disabled {
+        background-color: #dde6eb;
+        cursor: default;
+      }
+      &:hover {
+        background-color: #7b8991;
+      }
+    }
+  }
+}
