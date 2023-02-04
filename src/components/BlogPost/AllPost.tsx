@@ -68,6 +68,7 @@ const AllPost = () => {
             }
           );
           const json = await response.json();
+          console.log(json);
           setMaxCountPage(json.maxPage);
           setAllPostData(json.data);
         } catch (error) {
@@ -120,7 +121,11 @@ const AllPost = () => {
               date.getMonth() + 1
             }월 ${date.getDate()}일`;
             return (
-              <div key={id} className={css.postBox}>
+              <div
+                key={id}
+                className={css.postBox}
+                onClick={() => navigate(`/post/${id}`)}
+              >
                 <div className={css.postUser}>
                   <div className={css.userInfo}>
                     <img
@@ -132,20 +137,26 @@ const AllPost = () => {
                   </div>
                   <span className={css.postingDate}>{postingDate}</span>
                 </div>
-                <div className={css.postImg}>
-                  <img
-                    className={css.thumbnail}
-                    src={thumbnailImgUrl}
-                    alt="썸네일"
-                  />
-                </div>
+                {thumbnailImgUrl === null ? null : (
+                  <div className={css.postImg}>
+                    <img
+                      className={css.thumbnail}
+                      src={thumbnailImgUrl}
+                      alt="썸네일"
+                    />
+                  </div>
+                )}
                 <div className={css.postTitle}>
                   <p>
                     <span className={css.titleText}>{title}</span>
                   </p>
                   <p>
                     <span
-                      className={css.postingContent}
+                      className={
+                        thumbnailImgUrl === null
+                          ? css.postingLongContent
+                          : css.postingContent
+                      }
                       dangerouslySetInnerHTML={{ __html: content }}
                     />
                   </p>

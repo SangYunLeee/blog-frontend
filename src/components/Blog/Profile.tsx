@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { useParams } from 'react-router-dom';
 import Grass from '../../components/Blog/Grass/Grass';
 import Grass2 from './Grass/Grass2';
+import Follow from '../../components/Follow/Follow';
 import css from './Profile.module.scss';
 
 export interface GrassData {
@@ -10,7 +11,21 @@ export interface GrassData {
   level: number;
 }
 
+
+export interface FollowBtnType {
+  open: boolean;
+  setOpen: Dispatch<SetStateAction<boolean>>;
+  selectFollowingBtn: boolean;
+  setSelectFollowingBtn: Dispatch<SetStateAction<boolean>>;
+  selectFollowerBtn: boolean;
+  setSelectFollowerBtn: Dispatch<SetStateAction<boolean>>;
+}
+
 const Profile = ({ userNickname, userImg, userIntro }: any) => {
+ const [open, setOpen] = useState<boolean>(false);
+  const [selectFollowingBtn, setSelectFollowingBtn] = useState<boolean>(false);
+  const [selectFollowerBtn, setSelectFollowerBtn] = useState<boolean>(false);
+
   const [follower, setFollower] = useState<string[]>([]);
   const [following, setFollowing] = useState<string[]>([]);
   const [grassData, setGrassData] = useState<GrassData[]>([]);
@@ -21,6 +36,18 @@ const Profile = ({ userNickname, userImg, userIntro }: any) => {
   if (token) {
     requestHeaders.set('Authorization', token);
   }
+
+  const clickFollower = () => {
+    setOpen(true);
+    setSelectFollowerBtn(true);
+    setSelectFollowingBtn(false);
+  };
+
+  const clickFollowing = () => {
+    setOpen(true);
+    setSelectFollowingBtn(true);
+    setSelectFollowerBtn(false);
+  };
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/follower/user/${params.id}`, {
@@ -67,10 +94,24 @@ const Profile = ({ userNickname, userImg, userIntro }: any) => {
         <div className={css.nicknameWrapper}>
           <h2>{userNickname} 님</h2>
           <div className={css.follow}>
-            <p>팔로워</p>
+            <div className={css.follower} onClick={clickFollower}>
+             <p>팔로워</p>
             <p>{follower.length}</p>
-            <p>팔로잉</p>
+            </div>
+            <div className={css.following} onClick={clickFollowing}>
+              <p>팔로잉</p>
             <p>{following.length}</p>
+            </div>
+            {open ? (
+              <Follow
+                open={open}
+                setOpen={setOpen}
+                selectFollowingBtn={selectFollowingBtn}
+                setSelectFollowerBtn={setSelectFollowerBtn}
+                selectFollowerBtn={selectFollowerBtn}
+                setSelectFollowingBtn={setSelectFollowingBtn}
+              />
+            ) : null}
           </div>
         </div>
       </div>

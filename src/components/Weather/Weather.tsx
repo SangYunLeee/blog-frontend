@@ -110,44 +110,41 @@ const Weather = () => {
         {snow ? <Snowy /> : null}
         {rain ? <Rainy /> : null}
       </div>
-      <div className={css.weatherContainer}>
-        {agree ? (
-          <>
-            <div className={css.weatherContent}>
-              <WeatherIcon
-                time={time}
-                weatherData={weatherData}
-                setSnow={setSnow}
-                setRain={setRain}
-                setWeatherData={setWeatherData}
-              />
-              {translateData.map((data) => {
-                const { id, content } = data;
-                if (id === weatherId) {
-                  return (
-                    <span key={id} className={css.currentWeather}>
-                      {content}
-                    </span>
-                  );
-                }
-              })}
-              <span className={css.temperature}>{temperature}</span>
-            </div>
-            <div className={css.location}>
-              <FiMapPin className={css.locationIcon} />
-              <span className={css.locationName}>{location}</span>
-            </div>
-            <div className={css.rightContainer}>
-              <TodayWeather />
-            </div>
-          </>
-        ) : (
-          <div className={css.disagree}>
-            <span>위치 정보 이용에 동의하고</span>
-            <span>현재 날씨 정보를 확인해보세요 !</span>
+      {agree ? (
+        <div className={css.weatherContainer}>
+          <div className={css.weatherContent}>
+            <WeatherIcon
+              time={time}
+              weatherData={weatherData}
+              setSnow={setSnow}
+              setRain={setRain}
+              setWeatherData={setWeatherData}
+            />
+            {translateData.map((data) => {
+              const { id, content } = data;
+              if (id === weatherId) {
+                return (
+                  <span key={id} className={css.currentWeather}>
+                    {content}
+                  </span>
+                );
+              }
+            })}
+            <span className={css.temperature}>{temperature}</span>
           </div>
-        )}
-      </div>
+          <div className={css.location}>
+            <FiMapPin className={css.locationIcon} />
+            <span className={css.locationName}>{location}</span>
+          </div>
+          <div className={css.rightContainer}>
+            <TodayWeather />
+          </div>
+        </div>
+      ) : (
+        <div className={css.disagree}>
+          <span>위치 정보 이용에 동의하고 현재 날씨 정보를 확인해보세요 !</span>
+        </div>
+      )}
     </div>
   );
 };

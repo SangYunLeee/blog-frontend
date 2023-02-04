@@ -1,5 +1,5 @@
-/* eslint-disable react/jsx-no-useless-fragment */
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import DropDown from '../DropDown/DropDown';
 import css from './NewPost.module.scss';
 interface NewPostInterface {
@@ -16,6 +16,8 @@ interface NewPostInterface {
 }
 
 const NewPost = () => {
+  const navigate = useNavigate();
+
   //이웃이 있는지 없는지 여부확인
   const [buddyData, setBuddyData] = useState<boolean>(false);
   //이웃 새글 여부확인
@@ -99,10 +101,16 @@ const NewPost = () => {
   }, [topicIdData]);
 
   return (
-    <ul className={css.newPostContainer}>
-      <li className={css.newPostTitle}>
+    <section className={css.newPostContainer}>
+      <div className={css.newPostTitle}>
         <span>
-          이웃 새 글<button className={css.moreButton}>더보기</button>
+          이웃 새 글
+          <button
+            className={css.moreButton}
+            onClick={() => navigate('/neighborpost')}
+          >
+            더보기
+          </button>
         </span>
         <div>
           <DropDown
@@ -110,65 +118,77 @@ const NewPost = () => {
             setPagination={setPagination}
           />
         </div>
-      </li>
-      {buddyData ? (
-        <>
-          {buddyPostData ? (
-            <>
-              {newPostData.map((postData) => {
-                const { id, title, content, thumbnailImgUrl, createdAt, user } =
-                  postData;
-                const date = new Date(createdAt);
-                const postingDate = `${date.getFullYear()}년 ${
-                  date.getMonth() + 1
-                }월 ${date.getDate()}일`;
-                return (
-                  <li key={id} className={css.newPostContent}>
-                    <div className={css.userInfo}>
-                      <img
-                        className={css.userImg}
-                        src={user.profileImgUrl}
-                        alt="유저이미지"
-                      />
-                      <span className={css.userName}>{user.nickname}</span>
-                    </div>
-                    <div className={css.postContent}>
-                      <p className={css.postingTime}>{postingDate}</p>
-                      <p className={css.postingTitle}>{title}</p>
-                      <p className={css.postingContent}>
-                        <span
-                          className={css.text}
-                          dangerouslySetInnerHTML={{ __html: content }}
+      </div>
+      <div>
+        {buddyData ? (
+          <div>
+            {buddyPostData ? (
+              <ul>
+                {newPostData.map((postData) => {
+                  const {
+                    id,
+                    title,
+                    content,
+                    thumbnailImgUrl,
+                    createdAt,
+                    user,
+                  } = postData;
+                  const date = new Date(createdAt);
+                  const postingDate = `${date.getFullYear()}년 ${
+                    date.getMonth() + 1
+                  }월 ${date.getDate()}일`;
+                  return (
+                    <li
+                      key={id}
+                      className={css.newPostContent}
+                      onClick={() => navigate(`/post/${id}`)}
+                    >
+                      <div className={css.userInfo}>
+                        <img
+                          className={css.userImg}
+                          src={user.profileImgUrl}
+                          alt="유저이미지"
                         />
-                      </p>
-                    </div>
-                    <div className={css.thumbnailContent}>
-                      {thumbnailImgUrl === null ? null : (
-                        <div className={css.thumbnailImg}>
-                          <img
-                            src={thumbnailImgUrl}
-                            alt="썸네일"
-                            className={css.postThumbnail}
+                        <span className={css.userName}>{user.nickname}</span>
+                      </div>
+                      <div className={css.postContent}>
+                        <p className={css.postingTime}>{postingDate}</p>
+                        <p className={css.postingTitle}>{title}</p>
+                        <p className={css.postingContent}>
+                          <span
+                            className={css.text}
+                            dangerouslySetInnerHTML={{ __html: content }}
                           />
-                        </div>
-                      )}
-                    </div>
-                  </li>
-                );
-              })}
-            </>
-          ) : (
-            <div className={css.makeBuddyContainer}>
-              <p>아직 새로운 글이 없어요!</p>
-            </div>
-          )}
-        </>
-      ) : (
-        <div className={css.makeBuddyContainer}>
-          <p>이웃을 추가하고 새로운 글을 확인해보세요!</p>
-        </div>
-      )}
-    </ul>
+                        </p>
+                      </div>
+                      <div className={css.thumbnailContent}>
+                        {thumbnailImgUrl === null ? null : (
+                          <div className={css.thumbnailImg}>
+                            <img
+                              src={thumbnailImgUrl}
+                              alt="썸네일"
+                              className={css.postThumbnail}
+                            />
+                          </div>
+                        )}
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            ) : (
+              <div className={css.makeBuddyContainer}>
+                <p>아직 새로운 글이 없어요!</p>
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className={css.makeBuddyContainer}>
+            <p>이웃을 추가하고 새로운 글을 확인해보세요!</p>
+          </div>
+        )}
+      </div>
+    </section>
   );
 };
 
