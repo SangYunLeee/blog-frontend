@@ -138,12 +138,11 @@ const NewPost = () => {
                     date.getMonth() + 1
                   }월 ${date.getDate()}일`;
                   return (
-                    <li
-                      key={id}
-                      className={css.newPostContent}
-                      onClick={() => navigate(`/post/${id}`)}
-                    >
-                      <div className={css.userInfo}>
+                    <li key={id} className={css.newPostContent}>
+                      <div
+                        className={css.userInfo}
+                        onClick={() => navigate(`/blog/${user.id}`)}
+                      >
                         <img
                           className={css.userImg}
                           src={user.profileImgUrl}
@@ -151,7 +150,10 @@ const NewPost = () => {
                         />
                         <span className={css.userName}>{user.nickname}</span>
                       </div>
-                      <div className={css.postContent}>
+                      <div
+                        className={css.postContent}
+                        onClick={() => navigate(`/post/${id}`)}
+                      >
                         <p className={css.postingTime}>{postingDate}</p>
                         <p className={css.postingTitle}>{title}</p>
                         <p className={css.postingContent}>

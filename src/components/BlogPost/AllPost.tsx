@@ -120,13 +120,12 @@ const AllPost = () => {
               date.getMonth() + 1
             }월 ${date.getDate()}일`;
             return (
-              <div
-                key={id}
-                className={css.postBox}
-                onClick={() => navigate(`/post/${id}`)}
-              >
+              <div key={id} className={css.postBox}>
                 <div className={css.postUser}>
-                  <div className={css.userInfo}>
+                  <div
+                    className={css.userInfo}
+                    onClick={() => navigate(`/blog/${user.id}`)}
+                  >
                     <img
                       className={css.userImage}
                       src={user.profileImgUrl}
@@ -136,29 +135,34 @@ const AllPost = () => {
                   </div>
                   <span className={css.postingDate}>{postingDate}</span>
                 </div>
-                {thumbnailImgUrl === null ? null : (
-                  <div className={css.postImg}>
-                    <img
-                      className={css.thumbnail}
-                      src={thumbnailImgUrl}
-                      alt="썸네일"
-                    />
+                <div
+                  className={css.postContent}
+                  onClick={() => navigate(`/post/${id}`)}
+                >
+                  {thumbnailImgUrl === null ? null : (
+                    <div className={css.postImg}>
+                      <img
+                        className={css.thumbnail}
+                        src={thumbnailImgUrl}
+                        alt="썸네일"
+                      />
+                    </div>
+                  )}
+                  <div className={css.postTitle}>
+                    <p>
+                      <span className={css.titleText}>{title}</span>
+                    </p>
+                    <p>
+                      <span
+                        className={
+                          thumbnailImgUrl === null
+                            ? css.postingLongContent
+                            : css.postingContent
+                        }
+                        dangerouslySetInnerHTML={{ __html: content }}
+                      />
+                    </p>
                   </div>
-                )}
-                <div className={css.postTitle}>
-                  <p>
-                    <span className={css.titleText}>{title}</span>
-                  </p>
-                  <p>
-                    <span
-                      className={
-                        thumbnailImgUrl === null
-                          ? css.postingLongContent
-                          : css.postingContent
-                      }
-                      dangerouslySetInnerHTML={{ __html: content }}
-                    />
-                  </p>
                 </div>
               </div>
             );
