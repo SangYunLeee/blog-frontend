@@ -165,7 +165,7 @@ const TotalPost = () => {
     }
 
     fetch(
-      `${process.env.REACT_APP_API_URL}/user?search=${params.get(
+      `${process.env.REACT_APP_API_URL}/users?search=${params.get(
         'searchKeyword'
       )}`,
       {

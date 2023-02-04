@@ -18,7 +18,7 @@ const Poster = ({ post }: postProps) => {
       event.target.className ===
       document.querySelector(`.${css.userImage}`)?.className
     )
-      console.log('블로그로 이동');
+      window.location.href = `http://localhost:3000/blog/${post.user.id}`;
     else window.location.href = `http://localhost:3000/post/${post.id}`;
   };
 
