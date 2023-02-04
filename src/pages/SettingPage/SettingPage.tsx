@@ -9,62 +9,42 @@ export interface UserInfo {
   nickname: string;
   email: string;
   profile: { blogTitle: string; profileIntro: string; profileImgUrl: string };
+  startDate: string;
 }
 const SettingPage = () => {
-  const [userInfo, setUserInfo] = useState<UserInfo[]>([]);
+  const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
   const [nicknameData, setNicknameData] = useState<string>('');
   const [blogTitleData, setBlogTitleData] = useState<string>('');
   const [profileIntroData, setProfileIntroData] = useState<string>('');
-  const [fileUrl, setFileUrl] = useState<string | any>('');
-  const [file, setFile] = useState<FileList | null>();
-  const imgUploadInput = useRef<HTMLInputElement | null>(null);
+  const blogTitles = userInfo?.profile.blogTitle;
+  const profileIntros = userInfo?.profile.profileIntro;
+  const nickNames = userInfo?.nickname;
+  const profileImgUrls = userInfo?.profile.profileImgUrl;
   const requestHeaders: HeadersInit = new Headers();
   const token = localStorage.getItem('token');
   requestHeaders.set('Content-Type', 'application/json');
   if (token) {
     requestHeaders.set('Authorization', token);
   }
+  const onChangeNickName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNicknameData(e.target.value);
+  };
+  const onChangeBlogTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setBlogTitleData(e.target.value);
+  };
+  const onChangeProfileIntro = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setProfileIntroData(e.target.value);
+  };
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/user`, {
+    fetch(`${process.env.REACT_APP_API_URL}/users`, {
       headers: requestHeaders,
     })
       .then((res) => res.json())
       .then((data) => setUserInfo(data.data));
   }, []);
 
-  const onImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
-      setFile(event.target.files);
-
-      const newFileUrl = URL.createObjectURL(event.target.files[0]);
-      setFileUrl(newFileUrl);
-    }
-  };
-
-  // const submitHandler = async (event: React.MouseEvent<HTMLButtonElement>) => {
-  //   event.preventDefault();
-  //   const formData = new FormData();
-  //   if (file) {
-  //     formData.append('file', file[0]);
-  //     try {
-  //       const response = await axios.patch(
-  //         `${process.env.REACT_APP_API_URL}/profile`,
-  //         formData,
-  //         {
-  //           headers: { 'content-type': 'multipart/form-data' },
-  //         }
-  //       );
-  //     } catch (error: any) {
-  //       alert('에러!');
-  //       throw new Error(error);
-  //     }
-  //   } else {
-  //     alert('이미지 필요!');
-  //   }
-  // };
-
-  const onEdit = (id: any) => {
+  const onEdit = () => {
     fetch(`${process.env.REACT_APP_API_URL}/profile`, {
       method: 'PATCH',
       headers: requestHeaders,
@@ -77,40 +57,54 @@ const SettingPage = () => {
       .then((res) => res.json())
       .then((result) => {
         if (result.message === 'PROFILE_UPDATED') {
-          setUserInfo(
-            userInfo.map((data) =>
-              data.id === id
-                ? {
-                    ...data,
-                    nickname: nicknameData,
-                    blogTitle: blogTitleData,
-                    profileIntro: profileIntroData,
-                  }
-                : data
-            )
-          );
           alert('수정완료');
+        } else if (result.message === '이미 존재하는 닉네임 입니다.') {
+          alert('이미 존재하는 닉네임 입니다.');
         } else {
-          alert('수정 실패');
+          alert('수정 실패!');
         }
       });
   };
 
+  const onChangeImg = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
+    if (e.target.files) {
+      const uploadFile = e.target.files[0];
+      const formData = new FormData();
+      formData.append('profileImg', uploadFile);
+      alert('프로필 이미지 수정 완료!');
+
+      await axios({
+        method: 'patch',
+        url: `${process.env.REACT_APP_API_URL}/profile`,
+        data: formData,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          authorization: localStorage.getItem('token'),
+        },
+      });
+    } else {
+      return alert('수정 실패!');
+    }
+  };
+
   return (
-    <>
+    <div className={css.setting}>
       <Header />
       <div className={css.settingContainer}>
         <EditProfile
-          userInfo={userInfo}
+          blogTitles={blogTitles}
+          profileIntros={profileIntros}
+          nickNames={nickNames}
+          profileImgUrls={profileImgUrls}
+          onChangeNickName={onChangeNickName}
+          onChangeBlogTitle={onChangeBlogTitle}
+          onChangeProfileIntro={onChangeProfileIntro}
           nicknameData={nicknameData}
-          setNicknameData={setNicknameData}
           blogTitleData={blogTitleData}
-          setBlogTitleData={setBlogTitleData}
           profileIntroData={profileIntroData}
-          setProfileIntroData={setProfileIntroData}
-          fileUrl={fileUrl}
-          imgUploadInput={imgUploadInput}
-          onImageChang={onImageChange}
+          onChangeImg={onChangeImg}
         />
         <div className={css.saveWrapper}>
           <p className={css.saveComment}>
@@ -121,7 +115,7 @@ const SettingPage = () => {
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
