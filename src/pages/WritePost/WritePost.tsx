@@ -84,7 +84,6 @@ const WritePost = ({ status, postId }: Props) => {
         },
         data: blogData,
       }).then((res) => {
-        console.log(res);
         navigate(`/post/${postId}`);
         window.location.reload();
       });
@@ -102,7 +101,7 @@ const WritePost = ({ status, postId }: Props) => {
   };
 
   return (
-    <>
+    <div className={css.FinalWrap}>
       <Header />
       <div className={css.totalWrap}>
         <div className={css.container}>
@@ -200,7 +199,7 @@ const WritePost = ({ status, postId }: Props) => {
           />
         </div>
       </div>
-    </>
+    </div>
   );
 };
 export default WritePost;
