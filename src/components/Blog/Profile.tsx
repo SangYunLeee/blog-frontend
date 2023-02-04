@@ -79,12 +79,12 @@ const Profile = ({ userNickname, userImg, userIntro }: any) => {
         {/* {grassData.map((data) => {
           return <Grass {...data} />;
         })} */}
-        <Grass
+        {/* <Grass
           grassCounts={grassCounts}
           grassDate={grassDate}
           grassLevel={grassLevel}
-        />
-        {/* <Grass2 /> */}
+        /> */}
+        <Grass2 />
       </div>
       <button className={css.writeBtn}>게시물 작성하기</button>
     </div>

@@ -28,12 +28,19 @@ const EditProfile = (
     <div>
       <div className={css.infoWrapper}>
         <div className={css.imgWrapper}>
-          <img
-            className={css.profileImg}
-            alt="ProfileImg"
-            src={profileImgUrls}
+          <label htmlFor="imgInput">
+            <img
+              className={css.profileImg}
+              alt="ProfileImg"
+              src={profileImgUrls}
+            />
+          </label>
+          <input
+            id="imgInput"
+            type="file"
+            accept="image/*"
+            onChange={onChangeImg}
           />
-          <input type="file" accept="image/*" onChange={onChangeImg} />
           <button className={css.editButton}>EDIT</button>
         </div>
         <div className={css.blogInfo}>

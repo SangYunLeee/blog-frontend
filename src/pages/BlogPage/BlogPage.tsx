@@ -44,12 +44,6 @@ const BlogPage = () => {
       .then((data) => setBlogData(data.data));
   }, []);
 
-  // useEffect(() => {
-  //   fetch(`${process.env.REACT_APP_API_URL}/posts?userId${params.id}`)
-  //     .then((res) => res.json())
-  //     .then((data) => setBlogData(data.data));
-  // }, []);
-
   const onSearch = blogData.filter((data) => {
     if (inputData == null) return data;
     else if (

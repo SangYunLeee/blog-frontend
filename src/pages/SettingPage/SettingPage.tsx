@@ -44,7 +44,7 @@ const SettingPage = () => {
       .then((data) => setUserInfo(data.data));
   }, []);
 
-  const onEdit = (id: any) => {
+  const onEdit = () => {
     fetch(`${process.env.REACT_APP_API_URL}/profile`, {
       method: 'PATCH',
       headers: requestHeaders,
@@ -58,8 +58,10 @@ const SettingPage = () => {
       .then((result) => {
         if (result.message === 'PROFILE_UPDATED') {
           alert('수정완료');
+        } else if (result.message === '이미 존재하는 닉네임 입니다.') {
+          alert('이미 존재하는 닉네임 입니다.');
         } else {
-          alert('수정 실패');
+          alert('수정 실패!');
         }
       });
   };
@@ -71,6 +73,7 @@ const SettingPage = () => {
       const uploadFile = e.target.files[0];
       const formData = new FormData();
       formData.append('profileImg', uploadFile);
+      alert('프로필 이미지 수정 완료!');
 
       await axios({
         method: 'patch',
@@ -81,12 +84,13 @@ const SettingPage = () => {
           authorization: localStorage.getItem('token'),
         },
       });
+    } else {
+      return alert('수정 실패!');
     }
   };
 
-  // console.log(fileImage);
   return (
-    <>
+    <div className={css.setting}>
       <Header />
       <div className={css.settingContainer}>
         <EditProfile
@@ -111,7 +115,7 @@ const SettingPage = () => {
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
