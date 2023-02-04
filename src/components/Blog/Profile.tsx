@@ -11,7 +11,6 @@ export interface GrassData {
   level: number;
 }
 
-
 export interface FollowBtnType {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
@@ -22,7 +21,7 @@ export interface FollowBtnType {
 }
 
 const Profile = ({ userNickname, userImg, userIntro }: any) => {
- const [open, setOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
   const [selectFollowingBtn, setSelectFollowingBtn] = useState<boolean>(false);
   const [selectFollowerBtn, setSelectFollowerBtn] = useState<boolean>(false);
 
@@ -95,12 +94,12 @@ const Profile = ({ userNickname, userImg, userIntro }: any) => {
           <h2>{userNickname} 님</h2>
           <div className={css.follow}>
             <div className={css.follower} onClick={clickFollower}>
-             <p>팔로워</p>
-            <p>{follower.length}</p>
+              <p>팔로워</p>
+              <p>{follower.length}</p>
             </div>
             <div className={css.following} onClick={clickFollowing}>
               <p>팔로잉</p>
-            <p>{following.length}</p>
+              <p>{following.length}</p>
             </div>
             {open ? (
               <Follow
