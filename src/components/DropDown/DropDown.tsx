@@ -34,6 +34,8 @@ const DropDown = ({ setTopicIdData, setPagination }: TopicDataInterface) => {
       try {
         const response = await fetch(`${process.env.REACT_APP_API_URL}/topics`);
         const json = await response.json();
+        let topicList = json.data as TopicInterface[];
+        topicList.push({ content: '전체', id: 0 });
         setTopicData(json.data);
       } catch (error) {
         console.error('error');
