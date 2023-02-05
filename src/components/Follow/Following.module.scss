@@ -6,7 +6,9 @@
   cursor: pointer;
 
   .followerImg {
+    object-fit: cover;
     width: 45px;
+    height: 45px;
     border-radius: 100%;
   }
 
