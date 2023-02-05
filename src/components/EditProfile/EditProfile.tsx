@@ -49,7 +49,7 @@ const EditProfile = (
             <input
               className={css.infoContent}
               placeholder={nickNames}
-              value={nicknameData}
+              defaultValue={nicknameData}
               onChange={onChangeNickName}
             />
           </div>
@@ -58,7 +58,7 @@ const EditProfile = (
             <input
               className={css.infoContent}
               placeholder={profileIntros}
-              value={profileIntroData}
+              defaultValue={profileIntroData}
               onChange={onChangeProfileIntro}
             />
           </div>
@@ -67,7 +67,7 @@ const EditProfile = (
             <input
               className={css.infoContent}
               placeholder={blogTitles}
-              value={blogTitleData}
+              defaultValue={blogTitleData}
               onChange={onChangeBlogTitle}
             />
           </div>

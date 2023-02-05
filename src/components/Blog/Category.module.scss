@@ -1,5 +1,6 @@
 .categoryContainer {
   margin-top: 50%;
+  height: 100vh;
   .inputWrapper {
     display: flex;
     margin: 20% auto;
@@ -20,18 +21,68 @@
   .categoryWrapper {
     margin: 20px auto;
     .title {
-      margin: 5% 25%;
+      margin: 5% 20%;
       font-size: 30px;
     }
     ul {
+      display: flex;
+      justify-content: space-between;
       margin-left: 25%;
       line-height: 2;
       li {
         border-left: 2px solid #e6e8ea;
         margin-left: 10px;
         padding-left: 20px;
-        font-size: 15px;
+        font-size: 16px;
         cursor: pointer;
+      }
+      span {
+        margin-right: 20px;
+      }
+    }
+    .editButton {
+      width: 45px;
+      height: 22px;
+      border-radius: 30px;
+      color: white;
+      background-color: #b6c4f5;
+      font-size: 11px;
+      text-align: center;
+      margin-left: 75%;
+      margin-bottom: 5%;
+      cursor: pointer;
+      &:hover {
+        background-color: #8da3f0;
+      }
+    }
+    .buttons {
+      color: #bcbdc0;
+      cursor: pointer;
+      span {
+        &:hover {
+          color: #8da3f0;
+        }
+      }
+    }
+    .categoryNameInput {
+      width: 130px;
+    }
+  }
+  .categoryAddWrapper {
+    margin-left: 25%;
+    margin-top: 5%;
+    input {
+      height: 30px;
+      background-color: #e8eff3;
+    }
+    input::placeholder {
+      color: #bcbdc0;
+    }
+    button {
+      color: #bcbdc0;
+      cursor: pointer;
+      &:hover {
+        color: #8da3f0;
       }
     }
   }

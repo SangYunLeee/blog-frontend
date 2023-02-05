@@ -7,6 +7,7 @@ export interface Props {
   setInputData: React.Dispatch<React.SetStateAction<string>>;
   onSearch: BlogData[];
   blogData: any;
+  userId: string;
 }
 interface CaategoryData {
   id: number;
@@ -14,6 +15,9 @@ interface CaategoryData {
 }
 const Category: React.FC<Props> = (props) => {
   const [categoryData, setCategoryData] = useState<CaategoryData[]>([]);
+  const [categoryName, setCategoryName] = useState<string>();
+  const [editCategoty, setEditCategory] = useState<boolean>(false);
+  const [userId, setUserId] = useState<string>();
   const params = useParams();
   const requestHeaders: HeadersInit = new Headers();
   const token = localStorage.getItem('token');
@@ -30,25 +34,71 @@ const Category: React.FC<Props> = (props) => {
       .then((data) => setCategoryData(data.data));
   }, []);
 
-  const onEditCategory = () => {
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_API_URL}/users`, {
+      headers: requestHeaders,
+    })
+      .then((res) => res.json())
+      .then((data) => setUserId(data.data.id));
+  }, []);
+
+  const onAddCategory = () => {
     fetch(`${process.env.REACT_APP_API_URL}/categories`, {
       method: 'POST',
       headers: requestHeaders,
-      body: JSON.stringify({}),
+      body: JSON.stringify({
+        categoryName: categoryName,
+      }),
     })
       .then((res) => res.json())
       .then((result) => {
         if (result.message === 'CATEGORY_CREATED') {
-          alert('추가 완료!');
+          alert('카테고리 추가!');
+          window.location.reload();
         } else if (result.message === 'ALREADY_EXIST_CATEGORY_NAME') {
-          alert('이미 존재하는 카테고리 입니다.');
+          alert('동일한 이름의 카테고리가 있습니다!');
         } else {
-          alert('수정 실패!');
+          alert('카테고리 추가 실패!');
         }
       });
   };
 
-  console.log(categoryData);
+  const onDeleteCategory = (id: number) => {
+    fetch(`${process.env.REACT_APP_API_URL}/categories/${id}`, {
+      method: 'DELETE',
+      headers: requestHeaders,
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.message === 'CATEGORY_DELETED') {
+          alert('카테고리 삭제 완료!');
+          window.location.reload();
+        } else {
+          alert('카테고리 삭제 실패!');
+        }
+      });
+  };
+
+  const onEditCategory = (id: number) => {
+    setEditCategory(false);
+    fetch(`${process.env.REACT_APP_API_URL}/categories/${id}`, {
+      method: 'PATCH',
+      headers: requestHeaders,
+      body: JSON.stringify({
+        categoryName: categoryName,
+      }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.message === 'CATEGORY_UPDATED') {
+          alert('카테고리 수정 완료!');
+          window.location.reload();
+        } else {
+          alert('카테고리 수정 실패!');
+        }
+      });
+  };
+
   return (
     <div className={css.categoryContainer}>
       <div className={css.inputWrapper}>
@@ -68,15 +118,47 @@ const Category: React.FC<Props> = (props) => {
         </button>
       </div>
       <div className={css.categoryWrapper}>
-        <div className={css.title}>카테고리</div>
-        {/* <button>변경</button> */}
+        <div className={css.categoryWrapp}>
+          <div className={css.title}>카테고리</div>
+          {userId == props.userId ? (
+            <button
+              className={css.editButton}
+              onClick={() => setEditCategory(!editCategoty)}
+            >
+              EDIT
+            </button>
+          ) : null}
+        </div>
         {categoryData.map((data: any, idx) => {
           return (
             <ul key={idx}>
-              <li>{data.categoryName}</li>
+              {editCategoty === true ? (
+                <input
+                  className={css.categoryNameInput}
+                  placeholder={data.categoryName}
+                  onChange={(e) => setCategoryName(e.target.value)}
+                />
+              ) : (
+                <li>{data.categoryName}</li>
+              )}
+              {editCategoty === true && userId == props.userId ? (
+                <div className={css.buttons}>
+                  <span onClick={() => onEditCategory(data.id)}>수정</span>
+                  <span onClick={() => onDeleteCategory(data.id)}>삭제</span>
+                </div>
+              ) : null}
             </ul>
           );
         })}
+        {editCategoty === true && userId == props.userId ? (
+          <div className={css.categoryAddWrapper}>
+            <input
+              onChange={(e) => setCategoryName(e.target.value)}
+              placeholder="카테고리 추가"
+            />
+            <button onClick={onAddCategory}>추가</button>
+          </div>
+        ) : null}
       </div>
     </div>
   );

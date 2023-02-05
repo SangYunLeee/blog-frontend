@@ -52,10 +52,6 @@ function Grass({ grassCounts, grassDate, grassLevel }: any) {
     }
     return result;
   };
-
-  // console.log(grassCounts);
-  // console.log(grassDate[0]);
-  // console.log(grassLevel);
   return (
     <div className={css.grassContainer}>
       <div className={css.grassHeader}>

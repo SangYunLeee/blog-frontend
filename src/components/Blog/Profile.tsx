@@ -63,7 +63,7 @@ const Profile = ({ userNickname, userImg, userIntro, userId }: any) => {
     })
       .then((res) => res.json())
       .then((data) => setFollowing(data.data));
-  }, []);
+  }, [followingData]);
 
   useEffect(() => {
     fetch(
@@ -177,16 +177,7 @@ const Profile = ({ userNickname, userImg, userIntro, userId }: any) => {
         </div>
       </div>
       {userIntro === null && <div className={css.content}>{userIntro}</div>}
-
       <div className={css.grass}>
-        {/* {grassData.map((data) => {
-          return <Grass {...data} />;
-        })} */}
-        {/* <Grass
-          grassCounts={grassCounts}
-          grassDate={grassDate}
-          grassLevel={grassLevel}
-        /> */}
         <Grass2 />
         {currUserId !== Number(params.id) && (
           <button className={css.writeBtn} onClick={clickFollowBtn}>
