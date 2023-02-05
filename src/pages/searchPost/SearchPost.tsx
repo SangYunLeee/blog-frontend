@@ -230,7 +230,13 @@ const TotalPost = () => {
             {!searchTotal &&
               userData.map((user: userDataType) => {
                 return (
-                  <div key={user.id} className={css.user}>
+                  <div
+                    key={user.id}
+                    className={css.user}
+                    onClick={() =>
+                      (window.location.href = `http://localhost:3000/blog/${user.id}`)
+                    }
+                  >
                     <div
                       className={css.userImg}
                       style={{
