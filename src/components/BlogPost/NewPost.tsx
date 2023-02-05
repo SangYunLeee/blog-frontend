@@ -24,7 +24,7 @@ const NewPost = () => {
   const [buddyPostData, setBuddyPostData] = useState<boolean>(false);
   const [pagination, setPagination] = useState(1);
   //주제 아이디
-  const [topicIdData, setTopicIdData] = useState(1);
+  const [topicIdData, setTopicIdData] = useState(0);
 
   const token = localStorage.getItem('token');
 
@@ -59,42 +59,25 @@ const NewPost = () => {
   const [newPostData, setNewPostData] = useState<NewPostInterface[]>([]);
   useEffect(() => {
     const fetchData = async () => {
-      if (topicIdData !== 0) {
-        try {
-          const response = await fetch(
-            `${process.env.REACT_APP_API_URL}/posts?myFollowing=true&topicId=${topicIdData}`,
-            {
-              headers: requestHeaders,
-            }
-          );
-          const json = await response.json();
-          if (json.data.length === 0) {
-            setBuddyPostData(false);
-          } else {
-            setNewPostData(json.data);
-            setBuddyPostData(true);
+      const isSelected = topicIdData !== 0;
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_API_URL}/posts?myFollowing=true${
+            isSelected ? `&topicId=${topicIdData}` : ''
+          }`,
+          {
+            headers: requestHeaders,
           }
-        } catch (error) {
-          console.error('error');
+        );
+        const json = await response.json();
+        if (json.data.length === 0) {
+          setBuddyPostData(false);
+        } else {
+          setNewPostData(json.data);
+          setBuddyPostData(true);
         }
-      } else {
-        try {
-          const response = await fetch(
-            `${process.env.REACT_APP_API_URL}/posts?myFollowing=true`,
-            {
-              headers: requestHeaders,
-            }
-          );
-          const json = await response.json();
-          if (json.data.length === 0) {
-            setBuddyPostData(false);
-          } else {
-            setNewPostData(json.data);
-            setBuddyPostData(true);
-          }
-        } catch (error) {
-          console.error('error');
-        }
+      } catch (error) {
+        console.error('error');
       }
     };
     fetchData();

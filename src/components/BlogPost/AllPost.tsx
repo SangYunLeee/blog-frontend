@@ -45,34 +45,20 @@ const AllPost = () => {
   const [maxCountPage, setMaxCountPage] = useState<number>(1);
   useEffect(() => {
     const fetchData = async () => {
-      if (topicIdData !== 0) {
-        try {
-          const response = await fetch(
-            `${process.env.REACT_APP_API_URL}/posts?topicId=${topicIdData}&countPerPage=8&pageNumber=${pagination}`,
-            {
-              headers: requestHeaders,
-            }
-          );
-          const json = await response.json();
-          setMaxCountPage(json.maxPage);
-          setAllPostData(json.data);
-        } catch (error) {
-          console.error('error');
-        }
-      } else {
-        try {
-          const response = await fetch(
-            `${process.env.REACT_APP_API_URL}/posts?countPerPage=8&pageNumber=${pagination}`,
-            {
-              headers: requestHeaders,
-            }
-          );
-          const json = await response.json();
-          setMaxCountPage(json.maxPage);
-          setAllPostData(json.data);
-        } catch (error) {
-          console.error('error');
-        }
+      try {
+        const response = await fetch(
+          `${process.env.REACT_APP_API_URL}/posts?${
+            topicIdData !== 0 ? `topicId=${topicIdData}&` : ''
+          }countPerPage=8&pageNumber=${pagination}`,
+          {
+            headers: requestHeaders,
+          }
+        );
+        const json = await response.json();
+        setMaxCountPage(json.maxPage);
+        setAllPostData(json.data);
+      } catch (error) {
+        console.error('error');
       }
     };
     fetchData();
