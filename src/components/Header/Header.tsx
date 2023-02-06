@@ -76,7 +76,7 @@ const Header = () => {
           className={css.logo}
           onClick={() => (window.location.href = 'http://localhost:3000')}
         >
-          로고
+          <img src="./image/logo.png" alt="" />
         </div>
         <div className={css.headerRightArea}>
           <div className={css.searchbar}>
