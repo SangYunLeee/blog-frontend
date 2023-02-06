@@ -31,8 +31,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "npm run postinstall && react-scripts start",
-    "build": "react-scripts build",
+    "start": "npm i && npm run postinstall && react-scripts start",
+    "build": "npm i && npm run postinstall && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "postinstall": "node ./postinstall.js"

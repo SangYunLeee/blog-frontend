@@ -40,8 +40,6 @@ const TotalPost = () => {
   const [pageNumber, setPageNumber] = useState<number | null>(null);
   const [pagenation, setPagenation] = useState<boolean>(true);
 
-  const params = new URLSearchParams(window.location.search);
-
   const requestHeaders: HeadersInit = new Headers();
   requestHeaders.set('Content-Type', 'application/json');
 
@@ -55,7 +53,6 @@ const TotalPost = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        let page = 1;
         const pageArr = new Array(data.maxPage)
           .fill(null)
           .map((elem, idx) => (elem = idx + 1));
@@ -89,7 +86,6 @@ const TotalPost = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        let page = 1;
         const pageArr = new Array(data.maxPage)
           .fill(null)
           .map((elem, idx) => (elem = idx + 1));

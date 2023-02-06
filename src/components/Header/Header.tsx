@@ -74,7 +74,7 @@ const Header = () => {
       <div className={css.header}>
         <div
           className={css.logo}
-          onClick={() => (window.location.href = 'http://localhost:3000')}
+          onClick={() => (window.location.href = 'https://ttolog.netlify.app')}
         >
           <img
             src={process.env.REACT_APP_PUBLIC_URL + '/image/logo.png'}

@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { useParams } from 'react-router-dom';
-import Grass from '../../components/Blog/Grass/Grass';
 import Grass2 from './Grass/Grass2';
 import Follow from '../../components/Follow/Follow';
 import css from './Profile.module.scss';

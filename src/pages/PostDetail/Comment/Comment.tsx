@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import css from './Comment.module.scss';
 import { CommentProp } from '../PostDetail';
 import { UserInfo } from '../PostDetail';
