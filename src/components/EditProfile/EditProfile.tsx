@@ -1,5 +1,4 @@
 import React from 'react';
-import type { UserInfo } from '../../pages/SettingPage/SettingPage';
 import css from './EditProfile.module.scss';
 
 interface Props {

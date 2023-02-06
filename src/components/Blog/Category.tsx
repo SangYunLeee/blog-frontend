@@ -1,3 +1,5 @@
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { BlogData } from '../../pages/BlogPage/BlogPage';
@@ -9,14 +11,14 @@ export interface Props {
   blogData: any;
   userId: string;
 }
-interface CaategoryData {
+interface CategoryData {
   id: number;
   categoryName: string;
 }
 const Category: React.FC<Props> = (props) => {
-  const [categoryData, setCategoryData] = useState<CaategoryData[]>([]);
+  const [categoryData, setCategoryData] = useState<CategoryData[]>([]);
   const [categoryName, setCategoryName] = useState<string>();
-  const [editCategoty, setEditCategory] = useState<boolean>(false);
+  const [category, setEditCategory] = useState<boolean>(false);
   const [userId, setUserId] = useState<string>();
   const params = useParams();
   const requestHeaders: HeadersInit = new Headers();
@@ -118,12 +120,12 @@ const Category: React.FC<Props> = (props) => {
         </button>
       </div>
       <div className={css.categoryWrapper}>
-        <div className={css.categoryWrapp}>
+        <div className={css.categoryWrap}>
           <div className={css.title}>카테고리</div>
-          {userId == props.userId ? (
+          {userId === props.userId ? (
             <button
               className={css.editButton}
-              onClick={() => setEditCategory(!editCategoty)}
+              onClick={() => setEditCategory(!category)}
             >
               EDIT
             </button>
@@ -132,7 +134,7 @@ const Category: React.FC<Props> = (props) => {
         {categoryData.map((data: any, idx) => {
           return (
             <ul key={idx}>
-              {editCategoty === true ? (
+              {category === true ? (
                 <input
                   className={css.categoryNameInput}
                   placeholder={data.categoryName}
@@ -141,7 +143,7 @@ const Category: React.FC<Props> = (props) => {
               ) : (
                 <li>{data.categoryName}</li>
               )}
-              {editCategoty === true && userId == props.userId ? (
+              {category === true && userId === props.userId ? (
                 <div className={css.buttons}>
                   <span onClick={() => onEditCategory(data.id)}>수정</span>
                   <span onClick={() => onDeleteCategory(data.id)}>삭제</span>
@@ -150,7 +152,7 @@ const Category: React.FC<Props> = (props) => {
             </ul>
           );
         })}
-        {editCategoty === true && userId == props.userId ? (
+        {category === true && userId === props.userId ? (
           <div className={css.categoryAddWrapper}>
             <input
               onChange={(e) => setCategoryName(e.target.value)}
