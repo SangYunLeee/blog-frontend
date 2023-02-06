@@ -1,0 +1,134 @@
+@keyframes up-down {
+  from {
+    transform: translateY(60%);
+  }
+  to {
+    transform: translateY(65%);
+  }
+}
+
+@mixin btn {
+  cursor: pointer;
+  color: rgb(255, 255, 255);
+  background-color: #b6c4f5;
+  &:disabled {
+    cursor: default;
+    background-color: #e8eff3;
+    &:hover {
+      background-color: #e8eff3;
+    }
+  }
+  &:hover {
+    background-color: #8da3f0;
+  }
+}
+
+@mixin close {
+  margin-left: 0 !important;
+  position: relative;
+  width: 90%;
+  .closeIcon {
+    padding-top: 28px;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+  }
+}
+.container {
+  align-items: center;
+  width: 100%;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  position: fixed;
+  z-index: 9;
+}
+
+.backdrop {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.content {
+  width: 650px;
+  display: flex;
+  height: 550px;
+  flex-direction: row;
+  border: none;
+  box-shadow: 0 0 30px rgba(30, 30, 30, 0.185);
+  box-sizing: border-box;
+  background-color: white;
+  border-radius: 20px;
+  z-index: 10000;
+  .iconWrap {
+    @include close();
+  }
+  .image {
+    width: 44%;
+    background-color: #e8eff3;
+    height: 100%;
+    align-items: flex-start;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    .mainImage {
+      width: 100%;
+      animation: up-down 1.4s infinite ease-in-out alternate;
+    }
+    .slogan {
+      margin-top: 56%;
+      font-size: 19px;
+      font-weight: 300;
+      color: #666666;
+      text-align: center;
+    }
+  }
+  .title {
+    width: 52%;
+    margin-left: 5%;
+
+    .login {
+      font-size: 33px;
+      color: #7e7e7e;
+      margin: 30% 0% 13%;
+      font-weight: 300;
+    }
+    .inputBox {
+      margin-top: 20px;
+    }
+    .loginBtn {
+      width: 80%;
+      text-align: center;
+      padding: 4% 2%;
+      margin-top: 9%;
+      border-radius: 3px;
+      @include btn();
+    }
+
+    .horizonLine {
+      width: 85%;
+      border-top: solid 1px #e1e1e1;
+      margin-top: 9%;
+    }
+
+    .question {
+      color: #7e7e7e;
+      margin-top: 9%;
+      font-size: 13px;
+      display: inline-block;
+    }
+
+    .signUpBtn {
+      font-size: 13px;
+      margin-top: 9%;
+      color: #7e7e7e;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  }
+}

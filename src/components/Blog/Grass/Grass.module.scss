@@ -1,0 +1,27 @@
+.grassContainer {
+  width: 95%;
+  height: 100%;
+  padding: 10px;
+  .grassHeader {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    .grassYear {
+    }
+    .backButton {
+    }
+    .nextButton {
+    }
+  }
+  .calender {
+    width: 100%;
+    height: 70%;
+    margin-top: 5%;
+    .calenderContent {
+      .date {
+        background-color: #e6e8ea;
+        color: #e6e8ea;
+      }
+    }
+  }
+}

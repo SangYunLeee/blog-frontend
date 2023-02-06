@@ -1,0 +1,39 @@
+@media (max-width: 3000px) {
+  .swiper {
+    width: 70vw;
+  }
+}
+
+@media (max-width: 2000px) {
+  .swiper {
+    width: 80vw;
+  }
+}
+
+@media (max-width: 750px) {
+  .swiper {
+    width: 90vw;
+  }
+}
+
+.swiper {
+  .swiper-pagination {
+    position: absolute;
+  }
+
+  .swiper-pagination-bullet {
+    width: 70px;
+    height: 3px;
+    border-radius: 3px;
+    border: 1px solid #b6c4f5;
+    background: transparent;
+    opacity: 1;
+  }
+
+  .swiper-pagination-bullet-active {
+    width: 75px;
+    background: #b6c4f5;
+    transition: width 0.5s;
+    border-radius: 3px;
+  }
+}

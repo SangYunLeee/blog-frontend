@@ -1,0 +1,61 @@
+@import '../Login/Login.module.scss';
+@mixin btnSet {
+  font-size: 12px;
+  font-weight: 300;
+  position: absolute;
+  color: white;
+  border-radius: 4px;
+  padding: 5px;
+  right: 40px;
+  bottom: 10px;
+}
+.signUpWrap {
+  width: 334.48px;
+  height: 100%;
+  margin-left: 5%;
+  .title {
+    margin: 24% 0% 13%;
+    .signUp {
+      font-size: 33px;
+      color: #7e7e7e;
+      font-weight: 300;
+      margin-bottom: 10%;
+    }
+    .inputBox {
+      width: 334.48px;
+      margin-top: 24px;
+      .pwAlert {
+        font-size: 10px;
+        color: #fb6969;
+        margin-top: 5px;
+        font-weight: 300;
+      }
+    }
+
+    .inputWrap {
+      position: relative;
+
+      .checkBtn {
+        @include btnSet();
+        @include btn();
+      }
+      .success {
+        @include btnSet();
+        background-color: #7e7e7e;
+      }
+    }
+  }
+  .signUpBtn {
+    width: 80%;
+    text-align: center;
+    background-color: #c7cfb7;
+    padding: 4% 2%;
+    color: rgb(255, 255, 255);
+    border-radius: 3px;
+    @include btn();
+  }
+}
+
+.iconWrap {
+  @include close();
+}

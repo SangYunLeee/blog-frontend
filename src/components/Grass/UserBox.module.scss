@@ -1,0 +1,98 @@
+.userBoxWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  .userBoxContainer {
+    display: grid;
+    grid-template-rows: 50px 110px 50px;
+    justify-content: center;
+    width: 200px;
+    height: 220px;
+    border-radius: 20px;
+    background-color: #e8eff3;
+
+    .userInfo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 13px;
+      font-size: 16px;
+
+      .userImg {
+        display: flex;
+        align-items: center;
+        height: 30px;
+        border-radius: 100%;
+
+        .img {
+          width: 30px;
+          height: 30px;
+          object-fit: cover;
+          border-radius: 100%;
+          background-color: #fff;
+        }
+      }
+
+      .userName {
+        margin-left: 8px;
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      .settingBtn {
+        display: flex;
+        margin-left: 20px;
+        font-size: 15px;
+        cursor: pointer;
+      }
+    }
+
+    .dayBox {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 160px;
+      height: 100%;
+
+      .day {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+        width: 100%;
+        height: 90px;
+        border-radius: 20px;
+        font-size: 20px;
+
+        .dayNum {
+          margin-left: 5px;
+          font-size: 23px;
+          font-weight: bold;
+        }
+      }
+    }
+
+    .blogBtn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      button {
+        background-color: #b6c4f5;
+        color: white;
+        height: 30px;
+        width: 70px;
+        border-radius: 10px;
+        text-align: center;
+        font-size: 12px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #8da3f0;
+        }
+      }
+    }
+  }
+}

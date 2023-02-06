@@ -1,0 +1,46 @@
+.followerInfo {
+  display: grid;
+  grid-template-columns: 45px 1fr 0.5fr;
+  align-items: center;
+  padding: 10px 20px 12px 20px;
+  cursor: pointer;
+
+  .followerImg {
+    object-fit: cover;
+    width: 45px;
+    height: 45px;
+    border-radius: 100%;
+  }
+
+  .followerContent {
+    display: grid;
+    gap: 10px;
+    text-align: start;
+    padding-left: 20px;
+    font-size: 13px;
+
+    .nickname {
+      font-weight: bold;
+    }
+  }
+
+  .followBtn {
+    width: 70px;
+    height: 30px;
+    background-color: #b6c4f5;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .unFollowBtn {
+    width: 70px;
+    height: 30px;
+    background-color: #e6e8ea;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+  }
+}

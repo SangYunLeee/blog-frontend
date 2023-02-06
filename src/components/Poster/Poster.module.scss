@@ -1,0 +1,75 @@
+.poster {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 130px;
+  border-top: 1px rgb(222, 222, 222) solid;
+  cursor: pointer;
+  &:hover {
+    animation: postHover 0.2s ease forwards;
+
+    @keyframes postHover {
+      0% {
+        transform: scale(1);
+      }
+      100% {
+        transform: scale(1.005);
+      }
+    }
+  }
+
+  .userDataDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
+
+    .userImage {
+      width: 50px;
+      height: 50px;
+      margin: 6px 0;
+      border-radius: 50%;
+      background-color: rgb(232, 232, 232);
+      background-size: cover;
+    }
+    .userNickname {
+      font-size: 12px;
+    }
+  }
+
+  .postMainDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 570px;
+    height: 100%;
+    line-height: 1.4rem;
+
+    .currDate {
+      margin: 0 0 5px 5px;
+      font-size: 12px;
+      color: rgb(146, 146, 146);
+    }
+
+    .postTitle {
+      margin: 0 5px;
+      font-weight: 600;
+      font-size: 22px;
+    }
+
+    .content {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      line-height: 1.5rem;
+      overflow: hidden;
+      margin: 0 5px;
+    }
+  }
+
+  .thumbnailDiv {
+    width: 200px;
+    height: 100%;
+    border-radius: 5px;
+  }
+}

@@ -1,0 +1,40 @@
+.blogContainner {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: #e8eff3;
+
+  .blogWrapper {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    height: 100%;
+    padding: 10px;
+  }
+  .blogcontent {
+    width: 120vh;
+    background-color: white;
+    .blogHeader {
+      margin-top: 5%;
+      margin-left: 2%;
+      width: 100%;
+      .blogName {
+        margin-bottom: 5%;
+        font-size: 40px;
+      }
+      .titleWrapper {
+        display: flex;
+        justify-content: space-between;
+        .allContents {
+          width: 10%;
+          font-size: 30px;
+        }
+        .border {
+          width: 85%;
+          height: 0;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,107 @@
+@mixin btn {
+  width: 13px;
+  height: 13px;
+  position: absolute;
+  border-radius: 50px;
+  top: 15px;
+}
+.totalWrap {
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+  .top {
+    height: 40px;
+    background-color: #f6f6f6;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    position: relative;
+    .red {
+      @include btn;
+      background-color: #ff8f8f;
+      left: 20px;
+    }
+    .gray {
+      @include btn;
+      background-color: #d9d9d9;
+      left: 40px;
+    }
+    .green {
+      @include btn;
+      background-color: #a3d6a2;
+      left: 60px;
+    }
+  }
+  .tagArr {
+    background-color: #fafafa;
+    min-height: 200px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    padding: 5px 20px 20px 20px;
+    .inform {
+      color: #7c7c7c;
+      font-size: 11px;
+      text-align: right;
+      padding-bottom: 20px;
+    }
+  }
+  .eachTag {
+    background-color: #fafafa;
+    display: inline-block;
+    border-top: 1px solid #e6e8ea;
+    border-bottom: 1px solid #e6e8ea;
+    font-size: 17px;
+    padding: 8px;
+    color: #6c6b6b;
+    .hashtag {
+      margin-left: 8px;
+      font-size: 17px;
+      color: #6c6b6b;
+    }
+    ::placeholder {
+      color: #c0c0c0;
+    }
+  }
+  .tagArray {
+    box-sizing: border-box;
+    display: inline-block;
+    position: relative;
+    .makeTag {
+      display: inline-block;
+      margin: 10px;
+      color: #5c5c5c;
+      background-color: #dae3e9;
+      padding: 5px 10px;
+      border-radius: 10px;
+    }
+    .deleteBtn {
+      position: absolute;
+      display: inline-block;
+      background-color: #b6c4f5;
+      cursor: pointer;
+      border-radius: 50px;
+      padding: 1px;
+      width: 15px;
+      height: 15px;
+      text-align: center;
+      .deleteImg {
+        line-height: 15px;
+        padding-bottom: 1px;
+      }
+
+      right: 1px;
+    }
+  }
+  .submit {
+    cursor: pointer;
+    margin-top: 15px;
+    height: 40px;
+    font-size: 16px;
+    background-color: #b6c4f5;
+    color: #ffffff;
+    border-radius: 10px;
+    text-align: center;
+    &:hover {
+      background-color: #8da3f0;
+    }
+  }
+}

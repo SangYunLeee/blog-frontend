@@ -1,0 +1,26 @@
+@mixin nav {
+  border: 0px;
+  width: 33.2%;
+  height: 100%;
+  text-align: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: #fdfdfd;
+  color: #9c9c9c;
+  font-size: 15px;
+}
+.navWrap {
+  background-color: #e8eff3;
+  height: 40px;
+  .topic {
+    @include nav;
+    margin-right: 0.2%;
+  }
+  .category {
+    @include nav;
+    margin-right: 0.2%;
+  }
+  .secretType {
+    @include nav;
+  }
+}
