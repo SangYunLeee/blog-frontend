@@ -40,7 +40,7 @@ const Header = () => {
   };
   const searchingInputKeyword = (event: any) => {
     if (event.keyCode === 13) {
-      window.location.href = `https://ttolog.netlify.app//searchpost?searchKeyword=${event.target.value}`;
+      window.location.href = `https://ttolog.netlify.app/searchpost?searchKeyword=${event.target.value}`;
     }
   };
 
