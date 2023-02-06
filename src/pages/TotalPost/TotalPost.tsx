@@ -75,11 +75,17 @@ const TotalPost = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        const filterPost = data.data.filter(
-          (post: postDataType) =>
-            post.topic.topicName === event.target.innerText
-        );
-        setPostData(filterPost);
+        if (event.target.innerText !== '전체') {
+          const filterPost = data.data.filter(
+            (post: postDataType) =>
+              post.topic.topicName === event.target.innerText
+          );
+
+          setPostData(filterPost);
+        } else {
+          setPagenation(true);
+          setPostData(data.data);
+        }
       });
   };
 
@@ -106,6 +112,7 @@ const TotalPost = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        data.data.unshift({ id: 0, content: '전체' });
         setTagData(data.data);
       });
   }, []);
