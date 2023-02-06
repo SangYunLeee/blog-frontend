@@ -5,12 +5,14 @@
     min-width: 1200px;
     background-color: #e8eff3;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     .container {
       height: 100%;
       background-color: #e8eff3;
-      width: 65%;
-      margin-left: 10%;
+      width: 50%;
+      margin-left: auto;
+
+      margin-right: auto;
       .nav {
         background-color: #595959;
         margin-top: 7%;
@@ -18,6 +20,7 @@
       }
       .containerWrap {
         background-color: #ffffff;
+        padding-bottom: 2%;
       }
       .after {
         position: relative;
@@ -102,13 +105,14 @@
           height: 20px;
         }
       }
-    }
-    .tag {
-      width: 25%;
-      display: inline-block;
-      margin-left: 76%;
-      margin-top: 10%;
-      position: fixed;
+      .tag {
+        display: flex;
+        width: 25%;
+        display: inline-block;
+        margin-left: 76%;
+        margin-top: 10%;
+        position: fixed;
+      }
     }
   }
 }

@@ -49,11 +49,11 @@ const Tag = ({ change, handleWritePost, status, post }: Props) => {
 
   return (
     <div className={css.totalWrap}>
-      <div className={css.top}>
+      {/* <div className={css.top}>
         <p className={css.red} />
         <p className={css.gray} />
         <p className={css.green} />
-      </div>
+      </div> */}
       <div className={css.eachTag}>
         <label className={css.hashtag}># </label>
         <input
