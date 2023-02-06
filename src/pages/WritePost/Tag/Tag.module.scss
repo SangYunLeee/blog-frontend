@@ -8,7 +8,10 @@
 .totalWrap {
   display: flex;
   flex-direction: column;
-  width: 85%;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5%;
   .top {
     height: 40px;
     background-color: #f6f6f6;
@@ -32,8 +35,8 @@
     }
   }
   .tagArr {
-    background-color: #fafafa;
-    min-height: 200px;
+    background-color: #ffffff;
+    min-height: 100px;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
     padding: 5px 20px 20px 20px;
@@ -45,7 +48,7 @@
     }
   }
   .eachTag {
-    background-color: #fafafa;
+    background-color: #ffffff;
     display: inline-block;
     border-top: 1px solid #e6e8ea;
     border-bottom: 1px solid #e6e8ea;

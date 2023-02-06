@@ -19,10 +19,12 @@
       h2 {
         margin: 20px;
         font-size: 25px;
-        text-align: center;
+        margin-left: 25px;
       }
       .follow {
         display: flex;
+        width: 100%;
+        justify-content: space-around;
         margin-left: 20px;
         cursor: pointer;
 
@@ -30,6 +32,11 @@
         .follower {
           display: flex;
           margin-left: 5px;
+
+          .count {
+            margin-left: 5px;
+            color: #8da3f0;
+          }
         }
       }
     }

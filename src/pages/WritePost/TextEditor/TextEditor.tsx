@@ -26,7 +26,7 @@ const TextEditor = ({ setContent, content }: Props) => {
               OnChangeHandler(ed);
             });
           },
-          height: 980,
+          height: 480,
           menubar: false,
           plugins: [
             'advlist',

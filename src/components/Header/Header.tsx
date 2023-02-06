@@ -71,7 +71,10 @@ const Header = () => {
           className={css.logo}
           onClick={() => (window.location.href = 'https://ttolog.netlify.app/')}
         >
-          로고
+          <img
+            src={process.env.REACT_APP_PUBLIC_URL + '/image/logo.png'}
+            alt=""
+          />
         </div>
         <div className={css.headerRightArea}>
           <div className={css.searchbar}>

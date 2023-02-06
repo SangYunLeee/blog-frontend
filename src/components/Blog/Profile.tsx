@@ -157,11 +157,11 @@ const Profile = ({ userNickname, userImg, userIntro, userId }: any) => {
           <div className={css.follow}>
             <div className={css.follower} onClick={clickFollower}>
               <p>팔로워</p>
-              <p>{follower.length}</p>
+              <p className={css.count}>{follower.length}</p>
             </div>
             <div className={css.following} onClick={clickFollowing}>
               <p>팔로잉</p>
-              <p>{following.length}</p>
+              <p className={css.count}>{following.length}</p>
             </div>
             {open ? (
               <Follow

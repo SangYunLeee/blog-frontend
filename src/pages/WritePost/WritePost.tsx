@@ -30,14 +30,7 @@ const WritePost = ({ status, postId }: Props) => {
   const [content, setContent] = useState('');
   const [thumbImg, setThumbImg] = useState('');
   const [post, setPost] = useState<postDataType>();
-  const token = localStorage.getItem('token');
-  let headers: Record<string, string> = {
-    'Content-Type': 'application/json',
-  };
 
-  if (token) {
-    headers = { ...headers, authorization: token };
-  }
   const change = (name: string, value: string | File) => {
     setForm({ ...form, [name]: value });
   };
@@ -47,7 +40,6 @@ const WritePost = ({ status, postId }: Props) => {
     if (status) {
       fetch(`${process.env.REACT_APP_API_URL}/posts/${postId}`, {
         method: 'GET',
-        headers,
       })
         .then((res) => res.json())
         .then((res) => setPost(res.data));
@@ -154,7 +146,9 @@ const WritePost = ({ status, postId }: Props) => {
                       setThumbImg('');
                       change('thumbnail', '');
                     }}
-                    src="./image/tagDelete.png"
+                    src={
+                      process.env.REACT_APP_PUBLIC_URL + `/image/tagDelete.png`
+                    }
                     alt="close"
                   />
                 </>
