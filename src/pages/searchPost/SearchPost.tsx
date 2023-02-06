@@ -85,11 +85,17 @@ const TotalPost = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        const filterPost = data.data.filter(
-          (post: postDataType) =>
-            post.topic.topicName === event.target.innerText
-        );
-        setPostData(filterPost);
+        if (event.target.innerText !== '전체') {
+          const filterPost = data.data.filter(
+            (post: postDataType) =>
+              post.topic.topicName === event.target.innerText
+          );
+
+          setPostData(filterPost);
+        } else {
+          setPagenation(true);
+          setPostData(data.data);
+        }
       });
   };
 
@@ -127,7 +133,10 @@ const TotalPost = () => {
       headers: requestHeaders,
     })
       .then((res) => res.json())
-      .then((data) => setTagData(data.data));
+      .then((data) => {
+        data.data.unshift({ id: 0, content: '전체' });
+        setTagData(data.data);
+      });
 
     if (window.location.search) {
       setSearchKeyword(params.get('searchKeyword'));
@@ -156,11 +165,7 @@ const TotalPost = () => {
 
   useEffect(() => {
     if (token) {
-      requestHeaders.set(
-        //임시로 token에 현재값이 아니라 고정값을 저장
-        'Authorization',
-        token
-      );
+      requestHeaders.set('Authorization', token);
     }
 
     fetch(
@@ -241,7 +246,7 @@ const TotalPost = () => {
                     key={user.id}
                     className={css.user}
                     onClick={() =>
-                      (window.location.href = `https://ttolog.netlify.app//blog/${user.id}`)
+                      (window.location.href = `https://ttolog.netlify.app/blog/${user.id}`)
                     }
                   >
                     <div

@@ -14,12 +14,13 @@ const Poster = ({ post }: postProps) => {
   }월 ${date.getDate()}일`;
 
   const clickPost = (event: any) => {
-    if (
-      event.target.className ===
-      document.querySelector(`.${css.userImage}`)?.className
-    )
-      window.location.href = `https://ttolog.netlify.app/blog/${post.user.id}`;
-    else window.location.href = `https://ttolog.netlify.app/post/${post.id}`;
+    console.log(post.user.profileImgUrl);
+    // if (
+    //   event.target.className ===
+    //   document.querySelector(`.${css.userImage}`)?.className
+    // )
+    //   window.location.href = `https://ttolog.netlify.app/blog/${post.user.id}`;
+    // else window.location.href = `https://ttolog.netlify.app/post/${post.id}`;
   };
 
   return (
@@ -27,7 +28,7 @@ const Poster = ({ post }: postProps) => {
       <div className={css.userDataDiv}>
         <div
           className={css.userImage}
-          style={{ backgroundImage: `url(${post.user.profileImgUrl})` }}
+          style={{ backgroundImage: `url('${post.user.profileImgUrl}')` }}
         ></div>
         <div className={css.userNickname}>{post.user.nickname}</div>
       </div>
