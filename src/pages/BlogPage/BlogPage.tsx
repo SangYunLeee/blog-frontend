@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import Blog from '../../components/Blog/Blog';
 import Profile from '../../components/Blog/Profile';
