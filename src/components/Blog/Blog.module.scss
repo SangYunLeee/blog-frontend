@@ -25,6 +25,15 @@
     }
     .contentWrap {
       max-height: 100px;
+      .content {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+        width: 100%;
+        font-size: 14px;
+        line-height: 1.5rem;
+        overflow: hidden;
+      }
     }
     .contentImg {
       width: 200px;
