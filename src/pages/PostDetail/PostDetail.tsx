@@ -90,7 +90,7 @@ const PostDetail = () => {
       method: 'DELETE',
       headers,
     }).then(() => {
-      navigate('/blog');
+      navigate(`/blog/${user?.id}`);
     });
   };
 
