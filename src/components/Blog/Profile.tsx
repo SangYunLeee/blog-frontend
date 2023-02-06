@@ -181,7 +181,8 @@ const Profile = ({ userNickname, userImg, userIntro, userId }: any) => {
         <Grass2 />
         {currUserId !== Number(params.id) && (
           <button className={css.writeBtn} onClick={clickFollowBtn}>
-            {followingData.some((elem: any) => elem.id === Number(params.id))
+            {followingData &&
+            followingData.some((elem: any) => elem.id === Number(params.id))
               ? '언팔로우'
               : '팔로우'}
           </button>

@@ -44,17 +44,15 @@ const TotalPost = () => {
   const [maxPage, setMaxPage] = useState<number[]>([]);
   const [pageNumber, setPageNumber] = useState<number | null>(null);
   const [pagenation, setPagenation] = useState<boolean>(true);
+  const [currTag, setCurrTag] = useState<string | null>(null);
 
   const params = new URLSearchParams(window.location.search);
 
   const filterByTags = (event: any) => {
     setPagenation(false);
+    setCurrTag(event.target.innerText);
     if (token) {
-      requestHeaders.set(
-        //임시로 token에 현재값이 아니라 고정값을 저장
-        'Authorization',
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2NzE1OTA0Mjh9.zPRKdCzelW5A390QKjAvSMf6AkEvbCRFemGi5sO4KJ8'
-      );
+      requestHeaders.set('Authorization', token);
     }
     fetch(`${process.env.REACT_APP_API_URL}/posts?myFollowing=true`, {
       headers: requestHeaders,
@@ -65,7 +63,6 @@ const TotalPost = () => {
           (post: postDataType) =>
             post.topic.topicName === event.target.innerText
         );
-        console.log(data);
         setPostData(filterPost);
       });
   };
@@ -74,11 +71,7 @@ const TotalPost = () => {
     const page = event.target.innerText;
 
     if (token) {
-      requestHeaders.set(
-        //임시로 token에 현재값이 아니라 고정값을 저장
-        'Authorization',
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2NzE1OTA0Mjh9.zPRKdCzelW5A390QKjAvSMf6AkEvbCRFemGi5sO4KJ8'
-      );
+      requestHeaders.set('Authorization', token);
     }
     fetch(
       `${process.env.REACT_APP_API_URL}/posts?pageNumber=${page}&countPerPage=10&myFollowing=true`,
@@ -100,11 +93,7 @@ const TotalPost = () => {
 
   useEffect(() => {
     if (token) {
-      requestHeaders.set(
-        //임시로 token에 현재값이 아니라 고정값을 저장
-        'Authorization',
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2NzE1OTA0Mjh9.zPRKdCzelW5A390QKjAvSMf6AkEvbCRFemGi5sO4KJ8'
-      );
+      requestHeaders.set('Authorization', token);
     }
 
     fetch(
@@ -140,10 +129,18 @@ const TotalPost = () => {
           <div className={css.tagList}>
             {tagData.map((tag: { id: number; content: string }) => {
               return (
-                <div className={css.tagDiv} key={tag.id}>
-                  <div className={css.tagContent} onClick={filterByTags}>
-                    {tag.content}
-                  </div>
+                <div
+                  className={css.tagDiv}
+                  key={tag.id}
+                  onClick={filterByTags}
+                  style={{
+                    backgroundColor:
+                      currTag === tag.content
+                        ? '#b6c4f5'
+                        : 'rgb(234, 234, 234)',
+                  }}
+                >
+                  <div className={css.tagContent}>{tag.content}</div>
                 </div>
               );
             })}

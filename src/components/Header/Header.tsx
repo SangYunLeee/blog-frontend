@@ -21,7 +21,7 @@ const Header = () => {
   );
   const [userInfo, setUserInfo] = useState<userInfo | null>(null);
   const [userId, setUserId] = useState<userInfo | null>(null);
-  const searchInput = useRef<HTMLInputElement>(null);
+  const searchInput = useRef<HTMLInputElement | null>(null);
   const loginBtn = useRef<HTMLButtonElement>(null);
 
   const requestHeaders: HeadersInit = new Headers();
@@ -34,19 +34,14 @@ const Header = () => {
   const clickUserMenu = () => {
     setCurrMenuState(!currMenuState);
   };
-  const openSearchbar = () => {
-    setCurrInputFocus(!currInputFocus);
-  };
   const logout = () => {
     localStorage.clear();
-    window.location.reload();
+    window.location.href = `https://ttolog.netlify.app/`;
   };
   const searchingInputKeyword = (event: any) => {
     if (event.keyCode === 13) {
-      window.location.href = `http://localhost:3000/searchpost?searchKeyword=${event.target.value}`;
+      window.location.href = `https://ttolog.netlify.app//searchpost?searchKeyword=${event.target.value}`;
     }
-
-    // window.location.href = `${process.env.REACT_APP_API_URL}/posts?search=${event.target.value}`;
   };
 
   useEffect(() => {
@@ -74,7 +69,7 @@ const Header = () => {
       <div className={css.header}>
         <div
           className={css.logo}
-          onClick={() => (window.location.href = 'http://localhost:3000')}
+          onClick={() => (window.location.href = 'https://ttolog.netlify.app/')}
         >
           로고
         </div>
@@ -82,11 +77,16 @@ const Header = () => {
           <div className={css.searchbar}>
             <input
               className={currInputFocus ? css.inputFocus : css.inputBlur}
+              onFocus={() => setCurrInputFocus(!currInputFocus)}
+              onBlur={(e) => {
+                setCurrInputFocus(!currInputFocus);
+                e.target.value = '';
+              }}
               ref={searchInput}
               onKeyDown={searchingInputKeyword}
             />
             <div className={css.searchIconDiv}>
-              <div className={css.searchIcon} onClick={openSearchbar} />
+              <div className={css.searchIcon} />
             </div>
           </div>
           <div className={css.writePostBtnDiv}>

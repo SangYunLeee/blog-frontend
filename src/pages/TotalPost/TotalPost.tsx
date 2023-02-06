@@ -35,6 +35,7 @@ export interface postDataType {
 const TotalPost = () => {
   const [postData, setPostData] = useState<postDataType[]>([]);
   const [tagData, setTagData] = useState([]);
+  const [currTag, setCurrTag] = useState<string | null>(null);
 
   const [maxPage, setMaxPage] = useState<number[]>([]);
   const [pageNumber, setPageNumber] = useState<number | null>(null);
@@ -67,6 +68,8 @@ const TotalPost = () => {
 
   const filterByTags = (event: any) => {
     setPagenation(false);
+    console.log(event.target.innerText);
+    setCurrTag(event.target.innerText);
     fetch(`${process.env.REACT_APP_API_URL}/posts`, {
       headers: requestHeaders,
     })
@@ -116,10 +119,18 @@ const TotalPost = () => {
           <div className={css.tagList}>
             {tagData.map((tag: { id: number; content: string }) => {
               return (
-                <div className={css.tagDiv} key={tag.id}>
-                  <div className={css.tagContent} onClick={filterByTags}>
-                    {tag.content}
-                  </div>
+                <div
+                  className={css.tagDiv}
+                  key={tag.id}
+                  onClick={filterByTags}
+                  style={{
+                    backgroundColor:
+                      currTag === tag.content
+                        ? '#b6c4f5'
+                        : 'rgb(234, 234, 234)',
+                  }}
+                >
+                  <div className={css.tagContent}>{tag.content}</div>
                 </div>
               );
             })}

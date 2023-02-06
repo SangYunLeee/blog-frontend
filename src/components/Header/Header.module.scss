@@ -23,7 +23,7 @@
       position: relative;
       margin-right: 10px;
       .inputFocus {
-        width: 200px;
+        width: 150px;
         height: 30px;
         border-radius: 5px;
         background-color: rgb(242, 242, 242);
@@ -31,7 +31,7 @@
         animation: inputFocus 0.5s ease forwards;
         @keyframes inputFocus {
           0% {
-            transform: scaleX(0.2);
+            transform: scaleX(0.5);
             transform-origin: 100% 100%;
             opacity: 0;
           }
@@ -44,7 +44,7 @@
       }
 
       .inputBlur {
-        width: 200px;
+        width: 150px;
         height: 30px;
         border-radius: 30px;
         background-color: rgb(242, 242, 242);
@@ -57,9 +57,9 @@
             opacity: 1;
           }
           100% {
-            transform: scaleX(0.15);
+            transform: scaleX(0.5);
             transform-origin: 100% 100%;
-            opacity: 0;
+            opacity: 0.7;
           }
         }
       }
@@ -71,17 +71,16 @@
         position: absolute;
         top: 2px;
         right: 0;
-        width: 60px;
         height: 25px;
-        background-color: rgb(242, 242, 242);
+        // background-color: rgb(242, 242, 242);
         border-radius: 50px;
-        cursor: pointer;
 
         .searchIcon {
           background-image: url('../../..//public/image/header-search.png');
           background-size: cover;
           width: 20px;
           height: 20px;
+          margin-right: 10px;
         }
       }
     }

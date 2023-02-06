@@ -44,6 +44,8 @@ const TotalPost = () => {
   const [userData, setUserData] = useState([]);
   const [postData, setPostData] = useState<postDataType[]>([]);
   const [tagData, setTagData] = useState([]);
+  const [tagColor, setTagColor] = useState<string | null>('rgb(234, 234, 234)');
+  const [currTag, setCurrTag] = useState<string | null>(null);
   const [token, setToken] = useState<null | string>(
     localStorage.getItem('token')
   );
@@ -71,6 +73,7 @@ const TotalPost = () => {
   const params = new URLSearchParams(window.location.search);
   const filterByTags = (event: any) => {
     setPagenation(false);
+    setCurrTag(event.target.innerText);
 
     fetch(
       `${process.env.REACT_APP_API_URL}/posts?search=${params.get(
@@ -117,11 +120,7 @@ const TotalPost = () => {
 
   useEffect(() => {
     if (token) {
-      requestHeaders.set(
-        //임시로 token에 현재값이 아니라 고정값을 저장
-        'Authorization',
-        token
-      );
+      requestHeaders.set('Authorization', token);
     }
 
     fetch(`${process.env.REACT_APP_API_URL}/topics`, {
@@ -187,10 +186,18 @@ const TotalPost = () => {
           <div className={css.tagList}>
             {tagData.map((tag: { id: number; content: string }) => {
               return (
-                <div className={css.tagDiv} key={tag.id}>
-                  <div className={css.tagContent} onClick={filterByTags}>
-                    {tag.content}
-                  </div>
+                <div
+                  className={css.tagDiv}
+                  key={tag.id}
+                  onClick={filterByTags}
+                  style={{
+                    backgroundColor:
+                      currTag === tag.content
+                        ? '#b6c4f5'
+                        : 'rgb(234, 234, 234)',
+                  }}
+                >
+                  <div className={css.tagContent}>{tag.content}</div>
                 </div>
               );
             })}
@@ -234,7 +241,7 @@ const TotalPost = () => {
                     key={user.id}
                     className={css.user}
                     onClick={() =>
-                      (window.location.href = `http://localhost:3000/blog/${user.id}`)
+                      (window.location.href = `https://ttolog.netlify.app//blog/${user.id}`)
                     }
                   >
                     <div
