@@ -15,7 +15,6 @@ const Blog = (
   const postingDate = `${date.getFullYear()}년 ${
     date.getMonth() + 1
   }월 ${date.getDate()}일`;
-
   return (
     <div className={css.blogContainner} onClick={() => navigate(`/post/${id}`)}>
       <section className={css.contents}>
@@ -25,12 +24,16 @@ const Blog = (
             <h3 className={css.contentTitle}>{title}</h3>
             {reply && <p className={css.reply}>({reply})</p>}
           </div>
-          <p
-            className={css.content}
-            dangerouslySetInnerHTML={{ __html: content }}
-          />
+          <div className={css.contentWrap}>
+            <p
+              className={css.content}
+              dangerouslySetInnerHTML={{ __html: content }}
+            />
+          </div>
         </div>
-        <img className={css.contentImg} src={thumbnailImgUrl} alt="BlogImg" />
+        {thumbnailImgUrl !== null && (
+          <img className={css.contentImg} src={thumbnailImgUrl} alt="BlogImg" />
+        )}
       </section>
     </div>
   );

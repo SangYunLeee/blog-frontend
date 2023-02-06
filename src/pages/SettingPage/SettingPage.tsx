@@ -16,6 +16,7 @@ const SettingPage = () => {
   const [nicknameData, setNicknameData] = useState<string>('');
   const [blogTitleData, setBlogTitleData] = useState<string>('');
   const [profileIntroData, setProfileIntroData] = useState<string>('');
+  const [profileImg, setProfileImg] = useState<FileList | undefined>();
   const blogTitles = userInfo?.profile.blogTitle;
   const profileIntros = userInfo?.profile.profileIntro;
   const nickNames = userInfo?.nickname;
@@ -44,49 +45,35 @@ const SettingPage = () => {
       .then((data) => setUserInfo(data.data));
   }, []);
 
-  const onEdit = () => {
-    fetch(`${process.env.REACT_APP_API_URL}/profile`, {
-      method: 'PATCH',
-      headers: requestHeaders,
-      body: JSON.stringify({
-        nickname: nicknameData,
-        blogTitle: blogTitleData,
-        profileIntro: profileIntroData,
-      }),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        if (result.message === 'PROFILE_UPDATED') {
-          alert('수정완료');
-        } else if (result.message === '이미 존재하는 닉네임 입니다.') {
-          alert('이미 존재하는 닉네임 입니다.');
-        } else {
-          alert('수정 실패!');
-        }
-      });
+  const onChangeImg = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const fileList = e.target.files;
+    if (fileList !== null) {
+      setProfileImg(fileList);
+    }
   };
 
-  const onChangeImg = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const submitProfile = async (e: any) => {
     e.preventDefault();
+    const formData = new FormData();
+    // @ts-ignore
+    Array.from(profileImg).forEach((el) => {
+      formData.append('profileImg', el);
+    });
+    formData.append('nickname', nicknameData);
+    formData.append('blogTitle', blogTitleData);
+    formData.append('profileIntro', profileIntroData);
+    alert('프로필 수정 완료!');
 
-    if (e.target.files) {
-      const uploadFile = e.target.files[0];
-      const formData = new FormData();
-      formData.append('profileImg', uploadFile);
-      alert('프로필 이미지 수정 완료!');
-
-      await axios({
-        method: 'patch',
-        url: `${process.env.REACT_APP_API_URL}/profile`,
-        data: formData,
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          authorization: localStorage.getItem('token'),
-        },
-      });
-    } else {
-      return alert('수정 실패!');
-    }
+    await axios({
+      method: 'patch',
+      url: `${process.env.REACT_APP_API_URL}/profile`,
+      data: formData,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        authorization: localStorage.getItem('token'),
+      },
+    });
+    window.location.reload();
   };
 
   return (
@@ -106,14 +93,16 @@ const SettingPage = () => {
           profileIntroData={profileIntroData}
           onChangeImg={onChangeImg}
         />
-        <div className={css.saveWrapper}>
-          <p className={css.saveComment}>
-            조심하세요 변경사항이 저장되지 않았어요!
-          </p>
-          <button className={css.saveButton} onClick={onEdit}>
-            변경사항 저장하기
-          </button>
-        </div>
+        {nicknameData || blogTitleData || profileIntroData ? (
+          <div className={css.saveWrapper}>
+            <p className={css.saveComment}>
+              조심하세요 변경사항이 저장되지 않았어요!
+            </p>
+            <button className={css.saveButton} onClick={submitProfile}>
+              변경사항 저장하기
+            </button>
+          </div>
+        ) : null}
       </div>
     </div>
   );

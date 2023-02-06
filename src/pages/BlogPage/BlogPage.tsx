@@ -54,7 +54,6 @@ const BlogPage = () => {
       return data;
     }
   });
-
   return (
     <>
       <Header />
@@ -71,6 +70,7 @@ const BlogPage = () => {
             setInputData={setInputData}
             onSearch={onSearch}
             blogData={blogData}
+            userId={userId}
           />
         </div>
         <div className={css.blogcontent}>
