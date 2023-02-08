@@ -183,7 +183,7 @@ const TotalPost = () => {
   }, [searchTotal]);
 
   return (
-    <>
+    <div className={css.main}>
       <Header />
       <div className={css.totalPost}>
         <div className={css.category}>검색 결과:{searchKeyword}</div>
@@ -283,7 +283,7 @@ const TotalPost = () => {
       </div>
 
       <Footer />
-    </>
+    </div>
   );
 };
 
