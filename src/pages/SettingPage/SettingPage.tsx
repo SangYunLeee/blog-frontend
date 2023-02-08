@@ -16,7 +16,7 @@ const SettingPage = () => {
   const [nicknameData, setNicknameData] = useState<string>('');
   const [blogTitleData, setBlogTitleData] = useState<string>('');
   const [profileIntroData, setProfileIntroData] = useState<string>('');
-  const [profileImg, setProfileImg] = useState<FileList | undefined>();
+  const [profileImg, setProfileImg] = useState<File | undefined>();
   const blogTitles = userInfo?.profile.blogTitle;
   const profileIntros = userInfo?.profile.profileIntro;
   const nickNames = userInfo?.nickname;
@@ -48,7 +48,7 @@ const SettingPage = () => {
   const onChangeImg = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const fileList = e.target.files;
     if (fileList !== null) {
-      setProfileImg(fileList);
+      setProfileImg(fileList[0]);
     }
   };
 
@@ -56,9 +56,9 @@ const SettingPage = () => {
     e.preventDefault();
     const formData = new FormData();
     // @ts-ignore
-    Array.from(profileImg).forEach((el) => {
-      formData.append('profileImg', el);
-    });
+    if (profileImg) {
+      formData.append('profileImg', profileImg);
+    }
     formData.append('nickname', nicknameData);
     formData.append('blogTitle', blogTitleData);
     formData.append('profileIntro', profileIntroData);
