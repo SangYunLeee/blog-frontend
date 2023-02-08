@@ -130,7 +130,7 @@ const TotalPost = () => {
   }, []);
 
   return (
-    <>
+    <div className={css.main}>
       <Header />
       <div className={css.totalPost}>
         <div className={css.category}>이웃 전체 글</div>
@@ -184,7 +184,7 @@ const TotalPost = () => {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 
