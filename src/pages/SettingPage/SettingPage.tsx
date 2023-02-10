@@ -11,59 +11,75 @@ export interface UserInfo {
   profile: { blogTitle: string; profileIntro: string; profileImgUrl: string };
   startDate: string;
 }
+
+export interface NewUserInfo {
+  [key: string]: any;
+  nickname: string;
+  profileIntro: string;
+  blogTitle: string;
+  profileImg: File;
+  profileImgUrl: string;
+}
+
 const SettingPage = () => {
-  const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
-  const [nicknameData, setNicknameData] = useState<string>('');
-  const [blogTitleData, setBlogTitleData] = useState<string>('');
-  const [profileIntroData, setProfileIntroData] = useState<string>('');
-  const [profileImg, setProfileImg] = useState<File | undefined>();
-  const blogTitles = userInfo?.profile.blogTitle;
-  const profileIntros = userInfo?.profile.profileIntro;
-  const nickNames = userInfo?.nickname;
-  const profileImgUrls = userInfo?.profile.profileImgUrl;
+  const [userInfo, setUserInfo] = useState<Partial<UserInfo>>();
+  const [newUserInfo, setNewUserInfo] = useState<Partial<NewUserInfo>>({});
   const requestHeaders: HeadersInit = new Headers();
   const token = localStorage.getItem('token');
+
+  // input 값이 변결될 때 호출함
+  const handleUserInfoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let tempUserInfo;
+    if (e.target.name === 'profileImg') {
+      const value = e.target.files![0];
+      const objectUrl = URL.createObjectURL(value);
+      tempUserInfo = {
+        ...newUserInfo,
+        [e.target.name]: value,
+        profileImgUrl: objectUrl,
+      };
+    } else {
+      tempUserInfo = {
+        ...newUserInfo,
+        [e.target.name]: e.target.value,
+      };
+    }
+    setNewUserInfo(tempUserInfo);
+  };
+
   requestHeaders.set('Content-Type', 'application/json');
   if (token) {
     requestHeaders.set('Authorization', token);
   }
-  const onChangeNickName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNicknameData(e.target.value);
-  };
-  const onChangeBlogTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setBlogTitleData(e.target.value);
-  };
-  const onChangeProfileIntro = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setProfileIntroData(e.target.value);
-  };
 
+  // 유저 초기값 설정
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/users`, {
       headers: requestHeaders,
     })
       .then((res) => res.json())
-      .then((data) => setUserInfo(data.data));
+      .then((data) => {
+        setUserInfo(data.data);
+      });
   }, []);
 
-  const onChangeImg = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const fileList = e.target.files;
-    if (fileList !== null) {
-      setProfileImg(fileList[0]);
-    }
-  };
+  // GC 메모리 해제
+  useEffect(() => {
+    return () => {
+      URL.revokeObjectURL(newUserInfo.profileImgUrl || '');
+    };
+  }, [newUserInfo.profileImgUrl]);
 
   const submitProfile = async (e: any) => {
     e.preventDefault();
     const formData = new FormData();
-    // @ts-ignore
-    if (profileImg) {
-      formData.append('profileImg', profileImg);
+    for (const key in newUserInfo) {
+      if (newUserInfo[key]) {
+        formData.append(key, newUserInfo[key]);
+      }
     }
-    formData.append('nickname', nicknameData);
-    formData.append('blogTitle', blogTitleData);
-    formData.append('profileIntro', profileIntroData);
-    alert('프로필 수정 완료!');
 
+    // 변경 요청
     await axios({
       method: 'patch',
       url: `${process.env.REACT_APP_API_URL}/profile`,
@@ -72,8 +88,27 @@ const SettingPage = () => {
         'Content-Type': 'multipart/form-data',
         authorization: localStorage.getItem('token'),
       },
+    })
+      .then(() => alert('프로필 수정 완료!'))
+      .catch(() => alert('프로필 변경 실패!'));
+
+    // 변경 사항 프론트에 반영
+    await fetch(`${process.env.REACT_APP_API_URL}/users`, {
+      headers: requestHeaders,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setUserInfo(data.data);
+      });
+
+    // input 값 리셋
+    setNewUserInfo({
+      nickname: '',
+      profileIntro: '',
+      blogTitle: '',
+      profileImgUrl: '',
+      profileImg: undefined,
     });
-    window.location.reload();
   };
 
   return (
@@ -81,19 +116,11 @@ const SettingPage = () => {
       <Header />
       <div className={css.settingContainer}>
         <EditProfile
-          blogTitles={blogTitles}
-          profileIntros={profileIntros}
-          nickNames={nickNames}
-          profileImgUrls={profileImgUrls}
-          onChangeNickName={onChangeNickName}
-          onChangeBlogTitle={onChangeBlogTitle}
-          onChangeProfileIntro={onChangeProfileIntro}
-          nicknameData={nicknameData}
-          blogTitleData={blogTitleData}
-          profileIntroData={profileIntroData}
-          onChangeImg={onChangeImg}
+          handleUserInfoChange={handleUserInfoChange}
+          userInfo={userInfo}
+          newUserInfo={newUserInfo}
         />
-        {nicknameData || blogTitleData || profileIntroData ? (
+        {!isObjectEmpty(newUserInfo) ? (
           <div className={css.saveWrapper}>
             <p className={css.saveComment}>
               조심하세요 변경사항이 저장되지 않았어요!
@@ -107,5 +134,14 @@ const SettingPage = () => {
     </div>
   );
 };
+
+function isObjectEmpty(obj: { [key: string]: any }): boolean {
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key) && obj[key]) {
+      return false;
+    }
+  }
+  return true;
+}
 
 export default SettingPage;
