@@ -4,7 +4,7 @@ import Blog from '../../components/Blog/Blog';
 import Profile from '../../components/Blog/Profile';
 import Category from '../../components/Blog/Category';
 import Header from '../../components/Header/Header';
-import type { UserInfo } from '../../pages/SettingPage/SettingPage';
+import type { UserInfo } from '../../components/EditProfile/UserInfoType';
 import css from './BlogPage.module.scss';
 import { useParams } from 'react-router-dom';
 export interface BlogData {
