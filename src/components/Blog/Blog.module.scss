@@ -4,9 +4,12 @@
   .contents {
     display: flex;
     justify-content: space-between;
-    margin: 3% 2% 0 4%;
-    padding-bottom: 20px;
+    padding: 25px;
     border-bottom: 1px solid #e6e8ea;
+
+    &:hover {
+      background-color: #f8f8f8;
+    }
     .contentWrapper {
       flex-direction: column;
       .contentTitle {
