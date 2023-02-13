@@ -3,7 +3,7 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  background-color: #e8eff3;
+  background-color: #f5f5f5;
 
   .blogWrapper {
     display: flex;
@@ -26,9 +26,11 @@
       .titleWrapper {
         display: flex;
         justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
         .allContents {
-          width: 10%;
           font-size: 30px;
+          margin-right: 5px;
         }
         .border {
           width: 85%;
