@@ -67,10 +67,7 @@ const Header = () => {
     <>
       <Login open={open} setOpen={setOpen} />
       <div className={css.header}>
-        <div
-          className={css.logo}
-          onClick={() => (window.location.href = 'https://ttolog.netlify.app/')}
-        >
+        <div className={css.logo} onClick={() => navigate('/')}>
           <img
             src={process.env.REACT_APP_PUBLIC_URL + '/image/logo.png'}
             alt=""
