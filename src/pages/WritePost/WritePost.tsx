@@ -38,11 +38,12 @@ const WritePost = ({ status, postId }: Props) => {
 
   useEffect(() => {
     if (status) {
-      fetch(`${process.env.REACT_APP_API_URL}/posts/${postId}`, {
-        method: 'GET',
-      })
-        .then((res) => res.json())
-        .then((res) => setPost(res.data));
+      axios_({
+        url: `/posts/${postId}`,
+        headers: {
+          authorization: localStorage.getItem('token'),
+        },
+      }).then((res) => setPost(res.data.data));
     }
   }, []);
 
