@@ -1,46 +1,57 @@
-# Getting Started with Create React App
+# 🏡또로그
+<img width="700" src="https://user-images.githubusercontent.com/111855150/223650704-15ba790c-ed60-4349-ba9e-0df39d104a2e.jpg">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 🌳 프로젝트 소개
+또로그는 공유하고 싶은 일상을 글로 남길 수 있는 블로그입니다.
 
-## Available Scripts
+- 블로그에 글을 포스팅 할 때마다 잔디를 심을 수 있습니다. 🌱
+- 현재위치의 날씨정보를 알 수 있습니다. ☔️
+- 팔로우 기능으로 이웃을 팔로잉, 언팔로잉할 수 있습니다. 😎
+- 주제 필터링으로 원하는 주제의 글들을 확인할 수 있습니다. 📝
+- 게시글에 댓글과 대댓글을 추가할 수 있습니다. ✍️
+- 원하는 검색어에 해당하는 글들을 검색할 수 있습니다. 🔎
 
-In the project directory, you can run:
+### 👫 팀원 소개
+| 은또 | Position|
+| ------- | ----- |
+| [김정현](https://github.com/RBGonion) | Front-end |
+| [송기민](https://github.com/kiminsee) | Front-end|
+| [최설화](https://github.com/SulhwaChoi) | Front-end|
+| [최지원](https://github.com/jiwonidaax-x) | Front-end|
+| [이상윤](https://github.com/SangYunLeee) | Back-end|
+| [이우령](https://github.com/wooryeong) | Back-end|
 
-### `npm start`
+### ⏰ 개발 기간
+2023.01.03~2023.02.06 (기획+구현)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### 🔗 프로젝트 배포 링크
+https://ttolog.netlify.app/
 
-### `npm test`
+### ⚙️ 사용 기술 스택
+[Front-end] - `Typescript` `React` `JavaScript` `Router` `Sass` `Figma`(디자인) <br>
+[Back-end] - `Node.js` `Express` `Mysql` `Typescript` <br>
+[Communication] - `Trello` `Discord`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+### 📸 프로젝트 주요 페이지 시연 GIF
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<details>
+  <summary> 메인 페이지 </summary>
+  <img width="700" src="https://user-images.githubusercontent.com/111855150/223661068-bc6a7f7b-ab06-45bc-881c-d1153841af78.gif">
+  </details>
+  
+  <details>
+  <summary> 내 블로그페이지 및 팔로워 기능 </summary>
+  <img width="700" src="https://user-images.githubusercontent.com/111855150/223661900-e7e39d47-64fd-4e03-834b-e7f88995bb57.gif">
+</details>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+<details>
+  <summary> 게시글 작성 </summary>
+  <img width="700" src="https://user-images.githubusercontent.com/111855150/223662559-5cd7d003-35b9-4d87-9f63-e944ba2293b3.gif">
+  </details>
+  
+  <details>
+   <summary> 블로그 정보 수정 </summary>
+  <img width="700" src="https://user-images.githubusercontent.com/111855150/223663535-410c109c-d4a9-45d1-a528-b54548cab9cc.gif">
+  </details>
