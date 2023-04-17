@@ -99,7 +99,7 @@ const SignUp = ({ setFunc }: Props) => {
       <div className={css.iconWrap}>
         <img
           className={css.closeIcon}
-          src="image/login-close.png"
+          src="/image/login-close.png"
           alt="close"
           onClick={() => setFunc(false)}
         />

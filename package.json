@@ -1,7 +1,7 @@
 {
   "name": "map_practice",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -31,11 +31,14 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "npm i && npm run postinstall && react-scripts start",
-    "build": "npm i && npm run postinstall && react-scripts build",
+    "start": "npm i && npm run postInstall && react-scripts start",
+    "full-build": "npm ci && npm run postInstall && npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "postinstall": "node ./postinstall.js"
+    "postInstall": " node ./postinstall.js",
+    "build": "react-scripts build",
+    "start-prod": "serve -l 3000 -s build",
+    "start-dev": "react-scripts start"
   },
   "eslintConfig": {
     "extends": [
@@ -68,6 +71,10 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.11",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "prettier": "^2.8.0"
+    "prettier": "^2.8.0",
+    "serve": "^14.2.0"
+  },
+  "optionalDependencies": {
+    "fsevents": "^2.3.2"
   }
 }
