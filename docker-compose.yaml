@@ -2,12 +2,16 @@ version: '3.8'
 
 services:
   release:
-    image: sororiri/entto_blog_front_release:latest
+    image: sororiri/entto-front:0.0.1
     build:
       context: .
       dockerfile: prod.Dockerfile
+      args:
+        - ARG_REACT_APP_WEATHER_API_KEY=37e5699d890e683f6112012f6b978a30
+    env_file:
+      - ./.env
     ports:
-      - 80:80
+      - 5001:80
 
   dev:
     image: sororiri/entto_blog_front_dev:latest
