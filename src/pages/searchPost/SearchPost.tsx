@@ -245,9 +245,7 @@ const TotalPost = () => {
                   <div
                     key={user.id}
                     className={css.user}
-                    onClick={() =>
-                      (window.location.href = `https://ttolog.netlify.app/blog/${user.id}`)
-                    }
+                    onClick={() => (window.location.href = `/${user.id}`)}
                   >
                     <div
                       className={css.userImg}

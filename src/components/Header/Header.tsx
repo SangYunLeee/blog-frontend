@@ -36,11 +36,11 @@ const Header = () => {
   };
   const logout = () => {
     localStorage.clear();
-    window.location.href = `https://ttolog.netlify.app/`;
+    window.location.href = `/`;
   };
   const searchingInputKeyword = (event: any) => {
     if (event.keyCode === 13) {
-      window.location.href = `https://ttolog.netlify.app/searchpost?searchKeyword=${event.target.value}`;
+      window.location.href = `/searchpost?searchKeyword=${event.target.value}`;
     }
   };
 

@@ -18,8 +18,8 @@ const Poster = ({ post }: postProps) => {
       event.target.className ===
       document.querySelector(`.${css.userImage}`)?.className
     )
-      window.location.href = `https://ttolog.netlify.app/blog/${post.user.id}`;
-    else window.location.href = `https://ttolog.netlify.app/post/${post.id}`;
+      window.location.href = `/blog/${post.user.id}`;
+    else window.location.href = `/post/${post.id}`;
   };
 
   return (

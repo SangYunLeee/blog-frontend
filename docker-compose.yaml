@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   release:
-    image: sororiri/entto-front:0.0.1
+    image: sororiri/entto-front:0.0.2
     build:
       context: .
       dockerfile: prod.Dockerfile
@@ -11,7 +11,7 @@ services:
     env_file:
       - ./.env
     ports:
-      - 5001:80
+      - 5005:80
 
   dev:
     image: sororiri/entto_blog_front_dev:latest
