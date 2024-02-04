@@ -9,8 +9,7 @@ COPY postinstall.js .
 RUN npm run postInstall
 
 COPY . .
-
-ARG ARG_REACT_APP_API_URL="https://www.enttolog.xyz"
+ARG ARG_REACT_APP_API_URL="https://api.enttolog.shop"
 ARG ARG_REACT_APP_PUBLIC_URL=""
 ARG ARG_REACT_APP_WEATHER_API_KEY=""
 
